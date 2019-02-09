@@ -10,15 +10,25 @@
     //thanks cameraView makes it very simple to see the camera
     <com.otaliastudios.cameraview.CameraView
         android:id="@+id/camera_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="180dp"
+        android:layout_height="240dp"
         android:adjustViewBounds="true"
         android:keepScreenOn="true"
         app:cameraFacing="front" />
     //this view is made to place the overlay Bitmaps
+
     <com.example.videosegmentation.OverlayView
-        android:id="@+id/overlay_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/overlay_view_mask"
+        android:layout_width="180dp"
+        android:layout_height="240dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <com.example.videosegmentation.OverlayView
+        android:id="@+id/overlay_view_cropped"
+        android:layout_width="240dp"
+        android:layout_height="320dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

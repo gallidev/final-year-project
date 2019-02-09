@@ -1,12 +1,18 @@
 package com.example.videosegmentation;
 
+import android.app.ActionBar;
 import android.content.pm.PackageManager;
 
+import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 
+import com.dailystudio.development.Logger;
 import com.otaliastudios.cameraview.CameraView;
 
 
@@ -14,19 +20,42 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     private int PERMISSION_REQUEST_CODE = 3;
     private CameraView cameraView;
-    private OverlayView overlayView;
+    private OverlayView overlayViewMask;
+    private OverlayView overlayViewCropped;
     private FaceProcessor faceProcessor;
+    private ImageProcessor imageProcessor;
+
+
+    private class InitializeModelAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            final boolean ret = DeeplabModel.getInstance().initialize(
+                    getApplicationContext());
+            Logger.debug("initialize deeplab GPU model: %s", ret);
+            Log.d("Model", "Initialized model");
+
+            return ret;
+        }
+
+    }
+
+    private void initModel() {
+        new InitializeModelAsyncTask().execute((Void)null);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Make this activity full screen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //remove title
         setContentView(R.layout.activity_main);
 
-        cameraView = (CameraView) findViewById(R.id.camera_view);
-        overlayView = (OverlayView) findViewById(R.id.overlay_view);
+        Log.d("Starting Project:", "ooooohhh");
 
+        cameraView = (CameraView) findViewById(R.id.camera_view);
+        overlayViewMask = (OverlayView) findViewById(R.id.overlay_view_mask);
+        overlayViewCropped = (OverlayView) findViewById(R.id.overlay_view_cropped);
         checkAndRequestCameraPermission();
     }
 
@@ -46,8 +75,15 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     public void startFaceProcessor() {
         getLifecycle().addObserver(new MainActivityLifecycleObserver(cameraView));
 
-        faceProcessor = new FaceProcessor(cameraView, overlayView);
-        faceProcessor.startProcessing();
+        initModel();
+
+        imageProcessor = new ImageProcessor(cameraView, overlayViewMask, overlayViewCropped);
+
+        Log.d("Starting Processing", "Starting processing");
+
+        imageProcessor.startProcessing();
+        //faceProcessor = new FaceProcessor(cameraView, overlayView);
+        //faceProcessor.startProcessing();
     }
 
     @Override

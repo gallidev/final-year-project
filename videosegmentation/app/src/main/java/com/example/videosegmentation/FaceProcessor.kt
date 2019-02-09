@@ -55,7 +55,7 @@ class FaceProcessor(private val cameraView: CameraView, private val overlayView:
                         val face = faceList[0]
 
                         // Pass the face to OverlayView
-                        overlayView.face = face
+                        //overlayView.face = face
                     }
                 }
             }

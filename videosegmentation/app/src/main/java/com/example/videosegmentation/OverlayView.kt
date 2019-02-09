@@ -3,6 +3,7 @@ package com.example.videosegmentation
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import com.google.firebase.ml.vision.face.FirebaseVisionFace
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceLandmark
@@ -14,14 +15,9 @@ import com.google.firebase.ml.vision.face.FirebaseVisionFaceLandmark
  */
 class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
-    // The detected face
-    var face: FirebaseVisionFace? = null
-        set(value) {
-            field = value
 
-            // Trigger redraw when a new detected face object is passed in
-            postInvalidate()
-        }
+    var mask: Bitmap? = null
+    var oldMask: Bitmap? = null
 
     // The preview width
     var previewWidth: Int? = null
@@ -42,19 +38,37 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         super.onDraw(canvas)
 
         // Create local variables here so they cannot not be changed anywhere else
-        val face = face
-        val previewWidth = previewWidth
-        val previewHeight = previewHeight
+        // val face = face
+        val maskFixed = mask
 
-        if (face != null && canvas != null && previewWidth != null && previewHeight != null) {
+        Log.d("draw", "checking if the mask or old mask are not null")
+        if(maskFixed != null && canvas != null){
 
-            // Calculate the scale factor
-            widthScaleFactor = canvas.width.toFloat() / previewWidth.toFloat()
-            heightScaleFactor = canvas.height.toFloat() / previewHeight.toFloat()
+            val maskRect = Rect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height)
 
-            drawGlasses(canvas, face)
-            drawCigarette(canvas, face)
+
+            Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString() );
+            canvas.drawBitmap(maskFixed, null, maskRect, null)
         }
+
+        Log.d("draw", "checking if the mask or old mask are not null")
+
+    }
+
+    private fun drawMask(canvas: Canvas, mask: Bitmap){
+
+        val maskRect = Rect(
+                0,
+                0,
+                mask.width,
+                mask.height)
+
+        Log.d("drawing Mask:", mask.getPixel(60,50).toString() );
+        canvas.drawBitmap(mask, null, maskRect, null)
     }
 
     /***
