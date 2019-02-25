@@ -1,6 +1,5 @@
 package com.example.videosegmentation;
 
-import android.app.ActionBar;
 import android.content.pm.PackageManager;
 
 import android.os.AsyncTask;
@@ -8,9 +7,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.dailystudio.development.Logger;
 import com.otaliastudios.cameraview.CameraView;
@@ -22,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     private CameraView cameraView;
     private OverlayView overlayViewMask;
     private OverlayView overlayViewCropped;
-    private FaceProcessor faceProcessor;
     private ImageProcessor imageProcessor;
 
 
@@ -30,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            final boolean ret = DeeplabModel.getInstance().initialize(
+            final boolean ret = SegmentationModel.getUnetInstance().initialize(
                     getApplicationContext());
             Logger.debug("initialize deeplab GPU model: %s", ret);
             Log.d("Model", "Initialized model");

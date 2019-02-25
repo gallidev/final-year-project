@@ -1,17 +1,11 @@
 package com.example.videosegmentation
 
 import android.graphics.*
-import com.dailystudio.development.Logger
 import com.otaliastudios.cameraview.CameraView
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.graphics.ImageFormat.NV21
 import android.util.Log
 import java.io.ByteArrayOutputStream
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
 import android.graphics.Bitmap
-import android.util.Half.toFloat
+import android.os.SystemClock
 import com.dailystudio.app.utils.BitmapUtils
 
 
@@ -44,37 +38,53 @@ class ImageProcessor(private val cameraView: CameraView,
                 }
                 // to convert the image I found this online, gosh https://github.com/natario1/CameraView/issues/310
                 // this might slow down things, I should time it... gosh...
+
+                val startTime = SystemClock.uptimeMillis()
+
                 val out = ByteArrayOutputStream()
                 val yuvImage = YuvImage(frame.data, ImageFormat.NV21, frame.size.width, frame.size.height, null)
                 yuvImage.compressToJpeg(Rect(0, 0, frame.size.width, frame.size.height), 90, out)
                 val imageBytes = out.toByteArray()
                 val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
+                val endTime = SystemClock.uptimeMillis()
+                Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
 
-                Log.d("rotation in float", rotation.toFloat().toString());
+                //Log.d("rotation in float", rotation.toFloat().toString());
+                val startTimeBitmap = SystemClock.uptimeMillis()
                 val rotatedBitmap = rotateFlipImage(bitmap, 270.0f)
-
 //                overlayView.mask = rotatedBitmap
 //                overlayView.invalidate()
 
                 val w = rotatedBitmap.width
                 val h = rotatedBitmap.height
-                Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
+               // Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
 
-                val resizeRatio = DeeplabGPU.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
+                //val resizeRatio = DeeplabGPU.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
+                val resizeRatio = UnetCPU.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
                 val rw = Math.round(w * resizeRatio)
                 val rh = Math.round(h * resizeRatio)
-                Log.d("Resize bitmap", "ratio: " + resizeRatio.toString() + " -> " + rw + " - " + rh)
+                //Log.d("Resize bitmap", "ratio: " + resizeRatio.toString() + " -> " + rw + " - " + rh)
 //                Log.debug("resize bitmap: ratio = %f, [%d x %d] -> [%d x %d]",
 //                        resizeRatio, w, h, rw, rh)
 
                 val resized = ImageUtils.tfResizeBilinear(rotatedBitmap, rw, rh)
 
-                Log.d("Frame", "Completed frame prep with size" + resized.width + "- " + resized.height)
+                val endTimeBitmap = SystemClock.uptimeMillis()
 
-                var mask = DeeplabModel.getInstance().segment(resized)
+                Log.d("TIME", "Bitmap for Model " + java.lang.Long.toString(endTimeBitmap - startTimeBitmap))
 
-                Log.d("Frame", "Completed inference")
+                //Log.d("Frame", "Completed frame prep with size" + resized.width + "- " + resized.height)
+
+                val startTimeInference = SystemClock.uptimeMillis()
+
+                // var mask = SegmentationModel.getInstance().segment(resized)
+                var mask = SegmentationModel.getUnetInstance().segment(resized)
+
+                val endTimeInference = SystemClock.uptimeMillis()
+
+                Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
+
 
                 mask = BitmapUtils.createClippedBitmap(mask,
                         (mask.width - rw) / 2,
