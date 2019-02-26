@@ -46,7 +46,13 @@ class Loader(object):
 
         # Get a color palette
         image_sample_palette = Image.open(paths_segmented[0])
+        print("palette")
+        print(image_sample_palette.getpalette())
         palette = image_sample_palette.getpalette()
+        if(image_sample_palette.getpalette() == None):
+            palette = ([0,0,0, 255,0,0])
+       
+           
 
         return DataSet(images_original, images_segmented, palette,
                        augmenter=ia.ImageAugmenter(size=init_size, class_count=len(DataSet.CATEGORY)))
@@ -170,7 +176,7 @@ class Loader(object):
         x, y = im.size
         size = max(init_size[0], x, y)
         #check if the image is a png it won't accept the color black in 4 values
-        if(imageMode == 'L'):
+        if(imageMode == 'L' or imageMode == 'P'):
             fill_color = 0
         new_im = Image.new(imageMode, (size, size), fill_color)
         new_im.paste(im, ((size - x) // 2, (size - y) // 2))

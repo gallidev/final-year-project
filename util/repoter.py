@@ -75,9 +75,9 @@ class Reporter:
 
     @staticmethod
     def concat_images(im1, im2, palette, mode):
-        if mode == "L":
+        if mode == "P":
             assert palette is not None
-            dst = Image.new("L", (im1.width + im2.width, im1.height))
+            dst = Image.new("P", (im1.width + im2.width, im1.height))
             dst.paste(im1, (0, 0))
             dst.paste(im2, (im1.width, 0))
             dst.putpalette(palette)
@@ -94,7 +94,7 @@ class Reporter:
         res = np.argmax(ndarray, axis=2)
         if index_void is not None:
             res = np.where(res == index_void, 0, res)
-        image = Image.fromarray(np.uint8(res), mode="L")
+        image = Image.fromarray(np.uint8(res), mode="P")
         image.putpalette(palette)
         return image
 
@@ -103,7 +103,7 @@ class Reporter:
         assert image_in_np.shape[:2] == image_out_np.shape[:2] == image_tc_np.shape[:2]
         image_out, image_tc = Reporter.cast_to_pil(image_out_np, palette, index_void),\
                               Reporter.cast_to_pil(image_tc_np, palette, index_void)
-        image_concated = Reporter.concat_images(image_out, image_tc, palette, "L").convert("RGB")
+        image_concated = Reporter.concat_images(image_out, image_tc, palette, "P").convert("RGB")
         image_in_pil = Image.fromarray(np.uint8(image_in_np * 255), mode="RGB")
         image_result = Reporter.concat_images(image_in_pil, image_concated, None, "RGB")
         return image_result
