@@ -69,6 +69,7 @@ class Loader(object):
         # Load images from directory_path using generator
         print("Loading original images", end="", flush=True)
         for image in Loader.image_generator(paths_original, init_size, antialias=True):
+            #print(image.shape)
             images_original.append(image)
             if len(images_original) % 200 == 0:
                 print(".", end="", flush=True)
@@ -92,7 +93,7 @@ class Loader(object):
         #images_segmented = np.where(images_segmented == 15, 1, images_segmented)
         #images_segmented = np.where(images_segmented == 255, len(DataSet.CATEGORY)-1, images_segmented)
         images_segmented = np.where(images_segmented == 255, 1, images_segmented)
-        images_segmented = np.where(images_segmented == 254, len(DataSet.CATEGORY)-1, images_segmented)
+        #images_segmented = np.where(images_segmented == 254, len(DataSet.CATEGORY)-1, images_segmented)
 
 
         # One hot encoding using identity matrix.
@@ -148,6 +149,11 @@ class Loader(object):
                     image = image.convert("RGB")
                 #image.show()
                 image = np.asarray(image)
+
+                #check if the image is black and white 
+                #if image.shape == (256,256):
+                    #print(file_path)
+                
                 if normalization:
                     image = image / 255.0
                 yield image
@@ -173,8 +179,9 @@ class Loader(object):
 class DataSet(object):
     CATEGORY = (
         "ground",
-        "person",
-        "void"
+        "person"
+        #,
+        #"void"
     )
 
     def __init__(self, images_original, images_segmented, image_palette, augmenter=None):
