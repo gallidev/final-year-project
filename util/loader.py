@@ -85,16 +85,22 @@ class Loader(object):
         images_original = np.asarray(images_original, dtype=np.float32)
         images_segmented = np.asarray(images_segmented, dtype=np.uint8)
 
+        #print(images_segmented)
+
         # Change indices which correspond to "void" from 255
         images_segmented = np.where((images_segmented != 15) & (images_segmented != 255), 0, images_segmented)
-        images_segmented = np.where(images_segmented == 15, 1, images_segmented)
-        images_segmented = np.where(images_segmented == 255, len(DataSet.CATEGORY)-1, images_segmented)
+        #images_segmented = np.where(images_segmented == 15, 1, images_segmented)
+        #images_segmented = np.where(images_segmented == 255, len(DataSet.CATEGORY)-1, images_segmented)
+        images_segmented = np.where(images_segmented == 255, 1, images_segmented)
+        images_segmented = np.where(images_segmented == 254, len(DataSet.CATEGORY)-1, images_segmented)
+
 
         # One hot encoding using identity matrix.
         if one_hot:
             print("Casting to one-hot encoding... ", end="", flush=True)
             identity = np.identity(len(DataSet.CATEGORY), dtype=np.uint8)
             images_segmented = identity[images_segmented]
+            #print(images_segmented)
             print("Done")
         else:
             pass
@@ -127,7 +133,10 @@ class Loader(object):
                 # open a image
                 image = Image.open(file_path)
                 # to square
-                image = Loader.crop_to_square(image)
+                #image = Loader.crop_to_square(image)
+                # Super important to keep the same mode the picture is stored it is different for JPG and PNG
+                image = Loader.make_square(image, image.mode, init_size)
+
                 # resize by init_size
                 if init_size is not None and init_size != image.size:
                     if antialias:
@@ -137,6 +146,7 @@ class Loader(object):
                 # delete alpha channel
                 if image.mode == "RGBA":
                     image = image.convert("RGB")
+                #image.show()
                 image = np.asarray(image)
                 if normalization:
                     image = image / 255.0
@@ -149,6 +159,16 @@ class Loader(object):
         right, bottom = (image.width + size) // 2, (image.height + size) // 2
         return image.crop((left, upper, right, bottom))
 
+    @staticmethod
+    def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
+        x, y = im.size
+        size = max(init_size[0], x, y)
+        #check if the image is a png it won't accept the color black in 4 values
+        if(imageMode == 'L'):
+            fill_color = 0
+        new_im = Image.new(imageMode, (size, size), fill_color)
+        new_im.paste(im, ((size - x) // 2, (size - y) // 2))
+        return new_im
 
 class DataSet(object):
     CATEGORY = (
