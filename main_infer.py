@@ -20,11 +20,11 @@ def main():
         print("in=", model_unet.inputs.name)
         print("on=", model_unet.outputs.name)
 
-        saver.restore(sess, './model/Test_50_VOC_Dataset_256_model/deploy.ckpt')
-        saver.save(sess, './model/Test_50_VOC_Dataset_256_model/deployfinal.ckpt')
+        saver.restore(sess, './model/deploy.ckpt')
+        saver.save(sess, './model/deployfinal.ckpt')
 
         graphdef = graph.as_graph_def()
-        tf.train.write_graph(graphdef, './model/Test_50_VOC_Dataset_256_model', 'semanticsegmentation_person.pbtxt', as_text=True)
+        tf.train.write_graph(graphdef, './model', 'semanticsegmentation_person.pbtxt', as_text=True)
 
 if __name__ == '__main__':
     main()

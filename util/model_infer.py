@@ -93,7 +93,6 @@ class UNet:
         conv_up4_2 = UNet.conv(conv_up4_1, filters=16, l2_reg_scale=l2_reg)
         outputs = UNet.conv(conv_up4_2, filters=ld.DataSet.length_category(), kernel_size=[1, 1], activation=None, name="output")
 
-
         return Model(inputs, outputs, None, False)
 
     @staticmethod
