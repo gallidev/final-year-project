@@ -6,7 +6,7 @@ from util import image_augmenter as ia
 
 
 class Loader(object):
-    def __init__(self, dir_original, dir_segmented, init_size=(256, 256), one_hot=True):
+    def __init__(self, dir_original, dir_segmented, init_size=(128, 128), one_hot=True):
         self._data = Loader.import_data(dir_original, dir_segmented, init_size, one_hot)
 
     def get_all_dataset(self):

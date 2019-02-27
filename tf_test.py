@@ -3,18 +3,31 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 
+def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
+    x, y = im.size
+    size = max(init_size[0], x, y)
+    #check if the image is a png it won't accept the color black in 4 values
+    if(imageMode == 'L' or imageMode == 'P'):
+        fill_color = 0
+    new_im = Image.new(imageMode, (size, size), fill_color)
+    new_im.paste(im, ((size - x) // 2, (size - y) // 2))
+    return new_im
+
+
 if __name__ == '__main__':
 
-    image     = Image.open("data_set/VOCdevkit/person/18418693150_c40831b00a_o.jpg")
-    seg_image = Image.open("data_set/VOCdevkit/person/SegmentationClass/009649.png")
+    image     = Image.open("emma.jpeg")
+    #seg_image = Image.open("data_set/portraits/masks_png/00001.png")
     print("image.size = ", image.size)
-
+    
+    image = make_square(image, image.mode)
+    image.save("1.jpg")
     base_width  = image.size[0]
     base_height = image.size[1]
-    image.save("1.jpg")
-
     # resize image
     image = image.resize((256, 256), Image.ANTIALIAS)
+
+    image.show()
 
     # delete alpha channel
     print("image.mode ==", image.mode)
@@ -32,6 +45,7 @@ if __name__ == '__main__':
         prepimg = np.insert(prepimg, 2, prepimg[:,:,0], axis=2)
 
     # Read .pb file
+    #with tf.gfile.FastGFile("model/Test_22_Selfies_256_model/semanticsegmentation_frozen_person.pb", "rb") as f:
     with tf.gfile.FastGFile("model/semanticsegmentation_frozen_person_32.pb", "rb") as f:
         graphdef = tf.GraphDef()
         graphdef.ParseFromString(f.read())
@@ -44,7 +58,9 @@ if __name__ == '__main__':
     print("elapsedtime =", time.time() - t1)
 
     # Get a color palette
-    palette = seg_image.getpalette()
+    #palette = seg_image.getpalette()
+    #if palette is None:
+    palette = [0,0,0, 255,0,0]
 
     # Define index_void (len(DataSet.CATEGORY)-1)
     index_void = 2
@@ -57,8 +73,10 @@ if __name__ == '__main__':
     image = Image.fromarray(np.uint8(res), mode="P")
     image.putpalette(palette)
     image = image.convert("RGB")
+
     image = image.resize((base_width, base_height))
 
     image.save("2.jpg")
+
 
 
