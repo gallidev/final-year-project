@@ -53,13 +53,13 @@ class UNet:
         # conv_up4_1 = UNet.conv(concated4, filters=32, l2_reg_scale=l2_reg)
         # conv_up4_2 = UNet.conv(conv_up4_1, filters=32, l2_reg_scale=l2_reg)
 
-        conv1_1 = UNet.conv(inputs, filters=8, l2_reg_scale=l2_reg, batchnorm_istraining=False)
-        conv1_2 = UNet.conv(conv1_1, filters=8, l2_reg_scale=l2_reg, batchnorm_istraining=False)
+        conv1_1 = UNet.conv(inputs, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=False)
+        conv1_2 = UNet.conv(conv1_1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=False)
         pool1 = UNet.pool(conv1_2)
 
         # 1/2, 1/2, 64
-        conv2_1 = UNet.conv(pool1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=False)
-        conv2_2 = UNet.conv(conv2_1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=False)
+        conv2_1 = UNet.conv(pool1, filters=32, l2_reg_scale=l2_reg, batchnorm_istraining=False)
+        conv2_2 = UNet.conv(conv2_1, filters=32, l2_reg_scale=l2_reg, batchnorm_istraining=False)
         pool2 = UNet.pool(conv2_2)
 
         # 1/4, 1/4, 128

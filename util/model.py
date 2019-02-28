@@ -55,16 +55,16 @@ class UNet:
         # conv_up4_1 = UNet.conv(concated4, filters=32, l2_reg_scale=l2_reg)
         # conv_up4_2 = UNet.conv(conv_up4_1, filters=32, l2_reg_scale=l2_reg)
 
-        conv1_1 = UNet.conv(inputs, filters=8, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
-        conv1_2 = UNet.conv(conv1_1, filters=8, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+        conv1_1 = UNet.conv(inputs, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+        conv1_2 = UNet.conv(conv1_1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
         pool1 = UNet.pool(conv1_2)
 
-        conv2_1 = UNet.conv(pool1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
-        conv2_2 = UNet.conv(conv2_1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+        conv2_1 = UNet.conv(pool1, filters=32, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+        conv2_2 = UNet.conv(conv2_1, filters=32, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
         pool2 = UNet.pool(conv2_2)
 
-        conv3_1 = UNet.conv(pool2, filters=32, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
-        conv3_2 = UNet.conv(conv3_1, filters=32, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+        conv3_1 = UNet.conv(pool2, filters=64, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+        conv3_2 = UNet.conv(conv3_1, filters=64, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
         pool3 = UNet.pool(conv3_2)
 
         conv4_1 = UNet.conv(pool3, filters=128, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
