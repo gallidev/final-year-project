@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         initModel();
 
-        imageProcessor = new ImageProcessor(cameraView, overlayViewMask, overlayViewCropped);
+        imageProcessor = new ImageProcessor(cameraView, overlayViewMask, overlayViewCropped, getApplicationContext());
 
         Log.d("Starting Processing", "Starting processing");
 

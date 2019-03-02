@@ -1,12 +1,23 @@
 package com.example.videosegmentation
 
+import android.content.Context
 import android.graphics.*
 import com.otaliastudios.cameraview.CameraView
 import android.util.Log
 import java.io.ByteArrayOutputStream
 import android.graphics.Bitmap
 import android.os.SystemClock
+import android.renderscript.*
 import com.dailystudio.app.utils.BitmapUtils
+import android.support.v4.view.ViewCompat.setX
+import android.support.v4.view.ViewCompat.setY
+import android.renderscript.Element.U8
+import android.renderscript.Element.U8_4
+import android.R.attr.bitmap
+import android.R.attr.data
+import android.renderscript.Allocation
+
+
 
 
 /**
@@ -18,7 +29,8 @@ import com.dailystudio.app.utils.BitmapUtils
  */
 class ImageProcessor(private val cameraView: CameraView,
                      private val overlayViewMask: OverlayView,
-                     private val overlayViewCropped: OverlayView) {
+                     private val overlayViewCropped: OverlayView,
+                     private val contextApplication: Context) {
 
     fun startProcessing() {
 
@@ -41,11 +53,19 @@ class ImageProcessor(private val cameraView: CameraView,
 
                 val startTime = SystemClock.uptimeMillis()
 
-                val out = ByteArrayOutputStream()
-                val yuvImage = YuvImage(frame.data, ImageFormat.NV21, frame.size.width, frame.size.height, null)
-                yuvImage.compressToJpeg(Rect(0, 0, frame.size.width, frame.size.height), 90, out)
-                val imageBytes = out.toByteArray()
-                val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                val bitmap = Bitmap.createBitmap(frame.size.width, frame.size.height, Bitmap.Config.ARGB_8888)
+                val bmData = renderScriptNV21ToRGBA888(
+                        contextApplication,
+                        frame.size.width,
+                        frame.size.height,
+                        frame.data)
+                bmData.copyTo(bitmap)
+
+                //val out = ByteArrayOutputStream()
+                //val yuvImage = YuvImage(frame.data, ImageFormat.NV21, frame.size.width, frame.size.height, null)
+                //yuvImage.compressToJpeg(Rect(0, 0, frame.size.width, frame.size.width), 90, out)
+                //val imageBytes = out.toByteArray()
+                //val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
                 val endTime = SystemClock.uptimeMillis()
                 Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
@@ -138,6 +158,24 @@ class ImageProcessor(private val cameraView: CameraView,
         paint.xfermode = null
 
         return cropped
+    }
+
+
+    fun renderScriptNV21ToRGBA888(context: Context, width: Int, height: Int, nv21: ByteArray): Allocation {
+        val rs = RenderScript.create(context)
+        val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
+
+        val yuvType = Type.Builder(rs, Element.U8(rs)).setX(nv21.size)
+        val input = Allocation.createTyped(rs, yuvType.create(), Allocation.USAGE_SCRIPT)
+
+        val rgbaType = Type.Builder(rs, Element.RGBA_8888(rs)).setX(width).setY(height)
+        val out = Allocation.createTyped(rs, rgbaType.create(), Allocation.USAGE_SCRIPT)
+
+        input.copyFrom(nv21)
+
+        yuvToRgbIntrinsic.setInput(input)
+        yuvToRgbIntrinsic.forEach(out)
+        return out
     }
 
 

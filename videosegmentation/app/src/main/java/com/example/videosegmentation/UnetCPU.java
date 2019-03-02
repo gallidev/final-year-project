@@ -25,7 +25,7 @@ import java.util.Random;
 
 public class UnetCPU {
 
-    private final static String MODEL_PATH = "semanticsegmentation_frozen_person_quantized_08.tflite";
+    private final static String MODEL_PATH = "128_portraits_26ep_32ba_quantized_32.tflite";
 
     //the model input can only be 128x128 in terms of size
     private final static Integer INPUT_SIZE = 128;
@@ -107,7 +107,7 @@ public class UnetCPU {
         }
 
         // the size needs to be smaller than what the model can run in this example
-        // it also needs to be a square 257x257
+        // it also needs to be a square 128x128
         // if the picture is a vertical one it will create black bands on the sides
         if (w < INPUT_SIZE || h < INPUT_SIZE) {
             bitmap = BitmapUtils.extendBitmap(
@@ -122,10 +122,12 @@ public class UnetCPU {
         int[] mIntValues = new int[w * h];
         //I had to put 3 here probably because of the colors available after [1][w][h][3]
         float[][][][] mInput = new float[1][w][h][3];
-        float[][][][] mOutputs = new float[1][w][h][3];
+        //float[][][][] mOutputs = new float[1][w][h][3];
+        float[][][][] mOutputs = new float[1][w][h][2];
 
         bitmap.getPixels(mIntValues, 0, w, 0, 0, w, h);
 
+        //normalise the values of the image
         int pixel = 0;
         for (int i = 0; i < INPUT_SIZE; ++i) {
             for (int j = 0; j < INPUT_SIZE; ++j) {
@@ -151,13 +153,16 @@ public class UnetCPU {
         // float of each pixel is the highest number of the 3
 
         final long end = System.currentTimeMillis();
-        Logger.debug("%d millis per core segment call.", (end - start));
+        Log.d("TIME", "CORE inference " + java.lang.Long.toString(end - start));
+
 
         Bitmap output = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                if (mOutputs[0][y][x][1] > mOutputs[0][y][x][0] && mOutputs[0][y][x][1] > mOutputs[0][y][x][2])
+                if (mOutputs[0][y][x][1] > mOutputs[0][y][x][0]
+                        //&& mOutputs[0][y][x][1] > mOutputs[0][y][x][2])
+                    )
                 {
                     output.setPixel(x, y, mSegmentColors[1]);
                 } else {
