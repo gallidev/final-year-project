@@ -1,57 +1,46 @@
 package com.example.videosegmentation;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.dailystudio.app.utils.ArrayUtils;
 import com.dailystudio.app.utils.BitmapUtils;
 import com.dailystudio.development.Logger;
 
 import org.tensorflow.lite.Interpreter;
-import org.tensorflow.lite.Tensor;
+import org.tensorflow.lite.experimental.GpuDelegate;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.Arrays;
-import java.util.Random;
 
-public class UnetCPU {
+public class UnetPortraits extends AbstractSegmentation{
 
-    private final static String MODEL_PATH = "128_portraits_26ep_32ba_quantized_32.tflite";
 
     //the model input can only be 128x128 in terms of size
     private final static Integer INPUT_SIZE = 128;
     private final static int NUM_CLASSES = 2;
 
-    private volatile Interpreter sTfInterpreter = null;
 
-    private int[][] mSegmentBits;
-    private int[] mSegmentColors;
-
-    private final static Random RANDOM = new Random(System.currentTimeMillis());
+    public UnetPortraits(String model_path){
+        super();
+        this.model_path = model_path;
+    }
 
     public boolean initialize(Context context) {
         if (context == null) {
             return false;
         }
 
-        MappedByteBuffer buffer = loadModelFile(context, MODEL_PATH);
+        MappedByteBuffer buffer = loadModelFile(context, model_path);
         if (buffer == null) {
             return false;
         }
 
         Interpreter.Options options = new Interpreter.Options();
+        options.setNumThreads(1);
+        //GpuDelegate delegate = new GpuDelegate();
+        //options.addDelegate(delegate);
 
-//        GpuDelegate delegate = new GpuDelegate();
-//        options.addDelegate(delegate);
 
         sTfInterpreter = new Interpreter(buffer, options);
 
@@ -65,18 +54,15 @@ public class UnetCPU {
             if (i == 0) {
                 mSegmentColors[i] = Color.TRANSPARENT;
             } else {
-                mSegmentColors[i] = Color.rgb(
-                        (int)(255 * RANDOM.nextFloat()),
-                        (int)(255 * RANDOM.nextFloat()),
-                        (int)(255 * RANDOM.nextFloat()));
+                mSegmentColors[i] = Color.rgb(255,255,255);
+//                mSegmentColors[i] = Color.rgb(
+//                        (int)(255 * RANDOM.nextFloat()),
+//                        (int)(255 * RANDOM.nextFloat()),
+//                        (int)(255 * RANDOM.nextFloat()));
+
             }
         }
 
-        return (sTfInterpreter != null);
-    }
-
-
-    public boolean isInitialized() {
         return (sTfInterpreter != null);
     }
 
@@ -146,7 +132,6 @@ public class UnetCPU {
         }
 
         final long start = System.currentTimeMillis();
-
         sTfInterpreter.run(mInput, mOutputs);
 
         //to get out the segmentation mask from mOutputs we need to see when the second
@@ -160,7 +145,7 @@ public class UnetCPU {
 
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                if (mOutputs[0][y][x][1] > mOutputs[0][y][x][0]
+                if (mOutputs[0][y][x][1] < mOutputs[0][y][x][0]
                         //&& mOutputs[0][y][x][1] > mOutputs[0][y][x][2])
                     )
                 {
@@ -174,77 +159,7 @@ public class UnetCPU {
 
 
         return output;
-    }
 
-    private void fillZeroes(int[][] array) {
-        if (array == null) {
-            return;
-        }
-
-        int r;
-        for (r = 0; r < array.length; r++) {
-            Arrays.fill(array[r], 0);
-        }
-    }
-
-    private static void debugInputs(Interpreter interpreter) {
-        if (interpreter == null) {
-            return;
-        }
-
-        final int numOfInputs = interpreter.getInputTensorCount();
-        Logger.debug("[TF-LITE-MODEL] input tensors: [%d]",numOfInputs);
-
-        for (int i = 0; i < numOfInputs; i++) {
-            Tensor t = interpreter.getInputTensor(i);
-            Logger.debug("[TF-LITE-MODEL] input tensor[%d[: shape[%s]",
-                    i,
-                    ArrayUtils.intArrayToString(t.shape()));
-        }
-    }
-
-    private static void debugOutputs(Interpreter interpreter) {
-        if (interpreter == null) {
-            return;
-        }
-
-        final int numOfOutputs = interpreter.getOutputTensorCount();
-        Logger.debug("[TF-LITE-MODEL] output tensors: [%d]",numOfOutputs);
-
-        for (int i = 0; i < numOfOutputs; i++) {
-            Tensor t = interpreter.getOutputTensor(i);
-            Logger.debug("[TF-LITE-MODEL] output tensor[%d[: shape[%s]",
-                    i,
-                    ArrayUtils.intArrayToString(t.shape()));
-        }
-    }
-
-    private static MappedByteBuffer loadModelFile(Context context, String modelFile) {
-        if (context == null
-                || TextUtils.isEmpty(modelFile)) {
-            return null;
-        }
-
-        MappedByteBuffer buffer = null;
-
-        try {
-            AssetFileDescriptor df = context.getAssets().openFd(modelFile);
-
-            FileInputStream inputStream = new FileInputStream(df.getFileDescriptor());
-            FileChannel fileChannel = inputStream.getChannel();
-            long startOffset = df.getStartOffset();
-            long declaredLength = df.getDeclaredLength();
-
-            buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
-        } catch (IOException e) {
-            Logger.debug("load tflite model from [%s] failed: %s",
-                    modelFile,
-                    e.toString());
-
-            buffer = null;
-        }
-
-        return buffer;
     }
 
 }

@@ -4,20 +4,12 @@ import android.content.Context
 import android.graphics.*
 import com.otaliastudios.cameraview.CameraView
 import android.util.Log
-import java.io.ByteArrayOutputStream
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.renderscript.*
 import com.dailystudio.app.utils.BitmapUtils
-import android.support.v4.view.ViewCompat.setX
-import android.support.v4.view.ViewCompat.setY
-import android.renderscript.Element.U8
-import android.renderscript.Element.U8_4
-import android.R.attr.bitmap
-import android.R.attr.data
 import android.renderscript.Allocation
-
-
+import android.widget.TextView
 
 
 /**
@@ -29,7 +21,7 @@ import android.renderscript.Allocation
  */
 class ImageProcessor(private val cameraView: CameraView,
                      private val overlayViewMask: OverlayView,
-                     private val overlayViewCropped: OverlayView,
+                     private val activity: SegmentationActivity,
                      private val contextApplication: Context) {
 
     fun startProcessing() {
@@ -61,12 +53,6 @@ class ImageProcessor(private val cameraView: CameraView,
                         frame.data)
                 bmData.copyTo(bitmap)
 
-                //val out = ByteArrayOutputStream()
-                //val yuvImage = YuvImage(frame.data, ImageFormat.NV21, frame.size.width, frame.size.height, null)
-                //yuvImage.compressToJpeg(Rect(0, 0, frame.size.width, frame.size.width), 90, out)
-                //val imageBytes = out.toByteArray()
-                //val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-
                 val endTime = SystemClock.uptimeMillis()
                 Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
 
@@ -80,8 +66,8 @@ class ImageProcessor(private val cameraView: CameraView,
                 val h = rotatedBitmap.height
                // Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
 
-                //val resizeRatio = DeeplabGPU.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
-                val resizeRatio = UnetCPU.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
+                //val resizeRatio = Deeplab.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
+                val resizeRatio = UnetPortraits.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
                 val rw = Math.round(w * resizeRatio)
                 val rh = Math.round(h * resizeRatio)
                 //Log.d("Resize bitmap", "ratio: " + resizeRatio.toString() + " -> " + rw + " - " + rh)
@@ -99,35 +85,31 @@ class ImageProcessor(private val cameraView: CameraView,
                 val startTimeInference = SystemClock.uptimeMillis()
 
                 // var mask = SegmentationModel.getInstance().segment(resized)
-                var mask = SegmentationModel.getUnetInstance().segment(resized)
+                var mask = SegmentationModel.getInstance().segment(resized)
 
                 val endTimeInference = SystemClock.uptimeMillis()
 
                 Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
 
-
+                val createClippedMaskStart = SystemClock.uptimeMillis();
                 mask = BitmapUtils.createClippedBitmap(mask,
                         (mask.width - rw) / 2,
                         (mask.height - rh) / 2,
                         rw, rh)
 
+                val createClippedMaskEnd = SystemClock.uptimeMillis();
                 overlayViewMask.mask = mask
                 overlayViewMask.invalidate()
 
                 Log.d("Mask", "sent Mask")
-
-                mask = BitmapUtils.scaleBitmap(mask, w, h)
-
-                val cropped = cropBitmapWithMask(rotatedBitmap, mask)
-                Log.d("cropped", "completed Cropped")
-                overlayViewCropped.mask = cropped
-                overlayViewCropped.invalidate()
-                Log.d("Cropped", "sent Cropped")
+                activity.showPerformance(java.lang.Long.toString(endTime - startTime),
+                        java.lang.Long.toString(endTimeBitmap - startTimeBitmap),
+                        java.lang.Long.toString(endTimeInference - startTimeInference))
             }
         }
     }
 
-    fun rotateFlipImage(source: Bitmap, angle: Float): Bitmap {
+    private fun rotateFlipImage(source: Bitmap, angle: Float): Bitmap {
         val matrix = Matrix()
         matrix.postScale(1f, -1f, source.width/2f,source.height/2f)
         matrix.postRotate(angle)
@@ -160,8 +142,8 @@ class ImageProcessor(private val cameraView: CameraView,
         return cropped
     }
 
-
-    fun renderScriptNV21ToRGBA888(context: Context, width: Int, height: Int, nv21: ByteArray): Allocation {
+    //Converts YUV image into RGB in ~10ms
+    private fun renderScriptNV21ToRGBA888(context: Context, width: Int, height: Int, nv21: ByteArray): Allocation {
         val rs = RenderScript.create(context)
         val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
 

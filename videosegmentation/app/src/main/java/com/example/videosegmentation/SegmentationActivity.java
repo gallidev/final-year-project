@@ -7,27 +7,30 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.dailystudio.development.Logger;
 import com.otaliastudios.cameraview.CameraView;
 
 
-public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback  {
+public class SegmentationActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback  {
 
     private int PERMISSION_REQUEST_CODE = 3;
     private CameraView cameraView;
     private OverlayView overlayViewMask;
-    private OverlayView overlayViewCropped;
+    //private OverlayView overlayViewCropped;
+    private TextView performanceText;
     private ImageProcessor imageProcessor;
+    private String model;
 
 
     private class InitializeModelAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            final boolean ret = SegmentationModel.getUnetInstance().initialize(
+            final boolean ret = SegmentationModel.getInstance().initialize(
                     getApplicationContext());
-            Logger.debug("initialize deeplab GPU model: %s", ret);
+
             Log.d("Model", "Initialized model");
 
             return ret;
@@ -44,14 +47,22 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         super.onCreate(savedInstanceState);
         // Make this activity full screen
         //remove title
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_segmentation_full);
 
-        Log.d("Starting Project:", "ooooohhh");
+        SegmentationModel.NEW_MODEL = getIntent().getStringExtra("model");
 
         cameraView = (CameraView) findViewById(R.id.camera_view);
         overlayViewMask = (OverlayView) findViewById(R.id.overlay_view_mask);
-        overlayViewCropped = (OverlayView) findViewById(R.id.overlay_view_cropped);
+        performanceText = (TextView) findViewById(R.id.performanceText);
+        //overlayViewCropped = (OverlayView) findViewById(R.id.overlay_view_cropped);
         checkAndRequestCameraPermission();
+    }
+
+    protected void onRestart(){
+        super.onRestart();
+        SegmentationModel.NEW_MODEL = getIntent().getStringExtra("model");
+        initModel();
+
     }
 
 
@@ -72,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         initModel();
 
-        imageProcessor = new ImageProcessor(cameraView, overlayViewMask, overlayViewCropped, getApplicationContext());
+        imageProcessor = new ImageProcessor(cameraView, overlayViewMask, this, getApplicationContext());
 
         Log.d("Starting Processing", "Starting processing");
 
@@ -90,6 +101,22 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public void showPerformance(final String yuvConversion, final String imageManipulation, final String inference){
+
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                performanceText.setText("Yuv Conversion: " + yuvConversion +
+                        "\nImage Manipulation: " + imageManipulation +
+                        "\nInference: " + inference);
+
+            }
+        });
+
     }
 
 }

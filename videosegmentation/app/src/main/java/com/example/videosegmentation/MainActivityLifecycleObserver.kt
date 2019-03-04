@@ -6,7 +6,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.otaliastudios.cameraview.CameraView
 
 /**
- * Observe the lifcycle events of MainActivity and call appropriate camera view APIs
+ * Observe the lifcycle events of SegmentationActivity and call appropriate camera view APIs
  *
  * Created by Qichuan on 21/6/18.
  */

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Video Segmentation</string>
+    <string name="menu">Select a model</string>
+    <string name="deeplab">Deeplab V3+ model</string>
+    <string name="unet_voc_human">UNet Voc Human model</string>
+    <string name="unet_portraits">UNet Portraits model</string>
 </resources>

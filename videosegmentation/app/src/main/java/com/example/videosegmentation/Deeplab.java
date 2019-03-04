@@ -20,13 +20,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.Arrays;
 import java.util.Random;
 
-public class DeeplabGPU{
-
-    private final static String MODEL_PATH = "deeplabv3_257_mv_gpu.tflite";
+public class Deeplab extends AbstractSegmentation{
 
     private static final float IMAGE_MEAN = 128.0f;
     private static final float IMAGE_STD = 128.0f;
@@ -36,19 +32,21 @@ public class DeeplabGPU{
 
     private volatile Interpreter sTfInterpreter = null;
 
-
     private ByteBuffer mImageData;
-    private int[][] mSegmentBits;
-    private int[] mSegmentColors;
 
     private final static Random RANDOM = new Random(System.currentTimeMillis());
+
+    public Deeplab(String model_path){
+        super();
+        this.model_path = model_path;
+    }
 
     public boolean initialize(Context context) {
         if (context == null) {
             return false;
         }
 
-        MappedByteBuffer buffer = loadModelFile(context, MODEL_PATH);
+        MappedByteBuffer buffer = loadModelFile(context, model_path);
         if (buffer == null) {
             return false;
         }
@@ -72,20 +70,16 @@ public class DeeplabGPU{
         mSegmentColors = new int[NUM_CLASSES];
         for (int i = 0; i < NUM_CLASSES; i++) {
             if (i == 0) {
-                mSegmentColors[i] = Color.TRANSPARENT;
+                mSegmentColors[i] = Color.rgb(255,255,255);
             } else {
-                mSegmentColors[i] = Color.rgb(
-                        (int)(255 * RANDOM.nextFloat()),
-                        (int)(255 * RANDOM.nextFloat()),
-                        (int)(255 * RANDOM.nextFloat()));
+//                mSegmentColors[i] = Color.rgb(
+//                        (int)(255 * RANDOM.nextFloat()),
+//                        (int)(255 * RANDOM.nextFloat()),
+//                        (int)(255 * RANDOM.nextFloat()));
+                mSegmentColors[i] = Color.TRANSPARENT;
             }
         }
 
-        return (sTfInterpreter != null);
-    }
-
-
-    public boolean isInitialized() {
         return (sTfInterpreter != null);
     }
 
@@ -108,7 +102,7 @@ public class DeeplabGPU{
         Logger.debug("bitmap: %d x %d,", w, h);
 
         if (w > INPUT_SIZE || h > INPUT_SIZE) {
-           Logger.warn("invalid bitmap size: %d x %d [should be: %d x %d]",
+            Logger.warn("invalid bitmap size: %d x %d [should be: %d x %d]",
                     w, h,
                     INPUT_SIZE, INPUT_SIZE);
 
@@ -174,84 +168,10 @@ public class DeeplabGPU{
 
                 output.setPixel(x, y, mSegmentColors[mSegmentBits[x][y]]);
             }
-//            Logger.debug("segment map[%d]: %s",
-//                    y,
-//                    ArrayUtils.intArrayToString(segmap[y], ","));
         }
 
 
         return output;
-    }
-
-    private void fillZeroes(int[][] array) {
-        if (array == null) {
-            return;
-        }
-
-        int r;
-        for (r = 0; r < array.length; r++) {
-            Arrays.fill(array[r], 0);
-        }
-    }
-
-    private static void debugInputs(Interpreter interpreter) {
-        if (interpreter == null) {
-            return;
-        }
-
-        final int numOfInputs = interpreter.getInputTensorCount();
-        Logger.debug("[TF-LITE-MODEL] input tensors: [%d]",numOfInputs);
-
-        for (int i = 0; i < numOfInputs; i++) {
-            Tensor t = interpreter.getInputTensor(i);
-            Logger.debug("[TF-LITE-MODEL] input tensor[%d[: shape[%s]",
-                    i,
-                    ArrayUtils.intArrayToString(t.shape()));
-        }
-    }
-
-    private static void debugOutputs(Interpreter interpreter) {
-        if (interpreter == null) {
-            return;
-        }
-
-        final int numOfOutputs = interpreter.getOutputTensorCount();
-        Logger.debug("[TF-LITE-MODEL] output tensors: [%d]",numOfOutputs);
-
-        for (int i = 0; i < numOfOutputs; i++) {
-            Tensor t = interpreter.getOutputTensor(i);
-            Logger.debug("[TF-LITE-MODEL] output tensor[%d[: shape[%s]",
-                    i,
-                    ArrayUtils.intArrayToString(t.shape()));
-        }
-    }
-
-    private static MappedByteBuffer loadModelFile(Context context, String modelFile) {
-        if (context == null
-                || TextUtils.isEmpty(modelFile)) {
-            return null;
-        }
-
-        MappedByteBuffer buffer = null;
-
-        try {
-            AssetFileDescriptor df = context.getAssets().openFd(modelFile);
-
-            FileInputStream inputStream = new FileInputStream(df.getFileDescriptor());
-            FileChannel fileChannel = inputStream.getChannel();
-            long startOffset = df.getStartOffset();
-            long declaredLength = df.getDeclaredLength();
-
-            buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
-        } catch (IOException e) {
-            Logger.debug("load tflite model from [%s] failed: %s",
-                    modelFile,
-                    e.toString());
-
-            buffer = null;
-        }
-
-        return buffer;
     }
 
 }
