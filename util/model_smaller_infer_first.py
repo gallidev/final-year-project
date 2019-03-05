@@ -13,7 +13,7 @@ class UNet:
     def create_model(size, l2_reg):
         inputs = tf.placeholder(tf.float32, [None, size[0], size[1], 3], name="input")
 
-        conv1_1 = UNet.conv(inputs, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
+            conv1_1 = UNet.conv(inputs, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
         conv1_2 = UNet.conv(conv1_1, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
         pool1 = UNet.pool(conv1_2)
 
@@ -35,7 +35,8 @@ class UNet:
 
         conv_up1_1 = UNet.conv(concated1, filters=128, l2_reg_scale=l2_reg)
         conv_up1_2 = UNet.conv(conv_up1_1, filters=128, l2_reg_scale=l2_reg)
-        concated2 = tf.concat([UNet.conv_transpose(conv_up1_2, filters=64, l2_reg_scale=l2_reg), conv3_2], axis=3)
+        concated2 = tf.concat([UNet.conv_transpose(conv_up1_2, filters=64, l2_reg_scale=l2_reg), conv1_2], axis=3)
+        #concated2 = tf.concat([UNet.conv_transpose(conv_up1_2, filters=64, l2_reg_scale=l2_reg), conv3_2], axis=3)
 
         # conv_up2_1 = UNet.conv(concated2, filters=64, l2_reg_scale=l2_reg)
         # conv_up2_2 = UNet.conv(conv_up2_1, filters=64, l2_reg_scale=l2_reg)
