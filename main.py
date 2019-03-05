@@ -8,7 +8,7 @@ import tensorflow as tf
 import sys
 
 from util import loader as ld
-from util import model as model
+from util import model_smaller_first as model
 from util import repoter as rp
 
 

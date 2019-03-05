@@ -1,5 +1,5 @@
 import tensorflow as tf
-from util import model_infer as model
+from util import model_smaller_infer_first as model
 
 #######################################################################################
 ### $ python3 main_infer.py
