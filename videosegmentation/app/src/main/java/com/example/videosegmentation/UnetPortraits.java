@@ -11,6 +11,8 @@ import com.dailystudio.development.Logger;
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.experimental.GpuDelegate;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 
 public class UnetPortraits extends AbstractSegmentation{
@@ -19,7 +21,6 @@ public class UnetPortraits extends AbstractSegmentation{
     //the model input can only be 128x128 in terms of size
     private final static Integer INPUT_SIZE = 128;
     private final static int NUM_CLASSES = 2;
-
 
     public UnetPortraits(String model_path){
         super();
@@ -36,13 +37,17 @@ public class UnetPortraits extends AbstractSegmentation{
             return false;
         }
 
-        Interpreter.Options options = new Interpreter.Options();
-        options.setNumThreads(1);
-        //GpuDelegate delegate = new GpuDelegate();
-        //options.addDelegate(delegate);
-
-
-        sTfInterpreter = new Interpreter(buffer, options);
+        tfliteOptions.setNumThreads(2);
+/*
+        if(GpuDelegateHelper.isGpuDelegateAvailable()){
+            Log.d("GPU", "initializing with GPU delegate");
+            gpuDelegate = GpuDelegateHelper.createGpuDelegate();
+            options.addDelegate(gpuDelegate);
+        }else{
+            Log.d("GPU", "initializing without GPU delegate");
+        }
+*/
+        sTfInterpreter = new Interpreter(buffer, tfliteOptions);
 
         debugInputs(sTfInterpreter);
         debugOutputs(sTfInterpreter);
@@ -55,13 +60,15 @@ public class UnetPortraits extends AbstractSegmentation{
                 mSegmentColors[i] = Color.TRANSPARENT;
             } else {
                 mSegmentColors[i] = Color.rgb(255,255,255);
-//                mSegmentColors[i] = Color.rgb(
-//                        (int)(255 * RANDOM.nextFloat()),
-//                        (int)(255 * RANDOM.nextFloat()),
-//                        (int)(255 * RANDOM.nextFloat()));
-
             }
         }
+        imgData =
+                ByteBuffer.allocateDirect(
+                                INPUT_SIZE
+                                * INPUT_SIZE
+                                * 3
+                                * 4);
+        imgData.order(ByteOrder.nativeOrder());
 
         return (sTfInterpreter != null);
     }
@@ -106,12 +113,12 @@ public class UnetPortraits extends AbstractSegmentation{
 
 
         int[] mIntValues = new int[w * h];
-        //I had to put 3 here probably because of the colors available after [1][w][h][3]
-        float[][][][] mInput = new float[1][w][h][3];
-        //float[][][][] mOutputs = new float[1][w][h][3];
+
         float[][][][] mOutputs = new float[1][w][h][2];
 
         bitmap.getPixels(mIntValues, 0, w, 0, 0, w, h);
+
+        imgData.rewind();
 
         //normalise the values of the image
         int pixel = 0;
@@ -120,19 +127,13 @@ public class UnetPortraits extends AbstractSegmentation{
                 if (pixel >= mIntValues.length) {
                     break;
                 }
-
                 final int val = mIntValues[pixel++];
-                //find more info here on how to get the colors out
-                //https://stackoverflow.com/questions/5669501/how-do-you-get-the-rgb-values-from-a-bitmap-on-an-android-device
-
-                mInput[0][i][j][0] = ((val >> 16) & 0xFF)/ 255f;
-                mInput[0][i][j][1] = ((val >> 8) & 0xFF)/ 255f;
-                mInput[0][i][j][2] = (val & 0xFF)/ 255f;
+                addPixelValue(val);
             }
         }
 
         final long start = System.currentTimeMillis();
-        sTfInterpreter.run(mInput, mOutputs);
+        sTfInterpreter.run(imgData, mOutputs);
 
         //to get out the segmentation mask from mOutputs we need to see when the second
         // float of each pixel is the highest number of the 3
@@ -161,5 +162,6 @@ public class UnetPortraits extends AbstractSegmentation{
         return output;
 
     }
+
 
 }

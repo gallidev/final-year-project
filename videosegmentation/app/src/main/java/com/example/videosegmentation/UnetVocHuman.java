@@ -9,7 +9,10 @@ import com.dailystudio.app.utils.BitmapUtils;
 import com.dailystudio.development.Logger;
 
 import org.tensorflow.lite.Interpreter;
+import org.tensorflow.lite.experimental.GpuDelegate;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 
 public class UnetVocHuman extends AbstractSegmentation{
@@ -35,12 +38,11 @@ public class UnetVocHuman extends AbstractSegmentation{
             return false;
         }
 
-        Interpreter.Options options = new Interpreter.Options();
+        tfliteOptions.setNumThreads(2);
+        //GpuDelegate delegate = new GpuDelegate();
+        //options.addDelegate(delegate);
 
-//        GpuDelegate delegate = new GpuDelegate();
-//        options.addDelegate(delegate);
-
-        sTfInterpreter = new Interpreter(buffer, options);
+        sTfInterpreter = new Interpreter(buffer, tfliteOptions);
 
         debugInputs(sTfInterpreter);
         debugOutputs(sTfInterpreter);
@@ -56,6 +58,15 @@ public class UnetVocHuman extends AbstractSegmentation{
 
             }
         }
+
+        imgData =
+                ByteBuffer.allocateDirect(
+                        INPUT_SIZE
+                                * INPUT_SIZE
+                                * 3
+                                * 4);
+        imgData.order(ByteOrder.nativeOrder());
+
 
         return (sTfInterpreter != null);
     }
@@ -101,11 +112,11 @@ public class UnetVocHuman extends AbstractSegmentation{
 
         int[] mIntValues = new int[w * h];
         //I had to put 3 here probably because of the colors available after [1][w][h][3]
-        float[][][][] mInput = new float[1][w][h][3];
         float[][][][] mOutputs = new float[1][w][h][3];
 
         bitmap.getPixels(mIntValues, 0, w, 0, 0, w, h);
 
+        imgData.rewind();
         //normalise the values of the image
         int pixel = 0;
         for (int i = 0; i < INPUT_SIZE; ++i) {
@@ -115,18 +126,14 @@ public class UnetVocHuman extends AbstractSegmentation{
                 }
 
                 final int val = mIntValues[pixel++];
-                //find more info here on how to get the colors out
-                //https://stackoverflow.com/questions/5669501/how-do-you-get-the-rgb-values-from-a-bitmap-on-an-android-device
+                addPixelValue(val);
 
-                mInput[0][i][j][0] = ((val >> 16) & 0xFF)/ 255f;
-                mInput[0][i][j][1] = ((val >> 8) & 0xFF)/ 255f;
-                mInput[0][i][j][2] = (val & 0xFF)/ 255f;
             }
         }
 
         final long start = System.currentTimeMillis();
 
-        sTfInterpreter.run(mInput, mOutputs);
+        sTfInterpreter.run(imgData, mOutputs);
 
         //to get out the segmentation mask from mOutputs we need to see when the second
         // float of each pixel is the highest number of the 3

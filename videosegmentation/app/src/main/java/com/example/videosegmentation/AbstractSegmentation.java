@@ -11,11 +11,13 @@ import com.dailystudio.app.utils.ArrayUtils;
 import com.dailystudio.app.utils.BitmapUtils;
 import com.dailystudio.development.Logger;
 
+import org.tensorflow.lite.Delegate;
 import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.Tensor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
@@ -25,10 +27,18 @@ public abstract class AbstractSegmentation {
 
     protected String model_path;
 
+    protected Delegate gpuDelegate = null;
+
     protected volatile Interpreter sTfInterpreter = null;
+
+    /** Options for configuring the Interpreter. */
+    protected final Interpreter.Options tfliteOptions = new Interpreter.Options();
 
     protected int[][] mSegmentBits;
     protected int[] mSegmentColors;
+
+    /** A ByteBuffer to hold image data, to be feed into Tensorflow Lite as inputs. */
+    protected ByteBuffer imgData = null;
 
     protected final static Random RANDOM = new Random(System.currentTimeMillis());
 
@@ -57,13 +67,12 @@ public abstract class AbstractSegmentation {
         }
 
         final int numOfInputs = interpreter.getInputTensorCount();
-        Logger.debug("[TF-LITE-MODEL] input tensors: [%d]",numOfInputs);
+        Log.d("TF-LITE-MODEL", "input tensors: " + numOfInputs);
 
         for (int i = 0; i < numOfInputs; i++) {
             Tensor t = interpreter.getInputTensor(i);
-            Logger.debug("[TF-LITE-MODEL] input tensor[%d[: shape[%s]",
-                    i,
-                    ArrayUtils.intArrayToString(t.shape()));
+            Log.d("TF-LITE-MODEL", "input tensor " + i
+                    + "shape" +ArrayUtils.intArrayToString(t.shape()));
         }
     }
 
@@ -73,13 +82,12 @@ public abstract class AbstractSegmentation {
         }
 
         final int numOfOutputs = interpreter.getOutputTensorCount();
-        Logger.debug("[TF-LITE-MODEL] output tensors: [%d]",numOfOutputs);
+        Log.d("TF-LITE-MODEL", "output tensors: " + numOfOutputs);
 
         for (int i = 0; i < numOfOutputs; i++) {
             Tensor t = interpreter.getOutputTensor(i);
-            Logger.debug("[TF-LITE-MODEL] output tensor[%d[: shape[%s]",
-                    i,
-                    ArrayUtils.intArrayToString(t.shape()));
+            Log.d("TF-LITE-MODEL", "output tensor " + i
+                    + "shape" +ArrayUtils.intArrayToString(t.shape()));
         }
     }
 
@@ -110,4 +118,11 @@ public abstract class AbstractSegmentation {
 
         return buffer;
     }
+
+    protected void addPixelValue(int pixelValue) {
+        imgData.putFloat(((pixelValue >> 16) & 0xFF) / 255.f);
+        imgData.putFloat(((pixelValue >> 8) & 0xFF) / 255.f);
+        imgData.putFloat((pixelValue & 0xFF) / 255.f);
+    }
+
 }

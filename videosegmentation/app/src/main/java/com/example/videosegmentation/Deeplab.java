@@ -51,12 +51,7 @@ public class Deeplab extends AbstractSegmentation{
             return false;
         }
 
-        Interpreter.Options options = new Interpreter.Options();
-
-//        GpuDelegate delegate = new GpuDelegate();
-//        options.addDelegate(delegate);
-
-        sTfInterpreter = new Interpreter(buffer, options);
+        sTfInterpreter = new Interpreter(buffer, tfliteOptions);
 
         debugInputs(sTfInterpreter);
         debugOutputs(sTfInterpreter);

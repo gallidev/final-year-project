@@ -84,27 +84,28 @@ class ImageProcessor(private val cameraView: CameraView,
 
                 val startTimeInference = SystemClock.uptimeMillis()
 
-                // var mask = SegmentationModel.getInstance().segment(resized)
                 var mask = SegmentationModel.getInstance().segment(resized)
 
                 val endTimeInference = SystemClock.uptimeMillis()
 
                 Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
 
-                val createClippedMaskStart = SystemClock.uptimeMillis();
-                mask = BitmapUtils.createClippedBitmap(mask,
-                        (mask.width - rw) / 2,
-                        (mask.height - rh) / 2,
-                        rw, rh)
+                if(mask != null){
+                    val createClippedMaskStart = SystemClock.uptimeMillis();
+                    mask = BitmapUtils.createClippedBitmap(mask,
+                            (mask.width - rw) / 2,
+                            (mask.height - rh) / 2,
+                            rw, rh)
 
-                val createClippedMaskEnd = SystemClock.uptimeMillis();
-                overlayViewMask.mask = mask
-                overlayViewMask.invalidate()
+                    val createClippedMaskEnd = SystemClock.uptimeMillis();
+                    overlayViewMask.mask = mask
+                    overlayViewMask.invalidate()
 
-                Log.d("Mask", "sent Mask")
-                activity.showPerformance(java.lang.Long.toString(endTime - startTime),
-                        java.lang.Long.toString(endTimeBitmap - startTimeBitmap),
-                        java.lang.Long.toString(endTimeInference - startTimeInference))
+                    Log.d("Mask", "sent Mask")
+                    activity.showPerformance(java.lang.Long.toString(endTime - startTime),
+                            java.lang.Long.toString(endTimeBitmap - startTimeBitmap),
+                            java.lang.Long.toString(endTimeInference - startTimeInference))
+                }
             }
         }
     }
