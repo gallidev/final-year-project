@@ -4,13 +4,24 @@ import tensorflow as tf
 from PIL import Image
 
 
+def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
+    x, y = im.size
+    size = max(init_size[0], x, y)
+    #check if the image is a png it won't accept the color black in 4 values
+    if(imageMode == 'L' or imageMode == 'P'):
+        fill_color = 0
+    new_im = Image.new(imageMode, (size, size), fill_color)
+    new_im.paste(im, ((size - x) // 2, (size - y) // 2))
+    return new_im
+
 if __name__ == '__main__':
 
     # Read image
-    image     = Image.open("data_set/VOCdevkit/person/18418693150_c40831b00a_o.jpg")
+    image     = Image.open("emma.jpeg")
     seg_image = Image.open("data_set/VOCdevkit/person/SegmentationClass/009649.png")
     print("image.size = ", image.size)
 
+    image = make_square(image, image.mode)
     base_width  = image.size[0]
     base_height = image.size[1]
     image.save("3.jpg")
@@ -29,7 +40,7 @@ if __name__ == '__main__':
     prepimg = prepimg[np.newaxis, :, :, :]
 
     # Segmentation
-    interpreter = tf.contrib.lite.Interpreter(model_path="model/semanticsegmentation_frozen_person_quantized_32.tflite")
+    interpreter = tf.contrib.lite.Interpreter(model_path="model/128-MyModel_26Epochs_test/semanticsegmentation_frozen_person_quantized_32.tflite")
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
