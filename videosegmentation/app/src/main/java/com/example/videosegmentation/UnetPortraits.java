@@ -37,7 +37,7 @@ public class UnetPortraits extends AbstractSegmentation{
             return false;
         }
 
-        tfliteOptions.setNumThreads(2);
+        tfliteOptions.setNumThreads(1);
 /*
         if(GpuDelegateHelper.isGpuDelegateAvailable()){
             Log.d("GPU", "initializing with GPU delegate");

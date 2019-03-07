@@ -18,7 +18,8 @@ public class SegmentationModel {
     private static final Map<String, String> UnetModelPaths;
     static {
         Map<String, String> aMap = new HashMap<String,String>();
-        aMap.put(UNET_PORTRAITS, "128_portraits_26ep_32ba_quantized_32.tflite");
+        //aMap.put(UNET_PORTRAITS, "128_portraits_26ep_32ba_quantized_32.tflite");
+        aMap.put(UNET_PORTRAITS, "2nd_model_128.tflite");
         //aMap.put(UNET_PORTRAITS, "128_portraits_26ep_32ba_32f.tflite");
         //aMap.put(UNET_PORTRAITS, "first_model_128.tflite");
         aMap.put(UNET_VOC_HUMAN, "semanticsegmentation_frozen_person_quantized_32.tflite");

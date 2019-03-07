@@ -24,7 +24,7 @@ import android.graphics.Rect;
  **/
 public class ImageUtils {
 
-    public static Bitmap tfResizeBilinear(Bitmap bitmap, int w, int h) {
+    public static Bitmap tfResizeBilinear(Bitmap bitmap, int w, int h, float degrees) {
         if (bitmap == null) {
             return null;
         }
@@ -37,6 +37,8 @@ public class ImageUtils {
                 new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                 new Rect(0, 0, w, h),
                 null);
+        canvas.rotate(degrees);
+
 
         return resized;
     }

@@ -9,16 +9,9 @@ import android.os.SystemClock
 import android.renderscript.*
 import com.dailystudio.app.utils.BitmapUtils
 import android.renderscript.Allocation
-import android.widget.TextView
 
 
-/**
- *
- * FaceProcessor takes the camera frames from CameraView and uses FirebaseVisionFaceDetector
- * to detect the face, and then pass the detected face info to OverlayView so it can draw bitmaps on the face
- *
- * Created by Qichuan on 21/6/18.
- */
+
 class ImageProcessor(private val cameraView: CameraView,
                      private val overlayViewMask: OverlayView,
                      private val activity: SegmentationActivity,
@@ -45,12 +38,13 @@ class ImageProcessor(private val cameraView: CameraView,
 
                 val startTime = SystemClock.uptimeMillis()
 
-                val bitmap = Bitmap.createBitmap(frame.size.width, frame.size.height, Bitmap.Config.ARGB_8888)
+                val rotatedYuv = rotateYUV420Degree270(frame.data, frame.size.width, frame.size.height)
+                val bitmap = Bitmap.createBitmap(frame.size.height, frame.size.width, Bitmap.Config.ARGB_8888)
                 val bmData = renderScriptNV21ToRGBA888(
                         contextApplication,
-                        frame.size.width,
                         frame.size.height,
-                        frame.data)
+                        frame.size.width,
+                        rotatedYuv)
                 bmData.copyTo(bitmap)
 
                 val endTime = SystemClock.uptimeMillis()
@@ -58,7 +52,8 @@ class ImageProcessor(private val cameraView: CameraView,
 
                 //Log.d("rotation in float", rotation.toFloat().toString());
                 val startTimeBitmap = SystemClock.uptimeMillis()
-                val rotatedBitmap = rotateFlipImage(bitmap, 270.0f)
+                //val rotatedBitmap = rotateFlipImage(bitmap, 270.0f)
+                val rotatedBitmap = bitmap
 //                overlayView.mask = rotatedBitmap
 //                overlayView.invalidate()
 
@@ -74,10 +69,9 @@ class ImageProcessor(private val cameraView: CameraView,
 //                Log.debug("resize bitmap: ratio = %f, [%d x %d] -> [%d x %d]",
 //                        resizeRatio, w, h, rw, rh)
 
-                val resized = ImageUtils.tfResizeBilinear(rotatedBitmap, rw, rh)
+                val resized = ImageUtils.tfResizeBilinear(rotatedBitmap, rw, rh, 270.0f)
 
                 val endTimeBitmap = SystemClock.uptimeMillis()
-
                 Log.d("TIME", "Bitmap for Model " + java.lang.Long.toString(endTimeBitmap - startTimeBitmap))
 
                 //Log.d("Frame", "Completed frame prep with size" + resized.width + "- " + resized.height)
@@ -91,13 +85,14 @@ class ImageProcessor(private val cameraView: CameraView,
                 Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
 
                 if(mask != null){
-                    val createClippedMaskStart = SystemClock.uptimeMillis();
+                   // val createClippedMaskStart = SystemClock.uptimeMillis();
                     mask = BitmapUtils.createClippedBitmap(mask,
                             (mask.width - rw) / 2,
                             (mask.height - rh) / 2,
                             rw, rh)
 
-                    val createClippedMaskEnd = SystemClock.uptimeMillis();
+                    //val createClippedMaskEnd = SystemClock.uptimeMillis();
+                    //Log.d("TIME", "createClipped mask " + java.lang.Long.toString(createClippedMaskEnd - createClippedMaskStart))
                     overlayViewMask.mask = mask
                     overlayViewMask.invalidate()
 
@@ -108,39 +103,6 @@ class ImageProcessor(private val cameraView: CameraView,
                 }
             }
         }
-    }
-
-    private fun rotateFlipImage(source: Bitmap, angle: Float): Bitmap {
-        val matrix = Matrix()
-        matrix.postScale(1f, -1f, source.width/2f,source.height/2f)
-        matrix.postRotate(angle)
-        return Bitmap.createBitmap(source, 0, 0, source.width, source.height,
-                matrix, true)
-    }
-
-    private fun cropBitmapWithMask(original: Bitmap?, mask: Bitmap?): Bitmap? {
-        if (original == null || mask == null) {
-            return null
-        }
-
-        val w = original.width
-        val h = original.height
-        if (w <= 0 || h <= 0) {
-            return null
-        }
-
-        val cropped = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-
-
-        val canvas = Canvas(cropped)
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-
-        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
-        canvas.drawBitmap(original, 0f, 0f, null)
-        canvas.drawBitmap(mask, 0f, 0f, paint)
-        paint.xfermode = null
-
-        return cropped
     }
 
     //Converts YUV image into RGB in ~10ms
@@ -159,6 +121,63 @@ class ImageProcessor(private val cameraView: CameraView,
         yuvToRgbIntrinsic.setInput(input)
         yuvToRgbIntrinsic.forEach(out)
         return out
+    }
+
+    private fun rotateYUV420Degree180(data: ByteArray, imageWidth: Int, imageHeight: Int): ByteArray {
+        val yuv = ByteArray(imageWidth * imageHeight * 3 / 2)
+        var i = 0
+        var count = 0
+        i = imageWidth * imageHeight - 1
+        while (i >= 0) {
+            yuv[count] = data[i]
+            count++
+            i--
+        }
+        i = imageWidth * imageHeight * 3 / 2 - 1
+        i = imageWidth * imageHeight * 3 / 2 - 1
+        while (i >= imageWidth * imageHeight) {
+            yuv[count++] = data[i - 1]
+            yuv[count++] = data[i]
+            i -= 2
+        }
+        return yuv
+    }
+
+    private fun rotateYUV420Degree270(data: ByteArray, imageWidth: Int,
+                              imageHeight: Int): ByteArray {
+        val yuv = ByteArray(imageWidth * imageHeight * 3 / 2)
+        var nWidth = 0
+        var nHeight = 0
+        var wh = 0
+        var uvHeight = 0
+        if (imageWidth != nWidth || imageHeight != nHeight) {
+            nWidth = imageWidth
+            nHeight = imageHeight
+            wh = imageWidth * imageHeight
+            uvHeight = imageHeight shr 1// uvHeight = height / 2
+        }
+        // ??Y
+        var k = 0
+        for (i in 0 until imageWidth) {
+            var nPos = 0
+            for (j in 0 until imageHeight) {
+                yuv[k] = data[nPos + i]
+                k++
+                nPos += imageWidth
+            }
+        }
+        var i = 0
+        while (i < imageWidth) {
+            var nPos = wh
+            for (j in 0 until uvHeight) {
+                yuv[k] = data[nPos + i]
+                yuv[k + 1] = data[nPos + i + 1]
+                k += 2
+                nPos += imageWidth
+            }
+            i += 2
+        }
+        return rotateYUV420Degree180(yuv, imageWidth, imageHeight)
     }
 
 
