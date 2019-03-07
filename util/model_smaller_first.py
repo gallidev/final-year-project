@@ -51,7 +51,7 @@ class UNet:
         concated4 = tf.concat([UNet.conv_transpose(conv_up3_1, filters=16, strides=[4,4], l2_reg_scale=l2_reg), conv1_1], axis=3)
         #256x256x16
 
-        conv_up4_1 = UNet.conv(concated4, filters=16, strides=2 l2_reg_scale=l2_reg)
+        conv_up4_1 = UNet.conv(concated4, filters=16, strides=2, l2_reg_scale=l2_reg)
         #128x128x16
         outputs = UNet.conv(conv_up4_1, filters=ld.DataSet.length_category(), kernel_size=[1, 1], activation=None, name="output")
         #128x128x2

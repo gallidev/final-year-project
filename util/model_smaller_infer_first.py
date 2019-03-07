@@ -58,7 +58,7 @@ class UNet:
         return Model(inputs, outputs, None, False)
 
     @staticmethod
-    def conv(inputs, filters, kernel_size=[3, 3], activation=tf.nn.relu, l2_reg_scale=None, batchnorm_istraining=None, name=None):
+    def conv(inputs, filters, kernel_size=[3, 3], strides =1, activation=tf.nn.relu, l2_reg_scale=None, batchnorm_istraining=None, name=None):
         if l2_reg_scale is None:
             regularizer = None
         else:
@@ -67,7 +67,7 @@ class UNet:
             inputs=inputs,
             filters=filters,
             kernel_size=kernel_size,
-            strides=2, 
+            strides= strides,
             padding="same",
             activation=activation,
             kernel_regularizer=regularizer,
@@ -97,7 +97,7 @@ class UNet:
         return pooled
 
     @staticmethod
-    def conv_transpose(inputs, filters, l2_reg_scale=None):
+    def conv_transpose(inputs, filters, strides=[2,2], l2_reg_scale=None):
         if l2_reg_scale is None:
             regularizer = None
         else:
@@ -105,7 +105,7 @@ class UNet:
         conved = tf.layers.conv2d_transpose(
             inputs=inputs,
             filters=filters,
-            strides=[2, 2],
+            strides=strides,
             kernel_size=[2, 2],
             padding='same',
             activation=tf.nn.relu,
