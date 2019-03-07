@@ -14,46 +14,41 @@ class UNet:
         inputs = tf.placeholder(tf.float32, [None, size[0], size[1], 3], name="input")
 
         #128x128x3
-        conv1_1 = UNet.conv(inputs, filters=16, strides=2, l2_reg_scale=l2_reg, batchnorm_istraining=False)
+        conv1_1 = UNet.conv(inputs, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=False)
         #64x64x16
         pool1 = UNet.pool(conv1_1)
         #32x32x16
 
         conv2_1 = UNet.conv(pool1, filters=32, strides=2, l2_reg_scale=l2_reg, batchnorm_istraining=False)
-        #16x16x32
+        #32x32x32
         pool2 = UNet.pool(conv2_1)
-        #8x8x32
+        #16x16x32
 
         conv3_1 = UNet.conv(pool2, filters=64, strides=2, l2_reg_scale=l2_reg, batchnorm_istraining=False)
-        #4x4x64
+        #8x8x64
         pool3 = UNet.pool(conv3_1)
-        #2x2x64
+        #4x4x64
 
-        conv4 = UNet.conv(pool3, filters=128, l2_reg_scale=l2_reg)
+        conv4 = UNet.conv(pool3, filters=128, strides=2, l2_reg_scale=l2_reg)
         #2x2x128
-        concated1 = tf.concat([UNet.conv_transpose(conv4, filters=128, l2_reg_scale=l2_reg), conv4_1], axis=3)
-        #4x4x128
+        concated1 = tf.concat([UNet.conv_transpose(conv4, filters=64, strides=[4,4], l2_reg_scale=l2_reg), conv3_1], axis=3)
+        #8x8x64
 
-        conv_up1_1 = UNet.conv(concated1, filters=128, l2_reg_scale=l2_reg)
-        #4x4x128
-        concated2 = tf.concat([UNet.conv_transpose(conv_up1_1, filters=64, strides=[4,4], l2_reg_scale=l2_reg), conv3_1], axis=3)
+        conv_up1_1 = UNet.conv(concated1, filters=64, l2_reg_scale=l2_reg)
+        #8x8x64
+        concated2 = tf.concat([UNet.conv_transpose(conv_up1_1, filters=32, strides=[4,4], l2_reg_scale=l2_reg), conv2_1], axis=3)
+        #32x32x32
 
-        #16x16x64
-        conv_up2_1 = UNet.conv(concated2, filters=64, l2_reg_scale=l2_reg)
-        #16x16x64
-        concated3 = tf.concat([UNet.conv_transpose(conv_up2_1, filters=32, strides=[4,4], l2_reg_scale=l2_reg), conv2_1], axis=3)
-        #64x64x32
-
-        conv_up3_1 = UNet.conv(concated3, filters=32, l2_reg_scale=l2_reg)
-        #64x64x32
-        concated4 = tf.concat([UNet.conv_transpose(conv_up3_1, filters=16, strides=[4,4], l2_reg_scale=l2_reg), conv1_1], axis=3)
-        #256x256x16
-
-        conv_up4_1 = UNet.conv(concated4, filters=16, strides=2 l2_reg_scale=l2_reg)
+        conv_up2_1 = UNet.conv(concated2, filters=32, l2_reg_scale=l2_reg)
+        #32x32x32
+        concated3 = tf.concat([UNet.conv_transpose(conv_up2_1, filters=16, strides=[4,4], l2_reg_scale=l2_reg), conv1_1], axis=3)
         #128x128x16
-        outputs = UNet.conv(conv_up4_1, filters=ld.DataSet.length_category(), kernel_size=[1, 1], activation=None, name="output")
+
+        conv_up3_1 = UNet.conv(concated3, filters=16, l2_reg_scale=l2_reg)
+        #128x128x16
+
+        outputs = UNet.conv(conv_up3_1, filters=ld.DataSet.length_category(), kernel_size=[1, 1], activation=None, name="output")
         #128x128x2
-        outputs = UNet.conv(conv_up4_1, filters=ld.DataSet.length_category(), kernel_size=[1, 1], activation=None, name="output")
 
         return Model(inputs, outputs, None, False)
 
