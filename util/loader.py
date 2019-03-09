@@ -51,8 +51,6 @@ class Loader(object):
         palette = image_sample_palette.getpalette()
         if(image_sample_palette.getpalette() == None):
             palette = ([0,0,0, 255,0,0])
-       
-           
 
         return DataSet(images_original, images_segmented, palette,
                        augmenter=ia.ImageAugmenter(size=init_size, class_count=len(DataSet.CATEGORY)))
@@ -142,7 +140,7 @@ class Loader(object):
                 # to square
                 #image = Loader.crop_to_square(image)
                 # Super important to keep the same mode the picture is stored it is different for JPG and PNG
-                image = Loader.make_square(image, image.mode, init_size)
+                #image = Loader.make_square(image, image.mode, init_size)
 
                 # resize by init_size
                 if init_size is not None and init_size != image.size:
@@ -151,6 +149,7 @@ class Loader(object):
                     else:
                         image = image.resize(init_size)
                 # delete alpha channel
+                image.show()
                 if image.mode == "RGBA":
                     image = image.convert("RGB")
                 #image.show()
