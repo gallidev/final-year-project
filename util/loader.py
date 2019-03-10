@@ -6,7 +6,7 @@ from util import image_augmenter as ia
 
 
 class Loader(object):
-    def __init__(self, dir_original, dir_segmented, init_size=(128, 128), one_hot=True):
+    def __init__(self, dir_original, dir_segmented, init_size=(96, 128), one_hot=True):
         self._data = Loader.import_data(dir_original, dir_segmented, init_size, one_hot)
 
     def get_all_dataset(self):
@@ -73,13 +73,14 @@ class Loader(object):
         # Load images from directory_path using generator
         print("Loading original images", end="", flush=True)
         for image in Loader.image_generator(paths_original, init_size, antialias=True):
-            #print(image.shape)
+            print(image.shape)
             images_original.append(image)
             if len(images_original) % 200 == 0:
                 print(".", end="", flush=True)
         print(" Completed", flush=True)
         print("Loading segmented images", end="", flush=True)
         for image in Loader.image_generator(paths_segmented, init_size, normalization=False):
+            #print(image.shape)
             images_segmented.append(image)
             if len(images_segmented) % 200 == 0:
                 print(".", end="", flush=True)
@@ -149,16 +150,26 @@ class Loader(object):
                     else:
                         image = image.resize(init_size)
                 # delete alpha channel
-                image.show()
+                #image.show()
                 if image.mode == "RGBA":
                     image = image.convert("RGB")
+
                 #image.show()
                 image = np.asarray(image)
 
                 #check if the image is black and white 
                 #if image.shape == (256,256):
                     #print(file_path)
-                
+
+                # the image from asarray has the rows in the position of the columns
+                # so we transpose it
+                if(len(image.shape) == 3):
+                    # if it is a classic image
+                    image = image.transpose(1, 0, 2)
+                else:
+                    # if it is a segmented image
+                    image = image.transpose(1, 0)
+
                 if normalization:
                     image = image / 255.0
                 yield image
