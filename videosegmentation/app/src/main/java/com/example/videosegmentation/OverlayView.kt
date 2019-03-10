@@ -33,10 +33,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     private var heightScaleFactor = 1.0f
 
 
-
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        // you need to disable
+        // you need to disable hardware acceleration for this
         //https@ //stackoverflow.com/questions/18387814/drawing-on-canvas-porterduff-mode-clear-draws-black-why
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }

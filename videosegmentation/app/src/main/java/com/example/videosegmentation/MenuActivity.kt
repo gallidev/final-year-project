@@ -26,7 +26,7 @@ class MenuActivity : Activity() {
     fun onUnetVocClick(view: View){
 
         val intent = Intent(this, SegmentationActivity::class.java)
-        intent.putExtra("model", UNET_VOC_HUMAN)
+        intent.putExtra("model", UNET_PORTRAITS)
         startActivity(intent)
 
     }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.os.SystemClock
 import android.renderscript.*
 import android.renderscript.Allocation
+import com.dailystudio.app.utils.BitmapUtils
 
 
 class ImageProcessor(private val cameraView: CameraView,
@@ -83,7 +84,12 @@ class ImageProcessor(private val cameraView: CameraView,
 
                 if(mask != null){
 
-                    //mask = cropBitmapWithMask(backgroundImage, mask)
+                    //resize the mask to 3x4 aspect ratio if required
+                    mask = BitmapUtils.createClippedBitmap(mask,
+                            (mask.width - rw) / 2,
+                            (mask.height - rh) / 2,
+                            rw, rh)
+
                     overlayViewMask.mask = mask
                     overlayViewMask.invalidate()
 
