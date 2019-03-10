@@ -62,6 +62,7 @@ public class UnetPortraits extends AbstractSegmentation{
                 mSegmentColors[i] = Color.rgb(255,255,255);
             }
         }
+
         imgData =
                 ByteBuffer.allocateDirect(
                                 INPUT_SIZE

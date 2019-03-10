@@ -18,7 +18,7 @@ class MenuActivity : Activity() {
     fun onUnetPortraitsClick(view: View){
 
         val intent = Intent(this, SegmentationActivity::class.java)
-        intent.putExtra("model", UNET_PORTRAITS)
+        intent.putExtra("model", UNET_PORTRAITS_SMALLER)
         startActivity(intent)
 
     }

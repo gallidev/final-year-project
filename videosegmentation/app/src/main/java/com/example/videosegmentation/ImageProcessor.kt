@@ -1,7 +1,6 @@
 package com.example.videosegmentation
 
 import android.content.Context
-import android.graphics.*
 import com.otaliastudios.cameraview.CameraView
 import android.util.Log
 import android.graphics.Bitmap
@@ -61,7 +60,7 @@ class ImageProcessor(private val cameraView: CameraView,
                 val h = rotatedBitmap.height
                // Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
 
-                //val resizeRatio = Deeplab.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
+
                 val resizeRatio = UnetPortraits.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
                 val rw = Math.round(w * resizeRatio)
                 val rh = Math.round(h * resizeRatio)
@@ -72,8 +71,6 @@ class ImageProcessor(private val cameraView: CameraView,
                 val resized = ImageUtils.tfResizeBilinear(rotatedBitmap, rw, rh, 270.0f)
 
                 val endTimeBitmap = SystemClock.uptimeMillis()
-                Log.d("TIME", "Bitmap for Model " + java.lang.Long.toString(endTimeBitmap - startTimeBitmap))
-
                 //Log.d("Frame", "Completed frame prep with size" + resized.width + "- " + resized.height)
 
                 val startTimeInference = SystemClock.uptimeMillis()

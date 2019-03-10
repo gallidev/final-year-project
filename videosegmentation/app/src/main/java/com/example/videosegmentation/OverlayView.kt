@@ -49,8 +49,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     canvas.height)
 
 
-            Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString() );
-            canvas.drawBitmap(maskFixed, null, maskRect, null)
+            Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString());
+            canvas.drawBitmap(maskFixed, null, maskRect, Paint(Paint.FILTER_BITMAP_FLAG))
         }
 
         Log.d("draw", "checking if the mask or old mask are not null")

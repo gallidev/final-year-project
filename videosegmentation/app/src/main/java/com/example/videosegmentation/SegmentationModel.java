@@ -7,19 +7,22 @@ import java.util.Map;
 public class SegmentationModel {
 
     public static final String DEEPLAB = "deeplab";
-    public static final String UNET_PORTRAITS= "unet_portraits";
-    public static final String UNET_VOC_HUMAN= "unet_voc_human";
+    public static final String UNET_PORTRAITS = "unet_portraits";
+    public static final String UNET_VOC_HUMAN = "unet_voc_human";
+    public static final String UNET_PORTRAITS_SMALLER = "unet_portraits_smaller";
     public static String MODEL = "";
     public static String NEW_MODEL = "unet";
     private static AbstractSegmentation aiModel = null;
 
     private static final String deeplab_path = "deeplabv3_257_mv_gpu.tflite";
+    private static final String unetportraits_smaller = "4th_model_96_128.tflite";
 
     private static final Map<String, String> UnetModelPaths;
     static {
         Map<String, String> aMap = new HashMap<String,String>();
         //aMap.put(UNET_PORTRAITS, "128_portraits_26ep_32ba_quantized_32.tflite");
         aMap.put(UNET_PORTRAITS, "2nd_model_128.tflite");
+        //aMap.put(UNET_PORTRAITS, "3rd_model_128.tflite");
         //aMap.put(UNET_PORTRAITS, "128_portraits_26ep_32ba_32f.tflite");
         //aMap.put(UNET_PORTRAITS, "first_model_128.tflite");
         aMap.put(UNET_VOC_HUMAN, "semanticsegmentation_frozen_person_quantized_32.tflite");
@@ -46,6 +49,10 @@ public class SegmentationModel {
             NEW_MODEL = "";
         } else if (NEW_MODEL.equals(UNET_VOC_HUMAN)){
             aiModel = new UnetVocHuman(UnetModelPaths.get(NEW_MODEL));
+            MODEL = NEW_MODEL;
+            NEW_MODEL = "";
+        } else if (NEW_MODEL.equals(UNET_PORTRAITS_SMALLER)){
+            aiModel = new UnetPortraitsSmaller(unetportraits_smaller);
             MODEL = NEW_MODEL;
             NEW_MODEL = "";
         }
