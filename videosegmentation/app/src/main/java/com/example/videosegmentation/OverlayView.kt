@@ -5,6 +5,10 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+
+
 
 /**
  * A overlay view that draws thug life glasses and cigarette bitmaps on top of a detected face
@@ -16,6 +20,8 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
 
     var mask: Bitmap? = null
     var oldMask: Bitmap? = null
+    var backgroundImage: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.beach)
+
 
     // The preview width
     var previewWidth: Int? = null
@@ -26,17 +32,19 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     private var widthScaleFactor = 1.0f
     private var heightScaleFactor = 1.0f
 
-    // The glasses bitmap
-    private val glassesBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.glasses)
 
-    // The cigarette bitmap
-    private val cigaretteBitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.cigarette)
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        // you need to disable
+        //https@ //stackoverflow.com/questions/18387814/drawing-on-canvas-porterduff-mode-clear-draws-black-why
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
         // Create local variables here so they cannot not be changed anywhere else
-        // val face = face
         val maskFixed = mask
 
         Log.d("draw", "checking if the mask or old mask are not null")
@@ -49,24 +57,25 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     canvas.height)
 
 
-            Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString());
-            canvas.drawBitmap(maskFixed, null, maskRect, Paint(Paint.FILTER_BITMAP_FLAG))
+            var paint = Paint()
+            paint.setAntiAlias(true)
+            paint.setFilterBitmap(true)
+            paint.setDither(true)
+
+            paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
+
+            //Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString());
+            //canvas.drawBitmap(maskFixed, null, maskRect, Paint(Paint.FILTER_BITMAP_FLAG))
+
+            canvas.drawBitmap(backgroundImage, null, maskRect, null)
+            canvas.drawBitmap(mask, null, maskRect, paint)
+            paint.setXfermode(null)
+
+
         }
 
         Log.d("draw", "checking if the mask or old mask are not null")
 
-    }
-
-    private fun drawMask(canvas: Canvas, mask: Bitmap){
-
-        val maskRect = Rect(
-                0,
-                0,
-                mask.width,
-                mask.height)
-
-        Log.d("drawing Mask:", mask.getPixel(60,50).toString() );
-        canvas.drawBitmap(mask, null, maskRect, null)
     }
 
 }

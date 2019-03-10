@@ -1,20 +1,20 @@
 package com.example.videosegmentation
 
 import android.content.Context
+import android.graphics.*
 import com.otaliastudios.cameraview.CameraView
 import android.util.Log
-import android.graphics.Bitmap
 import android.os.SystemClock
 import android.renderscript.*
-import com.dailystudio.app.utils.BitmapUtils
 import android.renderscript.Allocation
-
 
 
 class ImageProcessor(private val cameraView: CameraView,
                      private val overlayViewMask: OverlayView,
                      private val activity: SegmentationActivity,
                      private val contextApplication: Context) {
+
+    var backgroundImage: Bitmap = BitmapFactory.decodeResource(contextApplication.resources, R.drawable.beach)
 
     fun startProcessing() {
 
@@ -82,14 +82,8 @@ class ImageProcessor(private val cameraView: CameraView,
                 Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
 
                 if(mask != null){
-                   // val createClippedMaskStart = SystemClock.uptimeMillis();
-                    mask = BitmapUtils.createClippedBitmap(mask,
-                            (mask.width - rw) / 2,
-                            (mask.height - rh) / 2,
-                            rw, rh)
 
-                    //val createClippedMaskEnd = SystemClock.uptimeMillis();
-                    //Log.d("TIME", "createClipped mask " + java.lang.Long.toString(createClippedMaskEnd - createClippedMaskStart))
+                    //mask = cropBitmapWithMask(backgroundImage, mask)
                     overlayViewMask.mask = mask
                     overlayViewMask.invalidate()
 
@@ -97,6 +91,7 @@ class ImageProcessor(private val cameraView: CameraView,
                     activity.showPerformance(java.lang.Long.toString(endTime - startTime),
                             java.lang.Long.toString(endTimeBitmap - startTimeBitmap),
                             java.lang.Long.toString(endTimeInference - startTimeInference))
+
                 }
             }
         }
@@ -177,5 +172,33 @@ class ImageProcessor(private val cameraView: CameraView,
         return rotateYUV420Degree180(yuv, imageWidth, imageHeight)
     }
 
+
+    fun cropBitmapWithMask(original: Bitmap, mask: Bitmap): Bitmap? {
+        if (original == null
+                || mask == null) {
+            return null;
+        }
+
+        var w = original.getWidth()
+        var h = original.getHeight()
+        if (w <= 0 || h <= 0) {
+            return null;
+        }
+
+        var cropped = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+
+
+        var canvas = Canvas(cropped)
+        var paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+
+        paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
+
+        canvas.drawBitmap(original, 0.0f, 0.0f, null)
+        canvas.drawBitmap(mask, 0.0f, 0.0f, paint)
+        paint.setXfermode(null)
+
+        return cropped;
+    }
 
 }
