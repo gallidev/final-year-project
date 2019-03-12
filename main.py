@@ -15,17 +15,16 @@ from util import repoter as rp
 def load_dataset(train_rate):
     #loader = ld.Loader(dir_original="data_set/VOCdevkit/person/JPEGImages",
     #                   dir_segmented="data_set/VOCdevkit/person/SegmentationClass")
-    loader = ld.Loader(dir_original="data_set/portraits/images_jpg",
-                      dir_segmented="data_set/portraits/masks_png",
-                      init_size=(96, 128))
-    #loader = ld.Loader(dir_original="data_set/portraits/test_image",
-    #                   dir_segmented="data_set/portraits/test_mask",
-    #                   init_size=(128, 96))
+    #loader = ld.Loader(dir_original="data_set/portraits/images_jpg",
+    #                  dir_segmented="data_set/portraits/masks_png",
+    #                  init_size=(96, 128))
+    loader = ld.Loader(dir_original="data_set/portraits/test_image",
+                       dir_segmented="data_set/portraits/test_mask",
+                       init_size=(96, 128))
     return loader.load_train_test(train_rate=train_rate, shuffle=False)
 
 
 def train(parser):
-
     # Load train and test datas
     train, test = load_dataset(train_rate=parser.trainrate)
     valid = train.perm(0, 30)

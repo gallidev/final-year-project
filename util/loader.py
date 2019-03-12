@@ -6,8 +6,8 @@ from util import image_augmenter as ia
 
 
 class Loader(object):
-    def __init__(self, dir_original, dir_segmented, init_size=(96, 128), one_hot=True):
-        self._data = Loader.import_data(dir_original, dir_segmented, init_size, one_hot)
+    def __init__(self, dir_original, dir_segmented, init_size=(96, 128), squared=False, one_hot=True):
+        self._data = Loader.import_data(dir_original, dir_segmented, init_size, squared, one_hot)
 
     def get_all_dataset(self):
         return self._data
@@ -37,12 +37,12 @@ class Loader(object):
         return train_set, test_set
 
     @staticmethod
-    def import_data(dir_original, dir_segmented, init_size=None, one_hot=True):
+    def import_data(dir_original, dir_segmented, init_size=None, squared=False, one_hot=True):
         # Generate paths of images to load
         paths_original, paths_segmented = Loader.generate_paths(dir_original, dir_segmented)
 
         # Extract images to ndarray using paths
-        images_original, images_segmented = Loader.extract_images(paths_original, paths_segmented, init_size, one_hot)
+        images_original, images_segmented = Loader.extract_images(paths_original, paths_segmented, init_size, squared, one_hot)
 
         # Get a color palette
         image_sample_palette = Image.open(paths_segmented[0])
@@ -67,19 +67,19 @@ class Loader(object):
         return paths_original, paths_segmented
 
     @staticmethod
-    def extract_images(paths_original, paths_segmented, init_size, one_hot):
+    def extract_images(paths_original, paths_segmented, init_size, squared, one_hot):
         images_original, images_segmented = [], []
 
         # Load images from directory_path using generator
         print("Loading original images", end="", flush=True)
-        for image in Loader.image_generator(paths_original, init_size, antialias=True):
-            print(image.shape)
+        for image in Loader.image_generator(paths_original, init_size, squared=squared, antialias=True):
+            #print(image.shape)
             images_original.append(image)
             if len(images_original) % 200 == 0:
                 print(".", end="", flush=True)
         print(" Completed", flush=True)
         print("Loading segmented images", end="", flush=True)
-        for image in Loader.image_generator(paths_segmented, init_size, normalization=False):
+        for image in Loader.image_generator(paths_segmented, init_size, squared=squared, normalization=False):
             #print(image.shape)
             images_segmented.append(image)
             if len(images_segmented) % 200 == 0:
@@ -123,7 +123,7 @@ class Loader(object):
         return identity[ndarray]
 
     @staticmethod
-    def image_generator(file_paths, init_size=None, normalization=True, antialias=False):
+    def image_generator(file_paths, init_size=None, normalization=True, squared=False, antialias=False):
         """
         `A generator which yields images deleted an alpha channel and resized.
         Args:
@@ -140,8 +140,11 @@ class Loader(object):
                 image = Image.open(file_path)
                 # to square
                 #image = Loader.crop_to_square(image)
-                # Super important to keep the same mode the picture is stored it is different for JPG and PNG
-                #image = Loader.make_square(image, image.mode, init_size)
+                #Super important to keep the same mode the picture is stored it is different for JPG and PNG
+
+                #print(squared)
+                if(squared):
+                    image = Loader.make_square(image, image.mode, init_size)
 
                 # resize by init_size
                 if init_size is not None and init_size != image.size:
@@ -163,12 +166,12 @@ class Loader(object):
 
                 # the image from asarray has the rows in the position of the columns
                 # so we transpose it
-                if(len(image.shape) == 3):
+                #if(len(image.shape) == 3):
                     # if it is a classic image
-                    image = image.transpose(1, 0, 2)
-                else:
+                #    image = image.transpose(1, 0, 2)
+                #else:
                     # if it is a segmented image
-                    image = image.transpose(1, 0)
+                #    image = image.transpose(1, 0)
 
                 if normalization:
                     image = image / 255.0

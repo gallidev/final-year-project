@@ -5,7 +5,7 @@ from util import loader as ld
 class UNet:
     def __init__(self, 
             #size=(256, 256), 
-            size=(96, 128),
+            size=(128, 96),
             l2_reg=None):
         self.model = self.create_model(size, l2_reg)
 
