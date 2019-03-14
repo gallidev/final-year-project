@@ -1,5 +1,5 @@
 ###################################################################
-# $ python3 main.py --gpu --augmentation --batchsize 32 --epoch 50
+# $ python3 main.py --gpu --batchsize 32 --epoch 20 --init_size 128 128 --squared
 ###################################################################
 
 import argparse
@@ -12,17 +12,22 @@ from util import model_smaller_first as model
 from util import repoter as rp
 
 
-def load_dataset(train_rate):
-    #loader = ld.Loader(dir_original="data_set/VOCdevkit/person/JPEGImages",
-    #                   dir_segmented="data_set/VOCdevkit/person/SegmentationClass")
-    #loader = ld.Loader(dir_original="data_set/portraits/images_jpg",
-    #                  dir_segmented="data_set/portraits/masks_png",
-    #                  init_size=(96, 128))
-    loader = ld.Loader(dir_original="data_set/portraits/test_image",
-                       dir_segmented="data_set/portraits/test_mask",
-                       init_size=(96, 128))
-    return loader.load_train_test(train_rate=train_rate, shuffle=False)
+def load_dataset(train_rate, init_size, squared, test=False):
 
+    loader = None
+
+    if test:
+        loader = ld.Loader(dir_original="data_set/portraits/test_image",
+                        dir_segmented="data_set/portraits/test_mask",
+                        init_size=init_size,
+                        squared=squared)
+    else:
+        loader = ld.Loader(dir_original="data_set/portraits/images_jpg",
+                        dir_segmented="data_set/portraits/masks_png",
+                        init_size=init_size,
+                        squared=squared)
+
+    return loader.load_train_test(train_rate=train_rate, shuffle=False)
 
 def train(parser):
     # Load train and test datas
@@ -126,6 +131,12 @@ def get_parser():
     parser.add_argument('-t', '--trainrate', type=float, default=0.85, help='Training rate')
     parser.add_argument('-a', '--augmentation', action='store_true', help='Number of epochs')
     parser.add_argument('-r', '--l2reg', type=float, default=0.0001, help='L2 regularization')
+    parser.add_argument('-i', '--init_size', nargs='+', type=int,  default=[128, 128], help='Size of the model')
+    parser.add_argument('-s', '--squared',  help='Square the input image', dest='squared', action='store_true')
+    parser.add_argument('-ns', '--no_squared', help='Do not square the input image', dest='squared', action='store_false')
+    parser.set_defaults(squared=True)
+    parser.add_argument('-te', '--test',  help='test data', dest='test', action='store_true')
+    parser.set_defaults(test=False)
 
     return parser
 
