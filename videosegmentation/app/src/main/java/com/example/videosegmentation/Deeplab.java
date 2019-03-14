@@ -139,12 +139,12 @@ public class Deeplab extends AbstractSegmentation{
 
         final long start = System.currentTimeMillis();
 
-        Logger.debug("start inference = %s", mImageData);
+        //Logger.debug("start inference = %s", mImageData);
         sTfInterpreter.run(mImageData, mOutputs);
 
         //Logger.debug("inference done, outputs = %s", ArrayUtils.floatArrayToString(mOutputs));
         final long end = System.currentTimeMillis();
-        Logger.debug("%d millis per core segment call.", (end - start));
+        //Logger.debug("%d millis per core segment call.", (end - start));
 
         Bitmap output = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 

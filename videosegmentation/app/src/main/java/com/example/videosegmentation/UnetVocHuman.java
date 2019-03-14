@@ -77,7 +77,7 @@ public class UnetVocHuman extends AbstractSegmentation{
 
     public Bitmap segment(Bitmap bitmap) {
         if (sTfInterpreter == null) {
-            Log.w("model", "tf model is NOT initialized.");
+           // Log.w("model", "tf model is NOT initialized.");
             return null;
         }
 
@@ -87,12 +87,12 @@ public class UnetVocHuman extends AbstractSegmentation{
 
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
-        Logger.debug("bitmap: %d x %d,", w, h);
+        //Logger.debug("bitmap: %d x %d,", w, h);
 
         if (w > INPUT_SIZE || h > INPUT_SIZE) {
-           Logger.warn("invalid bitmap size: %d x %d [should be: %d x %d]",
-                    w, h,
-                    INPUT_SIZE, INPUT_SIZE);
+          // Logger.warn("invalid bitmap size: %d x %d [should be: %d x %d]",
+           //         w, h,
+           //         INPUT_SIZE, INPUT_SIZE);
 
             return null;
         }
@@ -106,7 +106,7 @@ public class UnetVocHuman extends AbstractSegmentation{
 
             w = bitmap.getWidth();
             h = bitmap.getHeight();
-            Logger.debug("extend bitmap: %d x %d,", w, h);
+            //Logger.debug("extend bitmap: %d x %d,", w, h);
         }
 
 
@@ -133,13 +133,13 @@ public class UnetVocHuman extends AbstractSegmentation{
 
         final long start = System.currentTimeMillis();
 
-        sTfInterpreter.run(imgData, mOutputs);
 
+        sTfInterpreter.run(imgData, mOutputs);
         //to get out the segmentation mask from mOutputs we need to see when the second
         // float of each pixel is the highest number of the 3
 
         final long end = System.currentTimeMillis();
-        Log.d("TIME", "CORE inference " + Long.toString(end - start));
+        //Log.d("TIME", "CORE inference " + Long.toString(end - start));
 
 
         Bitmap output = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);

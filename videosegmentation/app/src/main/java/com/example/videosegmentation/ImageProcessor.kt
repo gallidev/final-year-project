@@ -10,31 +10,20 @@ import android.renderscript.Allocation
 import com.dailystudio.app.utils.BitmapUtils
 
 
-class ImageProcessor(private val cameraView: CameraView,
-                     private val overlayViewMask: OverlayView,
-                     private val activity: SegmentationActivity,
-                     private val contextApplication: Context) {
+class ImageProcessor(
+        private val cameraView: CameraView,
+        private val overlayViewMask: OverlayView,
+        private val activity: SegmentationActivity,
+        private val contextApplication: Context) {
 
-    var backgroundImage: Bitmap = BitmapFactory.decodeResource(contextApplication.resources, R.drawable.beach)
+
 
     fun startProcessing() {
-
         // Getting frames from camera view
         cameraView.addFrameProcessor { frame ->
 
-            if (frame.size != null) {
-
+            if (frame.size != null ) {
                 Log.d("Frame", "start processing frame")
-                val rotation = frame.rotation / 90
-                if (rotation / 2 == 0) {
-                    overlayViewMask.previewWidth = cameraView.previewSize?.width
-                    overlayViewMask.previewHeight = cameraView.previewSize?.height
-                } else {
-                    overlayViewMask.previewWidth = cameraView.previewSize?.height
-                    overlayViewMask.previewHeight = cameraView.previewSize?.width
-                }
-                // to convert the image I found this online, gosh https://github.com/natario1/CameraView/issues/310
-                // this might slow down things, I should time it... gosh...
 
                 val startTime = SystemClock.uptimeMillis()
 
@@ -48,7 +37,7 @@ class ImageProcessor(private val cameraView: CameraView,
                 bmData.copyTo(bitmap)
 
                 val endTime = SystemClock.uptimeMillis()
-                Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
+                //Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
 
                 //Log.d("rotation in float", rotation.toFloat().toString());
                 val startTimeBitmap = SystemClock.uptimeMillis()
@@ -76,11 +65,15 @@ class ImageProcessor(private val cameraView: CameraView,
 
                 val startTimeInference = SystemClock.uptimeMillis()
 
+                Log.d("TIME","inference start")
+                SegmentationModel.setIsProcessing(true)
                 var mask = SegmentationModel.getInstance().segment(resized)
-
+                Log.d("TIME","inference end")
+                SegmentationModel.setIsProcessing(false)
+                activity.onImageSegmentationEnd()
                 val endTimeInference = SystemClock.uptimeMillis()
 
-                Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
+                //Log.d("TIME", "Inference Completed in " + java.lang.Long.toString(endTimeInference - startTimeInference))
 
                 if(mask != null){
 
@@ -94,11 +87,11 @@ class ImageProcessor(private val cameraView: CameraView,
                     overlayViewMask.invalidate()
 
                     Log.d("Mask", "sent Mask")
-                    activity.showPerformance(java.lang.Long.toString(endTime - startTime),
-                            java.lang.Long.toString(endTimeBitmap - startTimeBitmap),
+                    activity.showPerformance(SegmentationModel.getModelPath(), java.lang.Long.toString(endTime - startTime),
                             java.lang.Long.toString(endTimeInference - startTimeInference))
 
                 }
+
             }
         }
     }
@@ -178,33 +171,5 @@ class ImageProcessor(private val cameraView: CameraView,
         return rotateYUV420Degree180(yuv, imageWidth, imageHeight)
     }
 
-
-    fun cropBitmapWithMask(original: Bitmap, mask: Bitmap): Bitmap? {
-        if (original == null
-                || mask == null) {
-            return null;
-        }
-
-        var w = original.getWidth()
-        var h = original.getHeight()
-        if (w <= 0 || h <= 0) {
-            return null;
-        }
-
-        var cropped = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
-
-
-        var canvas = Canvas(cropped)
-        var paint = Paint(Paint.ANTI_ALIAS_FLAG)
-
-
-        paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
-
-        canvas.drawBitmap(original, 0.0f, 0.0f, null)
-        canvas.drawBitmap(mask, 0.0f, 0.0f, paint)
-        paint.setXfermode(null)
-
-        return cropped;
-    }
 
 }

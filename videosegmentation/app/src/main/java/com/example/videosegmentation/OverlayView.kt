@@ -23,15 +23,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     var backgroundImage: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.beach)
 
 
-    // The preview width
-    var previewWidth: Int? = null
-
-    // The preview height
-    var previewHeight: Int? = null
-
-    private var widthScaleFactor = 1.0f
-    private var heightScaleFactor = 1.0f
-
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
@@ -46,7 +37,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         // Create local variables here so they cannot not be changed anywhere else
         val maskFixed = mask
 
-        Log.d("draw", "checking if the mask or old mask are not null")
+        //Log.d("draw", "checking if the mask or old mask are not null")
         if(maskFixed != null && canvas != null){
 
             val maskRect = Rect(
@@ -72,9 +63,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
 
 
         }
-
-        Log.d("draw", "checking if the mask or old mask are not null")
-
     }
 
 }

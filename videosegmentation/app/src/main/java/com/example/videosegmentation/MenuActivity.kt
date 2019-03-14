@@ -15,25 +15,33 @@ class MenuActivity : Activity() {
         setContentView(R.layout.activity_menu)
     }
 
-    fun onUnetPortraitsClick(view: View){
-
+    fun onDeeplabClick(view: View){
         val intent = Intent(this, SegmentationActivity::class.java)
-        intent.putExtra("model", UNET_PORTRAITS_SMALLER)
+        intent.putExtra("model", DEEPLAB)
+        startActivity(intent)
+    }
+
+    fun onUnetVocClick(view: View){
+        val intent = Intent(this, SegmentationActivity::class.java)
+        intent.putExtra("model", UNET_VOC_HUMAN)
         startActivity(intent)
 
     }
 
-    fun onUnetVocClick(view: View){
-
+    fun onUnetPortraitsClick(view: View){
         val intent = Intent(this, SegmentationActivity::class.java)
         intent.putExtra("model", UNET_PORTRAITS)
         startActivity(intent)
 
     }
 
-    fun onDeeplabClick(view: View){
+    fun onUnetPortraitsSmallerClick(view: View){
         val intent = Intent(this, SegmentationActivity::class.java)
-        intent.putExtra("model", DEEPLAB)
+        intent.putExtra("model", UNET_PORTRAITS_SMALLER)
         startActivity(intent)
+
     }
+
+
+
 }

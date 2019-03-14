@@ -26,6 +26,7 @@ import java.util.Random;
 public abstract class AbstractSegmentation {
 
     protected String model_path;
+    protected boolean isProcessing;
 
     protected Delegate gpuDelegate = null;
 
@@ -67,12 +68,12 @@ public abstract class AbstractSegmentation {
         }
 
         final int numOfInputs = interpreter.getInputTensorCount();
-        Log.d("TF-LITE-MODEL", "input tensors: " + numOfInputs);
+        //Log.d("TF-LITE-MODEL", "input tensors: " + numOfInputs);
 
         for (int i = 0; i < numOfInputs; i++) {
             Tensor t = interpreter.getInputTensor(i);
-            Log.d("TF-LITE-MODEL", "input tensor " + i
-                    + "shape" +ArrayUtils.intArrayToString(t.shape()));
+            //Log.d("TF-LITE-MODEL", "input tensor " + i
+            //        + "shape" +ArrayUtils.intArrayToString(t.shape()));
         }
     }
 
@@ -82,12 +83,12 @@ public abstract class AbstractSegmentation {
         }
 
         final int numOfOutputs = interpreter.getOutputTensorCount();
-        Log.d("TF-LITE-MODEL", "output tensors: " + numOfOutputs);
+        //Log.d("TF-LITE-MODEL", "output tensors: " + numOfOutputs);
 
         for (int i = 0; i < numOfOutputs; i++) {
             Tensor t = interpreter.getOutputTensor(i);
-            Log.d("TF-LITE-MODEL", "output tensor " + i
-                    + "shape" +ArrayUtils.intArrayToString(t.shape()));
+            //Log.d("TF-LITE-MODEL", "output tensor " + i
+            //       + "shape" +ArrayUtils.intArrayToString(t.shape()));
         }
     }
 
@@ -109,9 +110,9 @@ public abstract class AbstractSegmentation {
 
             buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
         } catch (IOException e) {
-            Logger.debug("load tflite model from [%s] failed: %s",
-                    modelFile,
-                    e.toString());
+            //Logger.debug("load tflite model from [%s] failed: %s",
+            //        modelFile,
+            //        e.toString());
 
             buffer = null;
         }
@@ -123,6 +124,21 @@ public abstract class AbstractSegmentation {
         imgData.putFloat(((pixelValue >> 16) & 0xFF) / 255.f);
         imgData.putFloat(((pixelValue >> 8) & 0xFF) / 255.f);
         imgData.putFloat((pixelValue & 0xFF) / 255.f);
+    }
+
+    public void closeModel(){
+        if(sTfInterpreter != null){
+            sTfInterpreter.close();
+        }
+
+    }
+
+    public void setProcessing(boolean isProcessing){
+        this.isProcessing = isProcessing;
+    }
+
+    public boolean isProcessing(){
+        return this.isProcessing;
     }
 
 }

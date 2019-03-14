@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Video Segmentation</string>
-    <string name="menu">Select a model</string>
+    <string name="app_name">Portrait Segmentation</string>
+    <string name="menu">Real-time Portrait Segmentation</string>
     <string name="deeplab">Deeplab V3+ model</string>
-    <string name="unet_voc_human">UNet Voc Human model</string>
-    <string name="unet_portraits">UNet Portraits model</string>
+    <string name="unet_voc_human">UNet VocHuman model</string>
+    <string name="unet_portraits">UNet Portraits models</string>
+    <string name="unet_portraits_smaller">UNet Portrait 3x4 models</string>
 </resources>
