@@ -37,8 +37,8 @@ def train(parser):
     print("test: " + str(parser.test))
     train, test = load_dataset(train_rate=parser.trainrate, init_size=init_size, squared=parser.squared, test=parser.test)
 
-    #valid = train.perm(0, 30)
-    #test = test.perm(0, 150)
+    valid = train.perm(0, 30)
+    test = test.perm(0, 150)
 
     # Create Reporter Object
     reporter = rp.Reporter(parser=parser)
@@ -73,7 +73,7 @@ def train(parser):
     epochs = parser.epoch
     batch_size = parser.batchsize
     is_augment = parser.augmentation
-    train_dict = {model_unet.inputs: train.images_original, model_unet.teacher: train.images_segmented,
+    train_dict = {model_unet.inputs: valid.images_original, model_unet.teacher: valid.images_segmented,
                   model_unet.is_training: False}
     test_dict = {model_unet.inputs: test.images_original, model_unet.teacher: test.images_segmented,
                  model_unet.is_training: False}

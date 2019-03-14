@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/util/model.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" lean-forward="true" selection-end-line="157" />
+              <caret line="10" selection-end-line="157" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -53,7 +53,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
+            <state relative-caret-position="218">
               <caret line="75" column="85" selection-start-line="75" selection-start-column="85" selection-end-line="75" selection-end-column="85" />
               <folding>
                 <element signature="e#204#219#0" expanded="true" />
@@ -98,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2355">
-              <caret line="157" lean-forward="true" selection-start-line="157" selection-end-line="157" />
+              <caret line="157" selection-start-line="157" selection-end-line="157" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -110,7 +110,7 @@
         <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2155">
-              <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
+              <caret line="159" selection-start-line="159" selection-end-line="159" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -296,12 +296,12 @@
       <workItem from="1552216478925" duration="6307000" />
       <workItem from="1552386810402" duration="25000" />
       <workItem from="1552388047164" duration="4224000" />
-      <workItem from="1552554352474" duration="1325000" />
+      <workItem from="1552554352474" duration="1836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21141000" />
+    <option name="totallyTimeSpent" value="21652000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="42" width="1260" height="738" extended-state="0" />
@@ -428,7 +428,7 @@
     <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2155">
-          <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -438,7 +438,7 @@
     <entry file="file://$PROJECT_DIR$/util/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" lean-forward="true" selection-end-line="157" />
+          <caret line="10" selection-end-line="157" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -448,7 +448,7 @@
     <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2355">
-          <caret line="157" lean-forward="true" selection-start-line="157" selection-end-line="157" />
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -483,7 +483,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
+        <state relative-caret-position="218">
           <caret line="75" column="85" selection-start-line="75" selection-start-column="85" selection-end-line="75" selection-end-column="85" />
           <folding>
             <element signature="e#204#219#0" expanded="true" />
