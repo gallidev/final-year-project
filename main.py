@@ -35,7 +35,7 @@ def train(parser):
     print(init_size)
     print("Squared: " + str(parser.squared))
     print("test: " + str(parser.test))
-    train, test = load_dataset(train_rate=parser.train_rate, init_size=init_size, squared=parser.squared, test=parser.test)
+    train, test = load_dataset(train_rate=parser.trainrate, init_size=init_size, squared=parser.squared, test=parser.test)
 
     #valid = train.perm(0, 30)
     #test = test.perm(0, 150)
@@ -73,7 +73,7 @@ def train(parser):
     epochs = parser.epoch
     batch_size = parser.batchsize
     is_augment = parser.augmentation
-    train_dict = {model_unet.inputs: valid.images_original, model_unet.teacher: valid.images_segmented,
+    train_dict = {model_unet.inputs: train.images_original, model_unet.teacher: train.images_segmented,
                   model_unet.is_training: False}
     test_dict = {model_unet.inputs: test.images_original, model_unet.teacher: test.images_segmented,
                  model_unet.is_training: False}
@@ -133,7 +133,7 @@ def get_parser():
     parser.add_argument('-g', '--gpu', action='store_true', help='Using GPUs')
     parser.add_argument('-e', '--epoch', type=int, default=250, help='Number of epochs')
     parser.add_argument('-b', '--batchsize', type=int, default=32, help='Batch size')
-    parser.add_argument('-t', '--train_rate', type=float, default=0.85, help='Training rate')
+    parser.add_argument('-t', '--trainrate', type=float, default=0.85, help='Training rate')
     parser.add_argument('-a', '--augmentation', action='store_true', help='Number of epochs')
     parser.add_argument('-r', '--l2reg', type=float, default=0.0001, help='L2 regularization')
     parser.add_argument('-i', '--init_size', nargs='+', type=int,  default=[128, 128], help='Size of the model')
