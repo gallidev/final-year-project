@@ -31,7 +31,12 @@ def load_dataset(train_rate, init_size, squared, test=False):
 
 def train(parser):
     # Load train and test datas
-    train, test = load_dataset(train_rate=parser.trainrate)
+    init_size = tuple(parser.init_size)
+    print(init_size)
+    print("Squared: " + str(parser.squared))
+    print("test: " + str(parser.test))
+    train, test = load_dataset(train_rate=parser.train_rate, init_size=init_size, squared=parser.squared, test=parser.test)
+
     valid = train.perm(0, 30)
     test = test.perm(0, 150)
 
