@@ -30,15 +30,15 @@ def load_dataset(train_rate, init_size, squared, test=False):
     return loader.load_train_test(train_rate=train_rate, shuffle=False)
 
 def train(parser):
-    # Load train and test datas
+
     init_size = tuple(parser.init_size)
     print(init_size)
     print("Squared: " + str(parser.squared))
     print("test: " + str(parser.test))
     train, test = load_dataset(train_rate=parser.train_rate, init_size=init_size, squared=parser.squared, test=parser.test)
 
-    valid = train.perm(0, 30)
-    test = test.perm(0, 150)
+    #valid = train.perm(0, 30)
+    #test = test.perm(0, 150)
 
     # Create Reporter Object
     reporter = rp.Reporter(parser=parser)
@@ -133,7 +133,7 @@ def get_parser():
     parser.add_argument('-g', '--gpu', action='store_true', help='Using GPUs')
     parser.add_argument('-e', '--epoch', type=int, default=250, help='Number of epochs')
     parser.add_argument('-b', '--batchsize', type=int, default=32, help='Batch size')
-    parser.add_argument('-t', '--trainrate', type=float, default=0.85, help='Training rate')
+    parser.add_argument('-t', '--train_rate', type=float, default=0.85, help='Training rate')
     parser.add_argument('-a', '--augmentation', action='store_true', help='Number of epochs')
     parser.add_argument('-r', '--l2reg', type=float, default=0.0001, help='L2 regularization')
     parser.add_argument('-i', '--init_size', nargs='+', type=int,  default=[128, 128], help='Size of the model')
