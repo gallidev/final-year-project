@@ -3,10 +3,10 @@ package com.example.videosegmentation
 import android.content.Context
 import android.graphics.*
 import com.otaliastudios.cameraview.CameraView
-import android.util.Log
 import android.os.SystemClock
 import android.renderscript.*
 import android.renderscript.Allocation
+import android.util.Log
 import com.dailystudio.app.utils.BitmapUtils
 
 
@@ -16,25 +16,48 @@ class ImageProcessor(
         private val activity: SegmentationActivity,
         private val contextApplication: Context) {
 
-
+    val YUVimageSIZE = 2880000
+    val FrameWIDTH = 1200
+    val FrameHEIGHT = 1600
 
     fun startProcessing() {
+
+        val rs = RenderScript.create(contextApplication)
+        val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
+
+        val yuvType = Type.Builder(rs, Element.U8(rs)).setX(YUVimageSIZE)
+        val input = Allocation.createTyped(rs, yuvType.create(), Allocation.USAGE_SCRIPT)
+
+        val rgbaType = Type.Builder(rs, Element.RGBA_8888(rs)).setX(FrameWIDTH).setY(FrameHEIGHT)
+        val out = Allocation.createTyped(rs, rgbaType.create(), Allocation.USAGE_SCRIPT)
+
+
         // Getting frames from camera view
         cameraView.addFrameProcessor { frame ->
 
             if (frame.size != null ) {
-                Log.d("Frame", "start processing frame")
-
+                //Log.d("Frame", "start processing frame")
                 val startTime = SystemClock.uptimeMillis()
 
                 val rotatedYuv = rotateYUV420Degree270(frame.data, frame.size.width, frame.size.height)
+
                 val bitmap = Bitmap.createBitmap(frame.size.height, frame.size.width, Bitmap.Config.ARGB_8888)
-                val bmData = renderScriptNV21ToRGBA888(
-                        contextApplication,
-                        frame.size.height,
-                        frame.size.width,
-                        rotatedYuv)
-                bmData.copyTo(bitmap)
+
+
+                input.copyFrom(rotatedYuv)
+
+                yuvToRgbIntrinsic.setInput(input)
+                yuvToRgbIntrinsic.forEach(out)
+
+                //val bmData = renderScriptNV21ToRGBA888(rs,
+                //        contextApplication,
+                //        frame.size.height,
+                //        frame.size.width,
+                //        rotatedYuv)
+
+                out.copyTo(bitmap)
+                //it is essential to destroy the allocation object to prevent memory leaks
+
 
                 val endTime = SystemClock.uptimeMillis()
                 //Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
@@ -48,7 +71,7 @@ class ImageProcessor(
 
                 val w = rotatedBitmap.width
                 val h = rotatedBitmap.height
-               // Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
+                // Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
 
 
                 val resizeRatio = UnetPortraits.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
@@ -65,11 +88,11 @@ class ImageProcessor(
 
                 val startTimeInference = SystemClock.uptimeMillis()
 
-                Log.d("TIME","inference start")
-                SegmentationModel.setIsProcessing(true)
-                var mask = SegmentationModel.getInstance().segment(resized)
-                Log.d("TIME","inference end")
-                SegmentationModel.setIsProcessing(false)
+                //Log.d("TIME","inference start")
+                ModelManager.setIsProcessing(true)
+                var mask = ModelManager.getInstance().segment(resized)
+                //Log.d("TIME","inference end")
+                ModelManager.setIsProcessing(false)
                 activity.onImageSegmentationEnd()
                 val endTimeInference = SystemClock.uptimeMillis()
 
@@ -86,19 +109,18 @@ class ImageProcessor(
                     overlayViewMask.mask = mask
                     overlayViewMask.invalidate()
 
-                    Log.d("Mask", "sent Mask")
-                    activity.showPerformance(SegmentationModel.getModelPath(), java.lang.Long.toString(endTime - startTime),
+                    //Log.d("Mask", "sent Mask")
+                    activity.showPerformance(ModelManager.getModelName(), java.lang.Long.toString(endTime - startTime),
                             java.lang.Long.toString(endTimeInference - startTimeInference))
 
                 }
-
             }
         }
     }
 
     //Converts YUV image into RGB in ~10ms
-    private fun renderScriptNV21ToRGBA888(context: Context, width: Int, height: Int, nv21: ByteArray): Allocation {
-        val rs = RenderScript.create(context)
+    private fun renderScriptNV21ToRGBA888(rs:RenderScript, context: Context, width: Int, height: Int, nv21: ByteArray): Allocation {
+        //val rs = RenderScript.create(context)
         val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
 
         val yuvType = Type.Builder(rs, Element.U8(rs)).setX(nv21.size)
@@ -111,6 +133,7 @@ class ImageProcessor(
 
         yuvToRgbIntrinsic.setInput(input)
         yuvToRgbIntrinsic.forEach(out)
+
         return out
     }
 

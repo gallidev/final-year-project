@@ -3,10 +3,14 @@ package com.example.videosegmentation
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.graphics.BitmapFactory
 import android.graphics.Bitmap
+import android.graphics.BlurMaskFilter.Blur
+import android.graphics.BlurMaskFilter
+import android.graphics.PorterDuff
+
+
 
 
 
@@ -20,7 +24,10 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
 
     var mask: Bitmap? = null
     var oldMask: Bitmap? = null
-    var backgroundImage: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.beach)
+    var backgroundImages: Array<Bitmap> = arrayOf(BitmapFactory.decodeResource(resources, R.drawable.beach) ,
+                BitmapFactory.decodeResource(resources, R.drawable.tour_eiffel))
+    var indexImage = 0;
+
 
 
 
@@ -40,6 +47,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         //Log.d("draw", "checking if the mask or old mask are not null")
         if(maskFixed != null && canvas != null){
 
+
+            val maskWithBlur = highlightImage(maskFixed)
+
             val maskRect = Rect(
                     0,
                     0,
@@ -51,18 +61,56 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             paint.setAntiAlias(true)
             paint.setFilterBitmap(true)
             paint.setDither(true)
+            //
 
             paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
-
             //Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString());
             //canvas.drawBitmap(maskFixed, null, maskRect, Paint(Paint.FILTER_BITMAP_FLAG))
 
-            canvas.drawBitmap(backgroundImage, null, maskRect, null)
-            canvas.drawBitmap(mask, null, maskRect, paint)
+            canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
+            canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
             paint.setXfermode(null)
 
 
         }
+    }
+
+    fun nextBackground(){
+        indexImage ++
+        if(indexImage % backgroundImages.size == 0){
+            indexImage = 0
+        }
+    }
+
+
+    private fun highlightImage(src: Bitmap): Bitmap {
+        // create new bitmap, which will be painted and becomes result image
+        val bmOut = Bitmap.createBitmap(src.width, src.height, Bitmap.Config.ARGB_8888)
+        // setup canvas for painting
+        val canvas = Canvas(bmOut)
+        // setup default color
+        canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR)
+        // create a blur paint for capturing alpha
+        val ptBlur = Paint()
+        ptBlur.maskFilter = BlurMaskFilter(1f, Blur.NORMAL)
+        val offsetXY = IntArray(2)
+        // capture alpha into a bitmap
+        val bmAlpha = src.extractAlpha(ptBlur, offsetXY)
+        // create a color paint
+        val ptAlphaColor = Paint()
+        ptAlphaColor.color = -0x1
+        // paint color for captured alpha region (bitmap)
+        canvas.drawBitmap(bmAlpha, offsetXY[0].toFloat(), offsetXY[1].toFloat(), ptAlphaColor)
+        //2 times makes the blur stronger
+        canvas.drawBitmap(bmAlpha, offsetXY[0].toFloat(), offsetXY[1].toFloat(), ptAlphaColor)
+        // free memory
+        bmAlpha.recycle()
+
+        // paint the image source
+        canvas.drawBitmap(src, 0f, 0f, null)
+
+        // return out final image
+        return bmOut
     }
 
 }

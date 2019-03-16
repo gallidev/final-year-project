@@ -3,15 +3,14 @@ package com.example.videosegmentation;
 import android.content.pm.PackageManager;
 
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.dailystudio.development.Logger;
 import com.otaliastudios.cameraview.CameraView;
 
 
@@ -20,7 +19,8 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     private int PERMISSION_REQUEST_CODE = 3;
     private CameraView cameraView;
     private OverlayView overlayViewMask;
-    //private OverlayView overlayViewCropped;
+    private ImageButton changeBackgroundButton;
+    private ImageButton changeModelButton;
     private TextView performanceText;
     private ImageProcessor imageProcessor;
     private String model;
@@ -30,11 +30,11 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            while(SegmentationModel.isProcessing()){
+            while(ModelManager.isProcessing()){
                 //Log.d("waiting", "waiting");
             }
-            //Log.d("Model", "Initializing but is it processing: " + SegmentationModel.isProcessing());
-            final boolean ret = SegmentationModel.getInstance().initialize(
+            //Log.d("Model", "Initializing but is it processing: " + ModelManager.isProcessing());
+            final boolean ret = ModelManager.getInstance().initialize(
                     getApplicationContext());
 
             //Log.d("Model", "Initialized model");
@@ -58,15 +58,16 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
         Log.d("LIFECYCLE", "OnCreate");
         cameraView = (CameraView) findViewById(R.id.camera_view);
         overlayViewMask = (OverlayView) findViewById(R.id.overlay_view_mask);
-        overlayViewMask.setOnClickListener(this);
+        changeBackgroundButton = (ImageButton) findViewById(R.id.changeBackgroundButton);
+        changeModelButton = (ImageButton) findViewById(R.id.changeModelButton);
+        changeBackgroundButton.setOnClickListener(this);
+        changeModelButton.setOnClickListener(this);
         performanceText = (TextView) findViewById(R.id.performanceText);
-        //overlayViewCropped = (OverlayView) findViewById(R.id.overlay_view_cropped);
-
     }
 
     protected void onStart(){
         super.onStart();
-        SegmentationModel.NEW_MODEL = getIntent().getStringExtra("model");
+        ModelManager.NEW_MODEL = getIntent().getStringExtra("model");
         Log.d("LIFECYCLE", "onStart");
         //Log.d("isProcessing", "the model is processing: " + modelIsProcessing.toString());
         checkAndRequestCameraPermission();
@@ -81,7 +82,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
 
     protected void onRestart(){
         super.onRestart();
-        //SegmentationModel.NEW_MODEL = getIntent().getStringExtra("model");
+        //ModelManager.NEW_MODEL = getIntent().getStringExtra("model");
         //initModel();
 
     }
@@ -140,14 +141,17 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
 
     public void onClick(View view){
 
-        if(view.getId() == R.id.overlay_view_mask){
+        Log.d("viewID", Integer.toString(view.getId()));
+
+        if(view.getId() == R.id.changeModelButton){
             //stop the camera view so no more frame is processed
             cameraView.stop();
-
             //get the next segmentation model for that kind
-            SegmentationModel.next();
-            SegmentationModel.NEW_MODEL = SegmentationModel.MODEL;
+            ModelManager.next();
+            ModelManager.NEW_MODEL = ModelManager.MODEL;
 
+        } else if(view.getId() == R.id.changeBackgroundButton){
+            overlayViewMask.nextBackground();
         }
     }
 
@@ -156,7 +160,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
      */
     public void onImageSegmentationEnd(){
         //If the user has tapped prepare the new model
-        if(SegmentationModel.NEW_MODEL.equals(SegmentationModel.MODEL)){
+        if(ModelManager.NEW_MODEL.equals(ModelManager.MODEL)){
             Log.d("TIME", "Init new model");
             initModel();
             cameraView.start();
