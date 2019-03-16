@@ -42,8 +42,8 @@ def train(parser):
 
     # Create Reporter Object
     reporter = rp.Reporter(parser=parser)
-    #accuracy_fig = reporter.create_figure("Accuracy", ("epoch", "accuracy"), ["train", "test"])
-    #loss_fig = reporter.create_figure("Loss", ("epoch", "loss"), ["train", "test"])
+    accuracy_fig = reporter.create_figure("Accuracy", ("epoch", "accuracy"), ["train", "test"])
+    loss_fig = reporter.create_figure("Loss", ("epoch", "loss"), ["train", "test"])
 
     # Whether or not using a GPU
     gpu = parser.gpu
@@ -96,8 +96,8 @@ def train(parser):
             print("Epoch:", epoch)
             print("[Train] Loss:", loss_train, " Accuracy:", accuracy_train)
             print("[Test]  Loss:", loss_test, "Accuracy:", accuracy_test)
-            #accuracy_fig.add([accuracy_train, accuracy_test], is_update=True)
-            #loss_fig.add([loss_train, loss_test], is_update=True)
+            accuracy_fig.add([accuracy_train, accuracy_test], is_update=True)
+            loss_fig.add([loss_train, loss_test], is_update=True)
             if epoch % 3 == 0:
                 idx_train = random.randrange(10)
                 idx_test = random.randrange(100)

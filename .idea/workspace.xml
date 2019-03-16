@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/1_model/1_model_26e_128.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/1_model/1_model_26e_128_quantized.tflite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/1_model/model_smaller_first.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/1_model/model_smaller_first.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/1_model/model_smaller_infer_first.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/1_model/model_smaller_infer_first.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runEvaluation.command" beforeDir="false" afterPath="$PROJECT_DIR$/runEvaluation.command" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,27 +24,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python3.7/site-packages/tensorflow/python/ops/array_ops.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="2035" column="4" selection-start-line="2035" selection-start-column="4" selection-end-line="2035" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" selection-end-line="157" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/model_infer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -53,10 +38,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="75" column="85" selection-start-line="75" selection-start-column="85" selection-end-line="75" selection-end-column="85" />
+            <state relative-caret-position="240">
+              <caret line="61" column="66" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LICENSE">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/repoter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2119">
               <folding>
-                <element signature="e#204#219#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runEvaluation.command">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="123" selection-start-line="9" selection-start-column="92" selection-end-line="9" selection-end-column="123" />
+            <state relative-caret-position="150">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -85,7 +83,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
+            <state relative-caret-position="555">
               <caret line="43" selection-start-line="43" selection-end-line="49" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
@@ -97,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2355">
+            <state relative-caret-position="2340">
               <caret line="157" selection-start-line="157" selection-end-line="157" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -109,7 +107,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2155">
+            <state relative-caret-position="2370">
               <caret line="159" selection-start-line="159" selection-end-line="159" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -121,7 +119,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
+            <state relative-caret-position="3690">
               <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
             </state>
           </provider>
@@ -139,6 +137,7 @@
       <find>print</find>
       <find>print(sq</find>
       <find>contrib</find>
+      <find>batch</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,15 +152,16 @@
         <option value="$PROJECT_DIR$/tf_test_accuracy.py" />
         <option value="$PROJECT_DIR$/util/model_smaller_infer_first.py" />
         <option value="$PROJECT_DIR$/util/model_smaller_first.py" />
+        <option value="$PROJECT_DIR$/runEvaluation.command" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
-    <option name="y" value="42" />
-    <option name="width" value="1260" />
-    <option name="height" value="738" />
+    <option name="y" value="41" />
+    <option name="width" value="1265" />
+    <option name="height" value="742" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -296,19 +296,19 @@
       <workItem from="1552216478925" duration="6307000" />
       <workItem from="1552386810402" duration="25000" />
       <workItem from="1552388047164" duration="4224000" />
-      <workItem from="1552554352474" duration="1836000" />
+      <workItem from="1552554352474" duration="2607000" />
+      <workItem from="1552728569779" duration="1186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21652000" />
+    <option name="totallyTimeSpent" value="23609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="42" width="1260" height="738" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.80600464" visible="true" weight="0.25287357" />
-      <window_info id="Structure" order="1" sideWeight="0.19399539" side_tool="true" visible="true" weight="0.25287357" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.80369514" visible="true" weight="0.25697866" />
+      <window_info id="Structure" order="1" sideWeight="0.19630484" side_tool="true" visible="true" weight="0.25697866" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -321,7 +321,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972136" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32972136" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32972136" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32972136" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -381,37 +381,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tf_test_accuracy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="9" selection-start-line="9" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tflite_test_accuracy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tf_test_accuracy.py" />
+    <entry file="file://$PROJECT_DIR$/tflite_test_accuracy.py" />
     <entry file="file:///usr/local/lib/python3.7/site-packages/tensorflow/python/ops/array_ops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
+        <state relative-caret-position="30105">
           <caret line="2035" column="4" selection-start-line="2035" selection-start-column="4" selection-end-line="2035" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runEvaluation.command">
+    <entry file="file://$PROJECT_DIR$/util/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="123" selection-start-line="9" selection-start-column="92" selection-end-line="9" selection-end-column="123" />
+          <caret line="10" selection-end-line="157" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -425,46 +410,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2155">
-          <caret line="159" selection-start-line="159" selection-end-line="159" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-end-line="157" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2355">
-          <caret line="157" selection-start-line="157" selection-end-line="157" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="43" selection-start-line="43" selection-end-line="49" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main_infer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -474,20 +419,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="43" selection-start-line="43" selection-end-line="49" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2340">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2370">
+          <caret line="159" selection-start-line="159" selection-end-line="159" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/util/loader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="3690">
           <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/runEvaluation.command">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/repoter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2119">
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="75" column="85" selection-start-line="75" selection-start-column="85" selection-end-line="75" selection-end-column="85" />
-          <folding>
-            <element signature="e#204#219#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="240">
+          <caret line="61" column="66" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="66" />
         </state>
       </provider>
     </entry>
