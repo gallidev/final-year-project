@@ -12,18 +12,22 @@ from util import model_smaller_first as model
 from util import repoter as rp
 
 
-def load_dataset(train_rate, init_size, squared, test=False):
+def load_dataset(train_rate, init_size, squared, test=False, augmentation=False):
 
     loader = None
 
+    folderJpegs = "images_jpg"
+    folderMasks = "masks_png"
+
+    if augmentation:
+        folderJpegs = "JPEGImagesOUT"
+        folderMasks = "SegmentationClassOUT"
     if test:
-        loader = ld.Loader(dir_original="data_set/portraits/test_image",
-                        dir_segmented="data_set/portraits/test_mask",
-                        init_size=init_size,
-                        squared=squared)
-    else:
-        loader = ld.Loader(dir_original="data_set/portraits/images_jpg",
-                        dir_segmented="data_set/portraits/masks_png",
+        folderJpegs = "test_image"
+        folderMasks = "test_mask"
+
+    loader = ld.Loader(dir_original="data_set/portraits/" + folderJpegs,
+                        dir_segmented="data_set/portraits/" + folderMasks,
                         init_size=init_size,
                         squared=squared)
 
@@ -35,7 +39,8 @@ def train(parser):
     print(init_size)
     print("Squared: " + str(parser.squared))
     print("test: " + str(parser.test))
-    train, test = load_dataset(train_rate=parser.trainrate, init_size=init_size, squared=parser.squared, test=parser.test)
+    train, test = load_dataset(train_rate=parser.trainrate, init_size=init_size,
+                               squared=parser.squared, test=parser.test, augmentation=parser.augmentation)
 
     valid = train.perm(0, 30)
     test = test.perm(0, 150)
@@ -72,7 +77,8 @@ def train(parser):
     # Train the model
     epochs = parser.epoch
     batch_size = parser.batchsize
-    is_augment = parser.augmentation
+    #is_augment = parser.augmentation
+    is_augment = False
     train_dict = {model_unet.inputs: valid.images_original, model_unet.teacher: valid.images_segmented,
                   model_unet.is_training: False}
     test_dict = {model_unet.inputs: test.images_original, model_unet.teacher: test.images_segmented,
