@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,13 +16,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="129">
               <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data_set/portraits/SegmentationClassOUT/.gitkeep">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data_set/portraits/JPEGImagesOUT/.gitkeep">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -39,35 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="115" selection-start-line="115" selection-end-line="115" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/runEvaluation.command">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/image_augmenter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="55" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="60">
+              <caret line="4" column="134" lean-forward="true" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="134" />
             </state>
           </provider>
         </entry>
@@ -76,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/IncreaseImage.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="431">
-              <caret line="157" lean-forward="true" selection-start-line="157" selection-end-line="157" />
+              <caret line="157" selection-start-line="157" selection-end-line="157" />
               <folding>
                 <element signature="e#148#158#0" expanded="true" />
               </folding>
@@ -131,8 +115,8 @@
       <find>crop</find>
       <find>rotate</find>
       <find>augmentation</find>
-      <find>is_augment</find>
       <find>augment</find>
+      <find>is_augment</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,13 +159,27 @@
             <path>
               <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
               <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="data_set" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
               <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="4_model" type="462c0819:PsiDirectoryNode" />
+              <item name="data_set" type="462c0819:PsiDirectoryNode" />
+              <item name="portraits" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
+              <item name="data_set" type="462c0819:PsiDirectoryNode" />
+              <item name="portraits" type="462c0819:PsiDirectoryNode" />
+              <item name="JPEGImagesOUT" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
+              <item name="data_set" type="462c0819:PsiDirectoryNode" />
+              <item name="portraits" type="462c0819:PsiDirectoryNode" />
+              <item name="SegmentationClassOUT" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
@@ -201,6 +199,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data_set/portraits/JPEGImagesOUT" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -330,19 +329,19 @@
       <workItem from="1552728569779" duration="1186000" />
       <workItem from="1552753617048" duration="1005000" />
       <workItem from="1552821940672" duration="35000" />
-      <workItem from="1552843359067" duration="8248000" />
+      <workItem from="1552843359067" duration="9488000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32897000" />
+    <option name="totallyTimeSpent" value="34137000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
+    <frame x="0" y="22" width="1280" height="778" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.79803646" visible="true" weight="0.23216188" />
-      <window_info id="Structure" order="1" sideWeight="0.20196353" side_tool="true" visible="true" weight="0.23216188" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.79676676" visible="true" weight="0.35218093" />
+      <window_info id="Structure" order="1" sideWeight="0.20323326" side_tool="true" visible="true" weight="0.35218093" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -355,7 +354,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972136" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.26190478" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36880466" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -522,13 +521,6 @@
     <entry file="file://$PROJECT_DIR$/testImageDataset.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/runEvaluation.command">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
@@ -549,7 +541,7 @@
     <entry file="file://$PROJECT_DIR$/IncreaseImage.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
-          <caret line="157" lean-forward="true" selection-start-line="157" selection-end-line="157" />
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
           <folding>
             <element signature="e#148#158#0" expanded="true" />
           </folding>
@@ -566,10 +558,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data_set/portraits/SegmentationClassOUT/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_set/portraits/JPEGImagesOUT/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="129">
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runEvaluation.command">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="134" lean-forward="true" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="134" />
         </state>
       </provider>
     </entry>
