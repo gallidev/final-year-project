@@ -158,6 +158,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
         Log.d("viewID", Integer.toString(view.getId()));
 
         if(view.getId() == R.id.changeModelButton){
+            changeModelButton.setEnabled(false);
             //stop the camera view so no more frame is processed
             cameraView.stop();
             //get the next segmentation model for that kind
@@ -176,11 +177,19 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     The following method is called when the model has finished to process each frame
      */
     public void onImageSegmentationEnd(){
-        //If the user has tapped prepare the new model
+        //If the user has pressed to use a new model
         if(ModelManager.NEW_MODEL.equals(ModelManager.MODEL)){
             Log.d("TIME", "Init new model");
             initModel();
             cameraView.start();
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    changeModelButton.setEnabled(true);
+                }
+            });
         }
     }
 

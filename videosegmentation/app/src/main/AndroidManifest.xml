@@ -7,9 +7,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo_app_round"
+        android:icon="@mipmap/tv_icon_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo_app_round"
+        android:roundIcon="@mipmap/tv_icon_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         >

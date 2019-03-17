@@ -11,25 +11,16 @@ import android.graphics.BlurMaskFilter
 import android.graphics.PorterDuff
 
 
-
-
-
-/**
- * A overlay view that draws thug life glasses and cigarette bitmaps on top of a detected face
- *
- * Created by Qichuan on 21/6/18.
- */
 class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
 
     var mask: Bitmap? = null
-    var oldMask: Bitmap? = null
     var backgroundImages: Array<Bitmap> = arrayOf(BitmapFactory.decodeResource(resources, R.drawable.beach) ,
-                BitmapFactory.decodeResource(resources, R.drawable.tour_eiffel))
-    var indexImage = 0;
-
-
-
+                BitmapFactory.decodeResource(resources, R.drawable.tour_eiffel),
+                BitmapFactory.decodeResource(resources, R.drawable.tajmahal),
+                BitmapFactory.decodeResource(resources, R.drawable.green_matrix_min)
+    )
+    var indexImage = 0
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
@@ -67,7 +58,12 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             //Log.d("drawing Mask:", maskFixed.getPixel(60,50).toString());
             //canvas.drawBitmap(maskFixed, null, maskRect, Paint(Paint.FILTER_BITMAP_FLAG))
 
-            canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
+            if(indexImage == backgroundImages.size){
+                canvas.drawColor(Color.WHITE)
+            }else{
+                canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
+            }
+
             canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
             paint.setXfermode(null)
 
@@ -77,7 +73,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
 
     fun nextBackground(){
         indexImage ++
-        if(indexImage % backgroundImages.size == 0){
+        if(indexImage == backgroundImages.size + 1){
             indexImage = 0
         }
     }

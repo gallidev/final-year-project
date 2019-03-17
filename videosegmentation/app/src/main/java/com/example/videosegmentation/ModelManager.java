@@ -20,7 +20,8 @@ public class ModelManager {
     };
     private static final Model[] unetPortraitSmaller = {
             new Model("4_model_26e_96_128_quantized.tflite", "Half Conv2D 26e"),
-            new Model("4_model_12e_96_128_quantized.tflite", "Half Conv2D 12e")
+            new Model("4_model_12e_96_128_quantized.tflite", "Half Conv2D 12e"),
+            new Model("4_model_12e_96_128_aug_quantized.tflite", "Half Conv2D 12e Augmented DS")
     };
 
     private static final Model deeplab =  new Model("deeplabv3_257_mv_gpu.tflite", "DeeplabV3+");
@@ -42,6 +43,9 @@ public class ModelManager {
         }
 
         if (NEW_MODEL.equals(UNET_PORTRAITS)) {
+            if(modelIndex % unetPortrait.length == 0){
+                modelIndex = 0;
+            }
             aiModel = new UnetPortraits(unetPortrait[modelIndex].path);
             Log.d("new model", "model index " + modelIndex);
         } else if (NEW_MODEL.equals(DEEPLAB)) {
@@ -49,6 +53,9 @@ public class ModelManager {
         } else if (NEW_MODEL.equals(UNET_VOC_HUMAN)){
             aiModel = new UnetVocHuman(unetVOC.path);
         } else if (NEW_MODEL.equals(UNET_PORTRAITS_SMALLER)){
+            if(modelIndex % unetPortraitSmaller.length == 0){
+                modelIndex = 0;
+            }
             aiModel = new UnetPortraitsSmaller(unetPortraitSmaller[modelIndex].path);
             Log.d("new model", "model index " + modelIndex);
         }
