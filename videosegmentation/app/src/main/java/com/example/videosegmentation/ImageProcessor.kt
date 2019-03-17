@@ -16,19 +16,22 @@ class ImageProcessor(
         private val activity: SegmentationActivity,
         private val contextApplication: Context) {
 
-    val YUVimageSIZE = 2880000
-    val FrameWIDTH = 1200
-    val FrameHEIGHT = 1600
+    private val imageYUVsize = 2880000
+    private val frameWIDTH = 1200
+    private val frameHEIGHT = 1600
+
+    private var lastFrame: Bitmap? = null
+
 
     fun startProcessing() {
 
         val rs = RenderScript.create(contextApplication)
         val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
 
-        val yuvType = Type.Builder(rs, Element.U8(rs)).setX(YUVimageSIZE)
+        val yuvType = Type.Builder(rs, Element.U8(rs)).setX(imageYUVsize)
         val input = Allocation.createTyped(rs, yuvType.create(), Allocation.USAGE_SCRIPT)
 
-        val rgbaType = Type.Builder(rs, Element.RGBA_8888(rs)).setX(FrameWIDTH).setY(FrameHEIGHT)
+        val rgbaType = Type.Builder(rs, Element.RGBA_8888(rs)).setX(frameWIDTH).setY(frameHEIGHT)
         val out = Allocation.createTyped(rs, rgbaType.create(), Allocation.USAGE_SCRIPT)
 
 
@@ -58,6 +61,7 @@ class ImageProcessor(
                 out.copyTo(bitmap)
                 //it is essential to destroy the allocation object to prevent memory leaks
 
+                setLastFrame(bitmap)
 
                 val endTime = SystemClock.uptimeMillis()
                 //Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
@@ -65,23 +69,23 @@ class ImageProcessor(
                 //Log.d("rotation in float", rotation.toFloat().toString());
                 val startTimeBitmap = SystemClock.uptimeMillis()
                 //val rotatedBitmap = rotateFlipImage(bitmap, 270.0f)
-                val rotatedBitmap = bitmap
+                //val rotatedBitmap = bitmap
 //                overlayView.mask = rotatedBitmap
 //                overlayView.invalidate()
 
-                val w = rotatedBitmap.width
-                val h = rotatedBitmap.height
+                val w = bitmap.width
+                val h = bitmap.height
                 // Log.d("decoded frame dimen:", w.toString() + " - " + h.toString())
 
 
-                val resizeRatio = UnetPortraits.getInputSize() / Math.max(rotatedBitmap.width, rotatedBitmap.height)
+                val resizeRatio = UnetPortraits.getInputSize() / Math.max(bitmap.width, bitmap.height)
                 val rw = Math.round(w * resizeRatio)
                 val rh = Math.round(h * resizeRatio)
                 //Log.d("Resize bitmap", "ratio: " + resizeRatio.toString() + " -> " + rw + " - " + rh)
 //                Log.debug("resize bitmap: ratio = %f, [%d x %d] -> [%d x %d]",
 //                        resizeRatio, w, h, rw, rh)
 
-                val resized = ImageUtils.tfResizeBilinear(rotatedBitmap, rw, rh, 270.0f)
+                val resized = ImageUtils.tfResizeBilinear(bitmap, rw, rh, 270.0f)
 
                 val endTimeBitmap = SystemClock.uptimeMillis()
                 //Log.d("Frame", "Completed frame prep with size" + resized.width + "- " + resized.height)
@@ -194,5 +198,13 @@ class ImageProcessor(
         return rotateYUV420Degree180(yuv, imageWidth, imageHeight)
     }
 
+
+    @Synchronized fun getLastFrame():Bitmap? {
+        return lastFrame
+    }
+
+    @Synchronized private fun setLastFrame(frame: Bitmap){
+        lastFrame = frame
+    }
 
 }

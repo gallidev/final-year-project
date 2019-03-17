@@ -113,4 +113,43 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         return bmOut
     }
 
+    fun saveScreen(frame: Bitmap): Bitmap {
+        // Create local variables here so they cannot not be changed anywhere else
+        val maskFixed = mask
+
+        val processedMask = Bitmap.createBitmap(frame.width, frame.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(processedMask)
+
+
+        //Log.d("draw", "checking if the mask or old mask are not null")
+        if(maskFixed != null ){
+            val maskWithBlur = highlightImage(maskFixed)
+
+            val maskRect = Rect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height)
+
+            var paint = Paint()
+            paint.setAntiAlias(true)
+            paint.setFilterBitmap(true)
+            paint.setDither(true)
+
+            paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
+
+            canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
+            canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
+            paint.setXfermode(null)
+
+            // at this point processedMask should be the size of the screen with the image as background
+            val canvasFinal = Canvas(frame)
+            canvasFinal.drawBitmap(processedMask, null, maskRect, null)
+
+            return frame
+        }
+        
+        return frame
+    }
+
 }

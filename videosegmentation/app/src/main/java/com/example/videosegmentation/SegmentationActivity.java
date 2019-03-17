@@ -1,9 +1,14 @@
 package com.example.videosegmentation;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +18,10 @@ import android.widget.TextView;
 
 import com.otaliastudios.cameraview.CameraView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
+
 
 public class SegmentationActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback, View.OnClickListener  {
 
@@ -21,6 +30,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     private OverlayView overlayViewMask;
     private ImageButton changeBackgroundButton;
     private ImageButton changeModelButton;
+    private ImageButton takePictureButton;
     private TextView performanceText;
     private ImageProcessor imageProcessor;
     private String model;
@@ -60,8 +70,10 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
         overlayViewMask = (OverlayView) findViewById(R.id.overlay_view_mask);
         changeBackgroundButton = (ImageButton) findViewById(R.id.changeBackgroundButton);
         changeModelButton = (ImageButton) findViewById(R.id.changeModelButton);
+        takePictureButton = (ImageButton) findViewById(R.id.takePictureButton);
         changeBackgroundButton.setOnClickListener(this);
         changeModelButton.setOnClickListener(this);
+        takePictureButton.setOnClickListener(this);
         performanceText = (TextView) findViewById(R.id.performanceText);
     }
 
@@ -91,8 +103,10 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     public void checkAndRequestCameraPermission() {
         //check if we have permissions for the camera
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED
+            || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            String [] permissions = new String[] {android.Manifest.permission.CAMERA};
+            String [] permissions = new String[] {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
             //if not request permissions
             ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE );
         } else {
@@ -131,8 +145,8 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
             @Override
             public void run() {
                 performanceText.setText("Model: " + modelPath +
-                        "\nYuv Conversion: " + yuvConversion+
-                        "\nInference: " + inference);
+                        //"\nYuv Conversion: " + yuvConversion+
+                        "\nInference: " + inference + "ms");
 
             }
         });
@@ -152,7 +166,10 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
 
         } else if(view.getId() == R.id.changeBackgroundButton){
             overlayViewMask.nextBackground();
+        } else if(view.getId() == R.id.takePictureButton){
+            takeScreenshot();
         }
+
     }
 
     /*
@@ -165,6 +182,43 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
             initModel();
             cameraView.start();
         }
+    }
+
+    private void takeScreenshot() {
+        Log.d("SCREENSHOT", "Take a screenshot");
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+
+            Log.d("PathToPic", mPath);
+            Bitmap bitmap = overlayViewMask.saveScreen(imageProcessor.getLastFrame());
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            openScreenshot(imageFile);
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
+            e.printStackTrace();
+        }
+    }
+
+    private void openScreenshot(File imageFile) {
+
+        Intent intent = new Intent();
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName() + ".provider", imageFile);
+        intent.setDataAndType(photoURI, "image/*");
+        startActivity(intent);
     }
 
 }

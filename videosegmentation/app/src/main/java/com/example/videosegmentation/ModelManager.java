@@ -19,7 +19,7 @@ public class ModelManager {
             new Model("3_model_26e_128_quantized.tflite", "Half Conv2D + big strides 26e")
     };
     private static final Model[] unetPortraitSmaller = {
-            new Model("4_model_26e_96_128_quantized.tflite", "Half Conv2d 26e"),
+            new Model("4_model_26e_96_128_quantized.tflite", "Half Conv2D 26e"),
             new Model("4_model_12e_96_128_quantized.tflite", "Half Conv2D 12e")
     };
 
