@@ -7,10 +7,11 @@ import os
 import glob
 import numpy as np
 from PIL import Image, ImageOps
+from matplotlib import cm
 
 
 ######################################################
-increase_num = 20
+increase_num = 8
 ######################################################
 
 
@@ -61,6 +62,23 @@ def addSaltPepperNoise(src):
         pass
     return out
 
+
+
+def crop_to_avoid_black(image, randomCrop):
+
+    left, upper = randomCrop, randomCrop
+    right, bottom = image.width - randomCrop , image.height - randomCrop
+    return image.crop((left, upper, right, bottom))
+
+# Crop a bit to avoid the rotation black part
+def crop_center(img, segimg, cropx, cropy):
+    x,y,z = img.shape
+
+    left, upper = cropx, cropy
+    right, bottom = segimg.width - cropx, segimg.height - cropy
+
+    return img[cropx:x-cropx, cropy:y-cropy, :], segimg.crop((left, upper, right, bottom))
+
 # Rotation
 def rotate_image(src1, src2, angle):
     orig_h, orig_w = src1.shape[:2]
@@ -69,10 +87,10 @@ def rotate_image(src1, src2, angle):
     return cv2.warpAffine(src1, matrix, (orig_w, orig_h), src1, flags=cv2.INTER_LINEAR), src2.rotate(angle)
 
 
-img_filesJ = sorted(glob.glob("data_set/VOCdevkit/person/JPEGImages/*"))
-img_filesS = sorted(glob.glob("data_set/VOCdevkit/person/SegmentationClass/*"))
-JPEG_out_base_path = "data_set/VOCdevkit/person/JPEGImagesOUT"
-SEGM_out_base_path = "data_set/VOCdevkit/person/SegmentationClassOUT"
+img_filesJ = sorted(glob.glob("data_set/portraits/images_jpg/*"))
+img_filesS = sorted(glob.glob("data_set/portraits/masks_png/*"))
+JPEG_out_base_path = "data_set/portraits/JPEGImagesOUT"
+SEGM_out_base_path = "data_set/portraits/SegmentationClassOUT"
 
 imgs = []
 for (img_fileJ, img_fileS) in zip(img_filesJ, img_filesS):
@@ -117,30 +135,43 @@ for img in imgs:
         jpgimg = img[0]
         segimg = img[1]
 
-#        # Contrast conversion execution
-#        if np.random.randint(2) == 1:
-#            level = np.random.randint(4)
-#            jpgimg = cv2.LUT(jpgimg, LUTs[level])
+       #Contrast conversion execution
+        if np.random.randint(2) == 1:
+            level = np.random.randint(4)
+            jpgimg = cv2.LUT(jpgimg, LUTs[level])
 
         # Smoothing execution
-        if np.random.randint(2) == 1:
-            jpgimg = cv2.blur(jpgimg, average_square)
+        #if np.random.randint(2) == 1:
+        #    jpgimg = cv2.blur(jpgimg, average_square)
 
-#        # Histogram equalization execution
-#        if np.random.randint(2) == 1:
-#            jpgimg = equalizeHistRGB(jpgimg)
+        # Histogram equalization execution
+        if np.random.randint(2) == 1:
+            jpgimg = equalizeHistRGB(jpgimg)
 
         # Gaussian noise addition execution
         if np.random.randint(2) == 1:
             jpgimg = addGaussianNoise(jpgimg)
 
         # Salt & Pepper noise addition execution
-        if np.random.randint(2) == 1:
-            jpgimg = addSaltPepperNoise(jpgimg)
+        #if np.random.randint(2) == 1:
+        #    jpgimg = addSaltPepperNoise(jpgimg)
 
         # Rotation
         if np.random.randint(2) == 1:
-            jpgimg, segimg = rotate_image(jpgimg, segimg, np.random.randint(360))
+            randomAngle = np.random.randint(360)
+            while(randomAngle > 20 and randomAngle < 340):
+                randomAngle = np.random.randint(360)
+
+            #print(str(randomAngle))
+            toRotate = jpgimg.copy()
+            toRotateSeg = segimg
+            rotatedJpg, rotatedSeg = rotate_image(toRotate, toRotateSeg, randomAngle)
+
+            biggestSize = max(jpgimg.shape)
+
+            randomCrop = np.random.randint(biggestSize//10, biggestSize//7)
+            #print(str(randomCrop))
+            jpgimg, segimg = crop_center(rotatedJpg, rotatedSeg, randomCrop, randomCrop)
 
         # Reverse execution
         if np.random.randint(2) == 1:
