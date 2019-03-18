@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="" />
+    <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/3_model/model_smaller_first.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/3_model/model_smaller_first.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/model_smaller_first.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/model_smaller_first.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/model_smaller_infer_first.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/model_smaller_infer_first.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,52 +22,69 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
+        <entry file="file://$PROJECT_DIR$/runEvaluation.command">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+            <state relative-caret-position="60">
+              <caret line="4" column="134" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="134" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_set/portraits/SegmentationClassOUT/.gitkeep">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_set/portraits/JPEGImagesOUT/.gitkeep">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
+        <entry file="file://$PROJECT_DIR$/model/3_model/model_smaller_first.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="43" selection-start-line="43" selection-end-line="49" />
+            <state relative-caret-position="-1266">
+              <caret line="11" selection-start-line="11" selection-end-line="117" selection-end-column="38" />
               <folding>
-                <element signature="e#0#16#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="50" column="70" selection-start-line="50" selection-start-column="70" selection-end-line="50" selection-end-column="70" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/3_model/model_smaller_infer_first.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="339">
+              <caret line="117" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="117" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/runEvaluation.command">
+        <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="134" lean-forward="true" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="134" />
+            <state relative-caret-position="190">
+              <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IncreaseImage.py">
+        <entry file="file://$PROJECT_DIR$/model/4_model/model_smaller_first.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="157" selection-start-line="157" selection-end-line="157" />
+            <state>
+              <caret selection-end-line="119" />
               <folding>
-                <element signature="e#148#158#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,7 +93,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/lib/python3.7/site-packages/PIL/Image.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3667">
+            <state relative-caret-position="37665">
               <caret line="2516" selection-start-line="2516" selection-end-line="2516" />
             </state>
           </provider>
@@ -79,7 +101,11 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_model.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -90,7 +116,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
+            <state relative-caret-position="3690">
               <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -130,11 +156,12 @@
         <option value="$PROJECT_DIR$/tflite_test_accuracy.py" />
         <option value="$PROJECT_DIR$/tf_test_accuracy.py" />
         <option value="$PROJECT_DIR$/runEvaluation.command" />
-        <option value="$PROJECT_DIR$/util/model_smaller_first.py" />
-        <option value="$PROJECT_DIR$/util/model_smaller_infer_first.py" />
         <option value="$PROJECT_DIR$/openvino_unet_test.py" />
         <option value="$PROJECT_DIR$/IncreaseImage.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/model/3_model/model_smaller_first.py" />
+        <option value="$PROJECT_DIR$/util/model_smaller_first.py" />
+        <option value="$PROJECT_DIR$/util/model_smaller_infer_first.py" />
       </list>
     </option>
   </component>
@@ -159,27 +186,13 @@
             <path>
               <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
               <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
-              <item name="data_set" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
               <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
-              <item name="data_set" type="462c0819:PsiDirectoryNode" />
-              <item name="portraits" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
-              <item name="data_set" type="462c0819:PsiDirectoryNode" />
-              <item name="portraits" type="462c0819:PsiDirectoryNode" />
-              <item name="JPEGImagesOUT" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TensorflowLite-UNet" type="462c0819:PsiDirectoryNode" />
-              <item name="data_set" type="462c0819:PsiDirectoryNode" />
-              <item name="portraits" type="462c0819:PsiDirectoryNode" />
-              <item name="SegmentationClassOUT" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="3_model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TensorflowLite-UNet" type="b2602c69:ProjectViewProjectNode" />
@@ -329,19 +342,20 @@
       <workItem from="1552728569779" duration="1186000" />
       <workItem from="1552753617048" duration="1005000" />
       <workItem from="1552821940672" duration="35000" />
-      <workItem from="1552843359067" duration="9488000" />
+      <workItem from="1552843359067" duration="9619000" />
+      <workItem from="1552902280377" duration="606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34137000" />
+    <option name="totallyTimeSpent" value="34874000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="778" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.79676676" visible="true" weight="0.35218093" />
-      <window_info id="Structure" order="1" sideWeight="0.20323326" side_tool="true" visible="true" weight="0.35218093" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.79387754" visible="true" weight="0.2358643" />
+      <window_info id="Structure" order="1" sideWeight="0.20612244" side_tool="true" visible="true" weight="0.2358643" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -354,7 +368,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972136" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36880466" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.2857143" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -395,9 +409,7 @@
     <entry file="file://$PROJECT_DIR$/model/2nd_model_26/model_smaller_infer_first.py" />
     <entry file="file://$PROJECT_DIR$/model/2nd_model_26/model_smaller_first.py" />
     <entry file="file://$PROJECT_DIR$/model/4th_model_26/model_smaller_first.py" />
-    <entry file="file://$PROJECT_DIR$/tffile_usbcamera_test.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tffile_usbcamera_test.py" />
     <entry file="file://$PROJECT_DIR$/tf_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -440,16 +452,6 @@
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/4_model/model_smaller_first.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="119" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util/repoter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -468,30 +470,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="119" selection-start-line="119" selection-end-line="119" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/4_model/model_smaller_infer_first.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="115" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="115" selection-start-line="115" selection-end-line="115" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -508,53 +490,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_model.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openvino_unet_test.py">
+    <entry file="file://$PROJECT_DIR$/openvino_unet_test.py" />
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testImageDataset.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="43" selection-start-line="43" selection-end-line="49" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/PIL/Image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3667">
-          <caret line="2516" selection-start-line="2516" selection-end-line="2516" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IncreaseImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="157" selection-start-line="157" selection-end-line="157" />
-          <folding>
-            <element signature="e#148#158#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/loader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -564,17 +504,107 @@
     <entry file="file://$PROJECT_DIR$/data_set/portraits/JPEGImagesOUT/.gitkeep">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+        <state relative-caret-position="555">
+          <caret line="43" selection-start-line="43" selection-end-line="49" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IncreaseImage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2280">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+          <folding>
+            <element signature="e#148#158#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37665">
+          <caret line="2516" selection-start-line="2516" selection-end-line="2516" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testImageDataset.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3690">
+          <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/runEvaluation.command">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="134" lean-forward="true" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="134" />
+          <caret line="4" column="134" selection-start-line="4" selection-start-column="103" selection-end-line="4" selection-end-column="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/4_model/model_smaller_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="119" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/3_model/model_smaller_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1266">
+          <caret line="11" selection-start-line="11" selection-end-line="117" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/3_model/model_smaller_infer_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="117" lean-forward="true" selection-start-line="11" selection-start-column="4" selection-end-line="117" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/model_smaller_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="50" column="70" selection-start-line="50" selection-start-column="70" selection-end-line="50" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/model_smaller_infer_first.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="33" column="83" selection-start-line="33" selection-start-column="83" selection-end-line="33" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

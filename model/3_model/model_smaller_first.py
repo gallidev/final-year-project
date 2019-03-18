@@ -17,7 +17,6 @@ class UNet:
 
         #128x128x3
         conv1_1 = UNet.conv(inputs, filters=16, l2_reg_scale=l2_reg, batchnorm_istraining=is_training)
-        #print("conv1_1: " + conv1_1.shape())
         #64x64x16
         pool1 = UNet.pool(conv1_1)
         #32x32x16
