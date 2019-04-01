@@ -29,6 +29,7 @@ public class Deeplab extends AbstractSegmentation{
     //the model input can only be 257x257 in terms of size
     private final static Integer INPUT_SIZE = 257;
     private final static int NUM_CLASSES = 21;
+    private final static int HUMAN_CLASS_INDEX = 15;
 
     private volatile Interpreter sTfInterpreter = null;
 
@@ -63,17 +64,15 @@ public class Deeplab extends AbstractSegmentation{
 
         mSegmentBits = new int[INPUT_SIZE][INPUT_SIZE];
         mSegmentColors = new int[NUM_CLASSES];
+
+
         for (int i = 0; i < NUM_CLASSES; i++) {
-            if (i == 0) {
                 mSegmentColors[i] = Color.rgb(255,255,255);
-            } else {
-//                mSegmentColors[i] = Color.rgb(
-//                        (int)(255 * RANDOM.nextFloat()),
-//                        (int)(255 * RANDOM.nextFloat()),
-//                        (int)(255 * RANDOM.nextFloat()));
-                mSegmentColors[i] = Color.TRANSPARENT;
-            }
+
         }
+
+        mSegmentColors[HUMAN_CLASS_INDEX] = Color.TRANSPARENT;
+
 
         return (sTfInterpreter != null);
     }
@@ -84,7 +83,7 @@ public class Deeplab extends AbstractSegmentation{
 
     public Bitmap segment(Bitmap bitmap) {
         if (sTfInterpreter == null) {
-            Log.w("model", "tf model is NOT initialized.");
+            //Log.w("model", "tf model is NOT initialized.");
             return null;
         }
 
@@ -94,12 +93,9 @@ public class Deeplab extends AbstractSegmentation{
 
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
-        Logger.debug("bitmap: %d x %d,", w, h);
+
 
         if (w > INPUT_SIZE || h > INPUT_SIZE) {
-            Logger.warn("invalid bitmap size: %d x %d [should be: %d x %d]",
-                    w, h,
-                    INPUT_SIZE, INPUT_SIZE);
 
             return null;
         }
@@ -113,7 +109,6 @@ public class Deeplab extends AbstractSegmentation{
 
             w = bitmap.getWidth();
             h = bitmap.getHeight();
-            Logger.debug("extend bitmap: %d x %d,", w, h);
         }
 
         mImageData.rewind();
@@ -139,12 +134,9 @@ public class Deeplab extends AbstractSegmentation{
 
         final long start = System.currentTimeMillis();
 
-        //Logger.debug("start inference = %s", mImageData);
         sTfInterpreter.run(mImageData, mOutputs);
 
-        //Logger.debug("inference done, outputs = %s", ArrayUtils.floatArrayToString(mOutputs));
         final long end = System.currentTimeMillis();
-        //Logger.debug("%d millis per core segment call.", (end - start));
 
         Bitmap output = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 

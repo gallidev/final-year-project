@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.util.Log;
 
 import com.dailystudio.app.utils.BitmapUtils;
-import com.dailystudio.development.Logger;
 
 import org.tensorflow.lite.Interpreter;
 

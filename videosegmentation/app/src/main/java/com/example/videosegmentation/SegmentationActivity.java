@@ -65,7 +65,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
         //remove title
         setContentView(R.layout.activity_segmentation_full);
 
-        Log.d("LIFECYCLE", "OnCreate");
+        //Log.d("LIFECYCLE", "OnCreate");
         cameraView = (CameraView) findViewById(R.id.camera_view);
         overlayViewMask = (OverlayView) findViewById(R.id.overlay_view_mask);
         changeBackgroundButton = (ImageButton) findViewById(R.id.changeBackgroundButton);
@@ -80,7 +80,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     protected void onStart(){
         super.onStart();
         ModelManager.NEW_MODEL = getIntent().getStringExtra("model");
-        Log.d("LIFECYCLE", "onStart");
+        //Log.d("LIFECYCLE", "onStart");
         //Log.d("isProcessing", "the model is processing: " + modelIsProcessing.toString());
         checkAndRequestCameraPermission();
 
@@ -88,8 +88,13 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
 
     protected void onStop(){
         super.onStop();
-        cameraView.stop();
-        cameraView.destroy();
+        //Log.d("LIFECYCLE", "onStop");
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
+//        ModelManager.getInstance().closeModel();
+        //Log.d("LIFECYCLE", "onDestroy");
     }
 
     protected void onRestart(){
@@ -155,12 +160,14 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
 
     public void onClick(View view){
 
-        Log.d("viewID", Integer.toString(view.getId()));
+        //Log.d("viewID", Integer.toString(view.getId()));
 
         if(view.getId() == R.id.changeModelButton){
             changeModelButton.setEnabled(false);
             //stop the camera view so no more frame is processed
+            //Log.d("TIME", "Trying to stop camera");
             cameraView.stop();
+            //Log.d("TIME", "Camera Stopped");
             //get the next segmentation model for that kind
             ModelManager.next();
             ModelManager.NEW_MODEL = ModelManager.MODEL;
@@ -179,10 +186,9 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     public void onImageSegmentationEnd(){
         //If the user has pressed to use a new model
         if(ModelManager.NEW_MODEL.equals(ModelManager.MODEL)){
-            Log.d("TIME", "Init new model");
+            //Log.d("TIME", "Init new model");
             initModel();
             cameraView.start();
-
             runOnUiThread(new Runnable() {
 
                 @Override
@@ -194,7 +200,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
     }
 
     private void takeScreenshot() {
-        Log.d("SCREENSHOT", "Take a screenshot");
+        //Log.d("SCREENSHOT", "Take a screenshot");
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
 
@@ -202,7 +208,7 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
             // image naming and path  to include sd card  appending name you choose for file
             String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
 
-            Log.d("PathToPic", mPath);
+            //Log.d("PathToPic", mPath);
             Bitmap bitmap = overlayViewMask.saveScreen(imageProcessor.getLastFrame());
 
             File imageFile = new File(mPath);

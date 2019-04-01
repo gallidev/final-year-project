@@ -16,12 +16,15 @@ public class ModelManager {
     private static final Model[] unetPortrait = {
             new Model("1_model_20e_128_quantized.tflite", "Standard 20e"),
             new Model("2_model_26e_128_quantized.tflite", "Half Conv2D 26e"),
-            new Model("3_model_26e_128_quantized.tflite", "Half Conv2D + big strides 26e")
+            new Model("3_model_26e_128_quantized.tflite", "Half Conv2D + Big strides 26e")
     };
     private static final Model[] unetPortraitSmaller = {
             new Model("4_model_26e_96_128_quantized.tflite", "Half Conv2D 26e"),
             new Model("4_model_12e_96_128_quantized.tflite", "Half Conv2D 12e"),
-            new Model("4_model_12e_96_128_aug_quantized.tflite", "Half Conv2D 12e Augmented DS")
+            new Model("4_model_12e_96_128_aug_quantized.tflite", "Half Conv2D Aug 12e"),
+            new Model("5_model_18e_96_128_aug_quantized.tflite", "Half Conv2D Aug + Big strides 18e"),
+            new Model("5_model_32e_96_128_aug_quantized.tflite", "Half Conv2D Aug + Big strides 32e")
+
     };
 
     private static final Model deeplab =  new Model("deeplabv3_257_mv_gpu.tflite", "DeeplabV3+");
@@ -38,7 +41,7 @@ public class ModelManager {
             return aiModel;
         }
 
-        if(aiModel != null) {
+        if(aiModel != null && aiModel.isInitialized()) {
             aiModel.closeModel();
         }
 
@@ -47,7 +50,7 @@ public class ModelManager {
                 modelIndex = 0;
             }
             aiModel = new UnetPortraits(unetPortrait[modelIndex].path);
-            Log.d("new model", "model index " + modelIndex);
+            //Log.d("new model", "model index " + modelIndex);
         } else if (NEW_MODEL.equals(DEEPLAB)) {
             aiModel = new Deeplab(deeplab.path);
         } else if (NEW_MODEL.equals(UNET_VOC_HUMAN)){
@@ -57,7 +60,7 @@ public class ModelManager {
                 modelIndex = 0;
             }
             aiModel = new UnetPortraitsSmaller(unetPortraitSmaller[modelIndex].path);
-            Log.d("new model", "model index " + modelIndex);
+            //Log.d("new model", "model index " + modelIndex);
         }
 
         MODEL = NEW_MODEL;
@@ -86,7 +89,7 @@ public class ModelManager {
             case UNET_PORTRAITS_SMALLER:
             {
                 modelIndex ++;
-                Log.d("new model", "model index " + modelIndex);
+                //Log.d("new model", "model index " + modelIndex);
                 if(modelIndex % unetPortraitSmaller.length == 0){
                     modelIndex = 0;
                 }
