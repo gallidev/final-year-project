@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Built application files
 *.apk
 *.ap_
@@ -63,3 +64,12 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+# NTFS MAC issue
+*.DS_Store
+
+#Python compiled files
+*.pyc
+*.*.pyc
+util/__pycache__/*.*.pyc
+result/
