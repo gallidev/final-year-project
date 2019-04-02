@@ -16,11 +16,13 @@ def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
 
 if __name__ == '__main__':
 
-    image     = Image.open("emma.jpeg")
+    imageFirst = Image.open("images/test1.jpeg")
+    imageSecond = Image.open("images/test2.jpeg")
+    imageThird = Image.open("images/test3.jpeg")
     #seg_image = Image.open("data_set/portraits/masks_png/00001.png")
-    print("image.size = ", image.size)
+    print("image.size = ", imageFirst.size)
     
-    image = make_square(image, image.mode)
+    image = make_square(imageFirst, imageFirst.mode)
     image.save("1.jpg")
     base_width  = image.size[0]
     base_height = image.size[1]

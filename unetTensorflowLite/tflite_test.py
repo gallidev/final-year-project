@@ -16,57 +16,70 @@ def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
 
 if __name__ == '__main__':
 
-    # Read image
-    image     = Image.open("emma.jpeg")
-    seg_image = Image.open("data_set/VOCdevkit/person/SegmentationClass/009649.png")
-    print("image.size = ", image.size)
+    # model path
+    model_path = "model/1_model/1_model_20e_128_quantized.tflite"
 
-    image = make_square(image, image.mode)
-    base_width  = image.size[0]
-    base_height = image.size[1]
-    image.save("3.jpg")
+    # read images
+    images = [Image.open("images/test1.jpg"), Image.open("images/test2.jpg"), Image.open("images/test3.jpg")]
 
-    # Resize image
-    image = image.resize((128, 128), Image.ANTIALIAS)
+    index = 1
+    for image in images:
+        print(str(image))
 
-    # Delete alpha channel
-    print("image.mode ==", image.mode)
-    if image.mode == "RGBA":
+        nameToSavedMask = "mask" + str(index) + ".jpg"
+
+        print("image.size = ", image.size)
+
+        image = make_square(image, image.mode)
+        base_width = image.size[0]
+        base_height = image.size[1]
+        image.save("1.jpg")
+
+        # Resize image
+        image = image.resize((128, 128), Image.ANTIALIAS)
+
+        # Delete alpha channel
+        print("image.mode ==", image.mode)
+        if image.mode == "RGBA":
+            image = image.convert("RGB")
+
+        # Normalization
+        image = np.asarray(image)
+        prepimg = image / 255.0
+        prepimg = prepimg[np.newaxis, :, :, :]
+
+        # Segmentation
+        interpreter = tf.contrib.lite.Interpreter(model_path)
+        interpreter.allocate_tensors()
+        input_details = interpreter.get_input_details()
+        output_details = interpreter.get_output_details()
+        input_shape = input_details[0]['shape']
+        interpreter.set_tensor(input_details[0]['index'], np.array(prepimg, dtype=np.float32))
+        t1 = time.time()
+        interpreter.invoke()
+        print("elapsedtime =", time.time() - t1)
+        outputs = interpreter.get_tensor(output_details[0]['index'])
+
+        # Get a color palette
+        palette = [0, 0, 0, 255, 255, 255]
+
+        # Define index_void Back Ground
+        index_void = 2
+
+        # View
+        output = outputs[0]
+        res = np.argmax(output, axis=2)
+        if index_void is not None:
+            res = np.where(res == index_void, 0, res)
+        image = Image.fromarray(np.uint8(res), mode="P")
+        image.putpalette(palette)
         image = image.convert("RGB")
+        image = image.resize((base_width, base_height))
 
-    # Normalization
-    image = np.asarray(image)
-    prepimg = image / 255.0
-    prepimg = prepimg[np.newaxis, :, :, :]
+        image.save(nameToSavedMask)
+        index += 1
 
-    # Segmentation
-    interpreter = tf.contrib.lite.Interpreter(model_path="model/128-MyModel_26Epochs_test/semanticsegmentation_frozen_person_quantized_32.tflite")
-    interpreter.allocate_tensors()
-    input_details = interpreter.get_input_details()
-    output_details = interpreter.get_output_details()
-    input_shape = input_details[0]['shape']
-    interpreter.set_tensor(input_details[0]['index'], np.array(prepimg, dtype=np.float32))
-    t1 = time.time()
-    interpreter.invoke()
-    print("elapsedtime =", time.time() - t1)
-    outputs = interpreter.get_tensor(output_details[0]['index'])
 
-    # Get a color palette
-    palette = seg_image.getpalette()
 
-    # Define index_void Back Ground
-    index_void = 2
-
-    # View
-    output = outputs[0]
-    res = np.argmax(output, axis=2)
-    if index_void is not None:
-        res = np.where(res == index_void, 0, res)
-    image = Image.fromarray(np.uint8(res), mode="P")
-    image.putpalette(palette)
-    image = image.convert("RGB")
-    image = image.resize((base_width, base_height))
-
-    image.save("4.jpg")
 
 

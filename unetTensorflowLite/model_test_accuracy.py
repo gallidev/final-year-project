@@ -89,10 +89,10 @@ def evaluate(args):
         output = outputs[0]
 
         seg_image = create_png_from_array(test.images_segmented[idx], palette)
-        #seg_image.show();
+        seg_image.show();
 
         result = create_png_from_array(output, palette)
-        #result.show();
+        result.show();
 
         iou_score = calculate_accuracy(result, seg_image)
         if(not(math.isnan(iou_score))):
