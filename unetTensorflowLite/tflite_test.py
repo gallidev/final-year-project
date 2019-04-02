@@ -28,12 +28,12 @@ def crop_center(img, cropx, cropy):
 
 if __name__ == '__main__':
 
-    model_folder = "1_model"
+    model_folder = "4_model"
 
     # model path
-    model_path = "model/" + model_folder + "/1_model_20e_128_quantized.tflite"
+    model_path = "model/" + model_folder + "/4_model_12e_96_128_aug_quantized.tflite"
 
-    square = True
+    square = False
 
     # read images
     images = [Image.open("images/test1.jpg"), Image.open("images/test2.jpg"), Image.open("images/test3.jpg"), Image.open("images/test4.jpg"), Image.open("images/test5.jpg")]
@@ -106,7 +106,8 @@ if __name__ == '__main__':
 
 
         #crop to vertical
-        image = crop_center(image, imageMask.width, imageMask.height)
+        if square:
+            image = crop_center(image, imageMask.width, imageMask.height)
 
         image.save(nameToSavedMask)
         index += 1

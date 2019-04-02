@@ -3,16 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mask1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/mask1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mask2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/mask2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mask3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/mask3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/4_model/results/mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/4_model/results/mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/4_model/results/mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/5_model/results/mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/5_model/results/mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/5_model/results/mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_test_accuracy.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_test_accuracy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runEvaluation.command" beforeDir="false" afterPath="$PROJECT_DIR$/runEvaluation.command" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tflite_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tflite_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/model_smaller_infer_first.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ModelManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +25,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/TensorflowLite_UNet$main.coverage" NAME="main Coverage Results" MODIFIED="1552231829236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/unetTensorflowLite$tflite_test.coverage" NAME="tflite_test Coverage Results" MODIFIED="1554216547979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/unetTensorflowLite$tflite_test.coverage" NAME="tflite_test Coverage Results" MODIFIED="1554228620444" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TensorflowLite_UNet$tf_test_accuracy.coverage" NAME="tf_test_accuracy Coverage Results" MODIFIED="1552244844922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TensorflowLite_UNet$increase_image.coverage" NAME="increase_image Coverage Results" MODIFIED="1552851699037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TensorflowLite_UNet$tflite_test_accuracy.coverage" NAME="tflite_test_accuracy Coverage Results" MODIFIED="1552389278751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -32,29 +35,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runEvaluation.command">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="99" />
+            <state relative-caret-position="90">
+              <caret line="6" column="138" selection-start-line="6" selection-start-column="138" selection-end-line="7" selection-end-column="138" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tf_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13">
-              <caret line="18" selection-start-line="18" selection-end-line="20" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#16#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tflite_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
+            <state relative-caret-position="338">
+              <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -75,19 +66,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-243">
-              <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/4_model/model_smaller_first.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -95,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/6_model/model_smaller_first.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+            <state relative-caret-position="138">
+              <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -120,10 +102,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+            <state relative-caret-position="230">
+              <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -132,10 +123,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util/loader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-203">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="414">
+              <caret line="152" column="24" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="72" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -161,6 +164,8 @@
       <find>augment</find>
       <find>is_augment</find>
       <find>crop</find>
+      <find>size</find>
+      <find>resize</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -170,10 +175,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/model/4th_model_26/model_smaller_first.py" />
-        <option value="$PROJECT_DIR$/util/loader.py" />
         <option value="$PROJECT_DIR$/tflite_test_accuracy.py" />
         <option value="$PROJECT_DIR$/tf_test_accuracy.py" />
-        <option value="$PROJECT_DIR$/runEvaluation.command" />
         <option value="$PROJECT_DIR$/openvino_unet_test.py" />
         <option value="$PROJECT_DIR$/IncreaseImage.py" />
         <option value="$PROJECT_DIR$/main.py" />
@@ -181,18 +184,20 @@
         <option value="$PROJECT_DIR$/util/model_smaller_first.py" />
         <option value="$PROJECT_DIR$/util/model_smaller_infer_first.py" />
         <option value="$PROJECT_DIR$/tf_test.py" />
-        <option value="$PROJECT_DIR$/model_test_accuracy.py" />
-        <option value="$PROJECT_DIR$/tflite_test.py" />
         <option value="$PROJECT_DIR$/model/4_model/model_smaller_first.py" />
         <option value="$PROJECT_DIR$/model/6_model/model_smaller_infer_first.py" />
         <option value="$PROJECT_DIR$/model/6_model/model_smaller_first.py" />
+        <option value="$PROJECT_DIR$/util/loader.py" />
+        <option value="$PROJECT_DIR$/model_test_accuracy.py" />
+        <option value="$PROJECT_DIR$/runEvaluation.command" />
+        <option value="$PROJECT_DIR$/tflite_test.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="27" />
-    <option name="width" value="1909" />
-    <option name="height" value="1053" />
+    <option name="y" value="22" />
+    <option name="width" value="1920" />
+    <option name="height" value="1058" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -211,30 +216,13 @@
             <path>
               <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
               <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="1_model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
               <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="4_model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="6_model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -404,16 +392,15 @@
       <workItem from="1552821940672" duration="35000" />
       <workItem from="1552843359067" duration="9619000" />
       <workItem from="1552902280377" duration="1314000" />
-      <workItem from="1554200727818" duration="6386000" />
+      <workItem from="1554200727818" duration="10349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41968000" />
+    <option name="totallyTimeSpent" value="45931000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.79196554" visible="true" weight="0.20074548" />
       <window_info id="Structure" order="1" sideWeight="0.20803443" side_tool="true" visible="true" weight="0.20074548" />
@@ -451,13 +438,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/util/loader.py</url>
-          <line>171</line>
+          <line>172</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tflite_test.py</url>
-          <line>110</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -487,16 +469,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30105">
           <caret line="2035" column="4" selection-start-line="2035" selection-start-column="4" selection-end-line="2035" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" selection-end-line="157" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -588,13 +560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testImageDataset.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -625,26 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/loader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-203">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-243">
@@ -662,27 +607,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runEvaluation.command">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tflite_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/4_model/model_smaller_first.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -701,10 +629,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/6_model/model_smaller_first.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        <state relative-caret-position="138">
+          <caret line="21" column="55" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="152" column="24" selection-start-line="152" selection-start-column="24" selection-end-line="152" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runEvaluation.command">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="138" selection-start-line="6" selection-start-column="138" selection-end-line="7" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tflite_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>

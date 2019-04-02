@@ -6,8 +6,8 @@ from util import image_augmenter as ia
 
 
 class Loader(object):
-    def __init__(self, dir_original, dir_segmented, init_size=(96, 128), squared=False, one_hot=True):
-        self._data = Loader.import_data(dir_original, dir_segmented, init_size, squared, one_hot)
+    def __init__(self, dir_original, dir_segmented, init_size=(96, 128), squared=False, one_hot=True, full_seg=False):
+        self._data = Loader.import_data(dir_original, dir_segmented, init_size, squared, one_hot, full_seg)
 
     def get_all_dataset(self):
         return self._data
@@ -37,12 +37,13 @@ class Loader(object):
         return train_set, test_set
 
     @staticmethod
-    def import_data(dir_original, dir_segmented, init_size=None, squared=False, one_hot=True):
+    def import_data(dir_original, dir_segmented, init_size=None, squared=False, one_hot=True, full_seg=False):
         # Generate paths of images to load
         paths_original, paths_segmented = Loader.generate_paths(dir_original, dir_segmented)
 
         # Extract images to ndarray using paths
-        images_original, images_segmented = Loader.extract_images(paths_original, paths_segmented, init_size, squared, one_hot)
+        images_original, images_segmented = Loader.extract_images(paths_original, paths_segmented, init_size, squared,
+                                                                  one_hot, full_seg)
 
         # Get a color palette
         image_sample_palette = Image.open(paths_segmented[0])
@@ -67,7 +68,7 @@ class Loader(object):
         return paths_original, paths_segmented
 
     @staticmethod
-    def extract_images(paths_original, paths_segmented, init_size, squared, one_hot):
+    def extract_images(paths_original, paths_segmented, init_size, squared, one_hot, full_seg):
         images_original, images_segmented = [], []
 
         # Load images from directory_path using generator
@@ -79,7 +80,7 @@ class Loader(object):
                 print(".", end="", flush=True)
         print(" Completed", flush=True)
         print("Loading segmented images", end="", flush=True)
-        for image in Loader.image_generator(paths_segmented, init_size, squared=squared, normalization=False):
+        for image in Loader.image_generator(paths_segmented, init_size, squared=squared, normalization=False, full_seg=full_seg):
             #print(image.shape)
             images_segmented.append(image)
             if len(images_segmented) % 200 == 0:
@@ -123,7 +124,7 @@ class Loader(object):
         return identity[ndarray]
 
     @staticmethod
-    def image_generator(file_paths, init_size=None, normalization=True, squared=False, antialias=False):
+    def image_generator(file_paths, init_size=None, normalization=True, squared=False, antialias=False, full_seg=False):
         """
         `A generator which yields images deleted an alpha channel and resized.
         Args:
@@ -147,7 +148,7 @@ class Loader(object):
                     image = Loader.make_square(image, image.mode, init_size)
 
                 # resize by init_size
-                if init_size is not None and init_size != image.size:
+                if init_size is not None and init_size != image.size and full_seg is False:
                     if antialias:
                         image = image.resize(init_size, Image.ANTIALIAS)
                     else:

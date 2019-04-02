@@ -7,7 +7,7 @@ import math
 import argparse
 
 
-def load_dataset(train_rate, init_size, squared, test=False):
+def load_dataset(train_rate, init_size, squared, test=False, full_seg=False):
 
     loader = None
 
@@ -15,12 +15,14 @@ def load_dataset(train_rate, init_size, squared, test=False):
         loader = ld.Loader(dir_original="data_set/portraits/test_image",
                         dir_segmented="data_set/portraits/test_mask",
                         init_size=init_size,
-                        squared=squared)
+                        squared=squared,
+                        full_seg=full_seg)
     else:
         loader = ld.Loader(dir_original="data_set/portraits/images_jpg",
                         dir_segmented="data_set/portraits/masks_png",
                         init_size=init_size,
-                        squared=squared)
+                        squared=squared,
+                        full_seg=full_seg)
 
     return loader.load_train_test(train_rate=train_rate, shuffle=False)
 
@@ -46,7 +48,8 @@ def evaluate(args):
     print("Squared: " + str(args.squared) )
     print("tflite: " + str(args.tflite) )
     print("test: " + str(args.test) )
-    train, test = load_dataset(train_rate=args.train_rate, init_size=init_size, squared=args.squared, test=args.test)
+    train, test = load_dataset(train_rate=args.train_rate, init_size=init_size, squared=args.squared, test=args.test,
+                               full_seg=args.full_seg)
 
     np.set_printoptions(threshold=sys.maxsize)
 
@@ -89,10 +92,13 @@ def evaluate(args):
         output = outputs[0]
 
         seg_image = create_png_from_array(test.images_segmented[idx], palette)
-        seg_image.show();
+        #seg_image.show()
 
         result = create_png_from_array(output, palette)
-        result.show();
+        if args.full_seg:
+            result = result.resize(seg_image.size, Image.ANTIALIAS)
+
+        #result.show()
 
         iou_score = calculate_accuracy(result, seg_image)
         if(not(math.isnan(iou_score))):
@@ -128,6 +134,8 @@ def get_parser():
     parser.set_defaults(tflite=True)
     parser.add_argument('-te', '--test',  help='test data', dest='test', action='store_true')
     parser.set_defaults(test=False)
+    parser.add_argument('-fs', '--no_full_seg', help='Full resolution segmentation', dest='full_seg', action='store_false')
+    parser.set_defaults(full_seg=True)
     return parser
 
 
