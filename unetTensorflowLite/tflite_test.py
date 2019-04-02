@@ -14,29 +14,57 @@ def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
     new_im.paste(im, ((size - x) // 2, (size - y) // 2))
     return new_im
 
+# Crop a bit to avoid the rotation black part
+def crop_center(img, cropx, cropy):
+
+    centerx = (img.width - cropx) / 2
+    centery = (img.width - cropy) / 2
+
+    left, upper = centerx, centery
+
+    right, bottom = img.width - centerx, img.height - centery
+
+    return img.crop((left, upper, right, bottom))
+
 if __name__ == '__main__':
 
+    model_folder = "1_model"
+
     # model path
-    model_path = "model/1_model/1_model_20e_128_quantized.tflite"
+    model_path = "model/" + model_folder + "/1_model_20e_128_quantized.tflite"
+
+    square = True
 
     # read images
-    images = [Image.open("images/test1.jpg"), Image.open("images/test2.jpg"), Image.open("images/test3.jpg")]
+    images = [Image.open("images/test1.jpg"), Image.open("images/test2.jpg"), Image.open("images/test3.jpg"), Image.open("images/test4.jpg"), Image.open("images/test5.jpg")]
+
+    relativePathResults = "model/" + model_folder + "/results/" + model_folder + "_"
+
+
+    imageMask = Image.open("images/mask1.png")
+    imageMaskSquared = make_square(imageMask, imageMask.mode)
+    imageMaskSquared.save("MaskSquared1.jpg")
+
 
     index = 1
     for image in images:
         print(str(image))
 
-        nameToSavedMask = "mask" + str(index) + ".jpg"
+        nameToSavedMask = relativePathResults + "mask" + str(index) + ".jpg"
 
         print("image.size = ", image.size)
 
-        image = make_square(image, image.mode)
+        if square:
+            image = make_square(image, image.mode)
         base_width = image.size[0]
         base_height = image.size[1]
         image.save("1.jpg")
 
         # Resize image
-        image = image.resize((128, 128), Image.ANTIALIAS)
+        if square:
+            image = image.resize((128, 128), Image.ANTIALIAS)
+        else:
+            image = image.resize((96, 128), Image.ANTIALIAS)
 
         # Delete alpha channel
         print("image.mode ==", image.mode)
@@ -75,6 +103,10 @@ if __name__ == '__main__':
         image.putpalette(palette)
         image = image.convert("RGB")
         image = image.resize((base_width, base_height))
+
+
+        #crop to vertical
+        image = crop_center(image, imageMask.width, imageMask.height)
 
         image.save(nameToSavedMask)
         index += 1
