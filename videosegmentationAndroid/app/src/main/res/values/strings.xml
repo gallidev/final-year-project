@@ -2,7 +2,7 @@
     <string name="app_name">Portrait Segmentation</string>
     <string name="menu">Real-time Portrait Segmentation</string>
     <string name="deeplab">Deeplab V3+ model</string>
-    <string name="unet_voc_human">UNet VocHuman model</string>
-    <string name="unet_portraits">UNet Portraits models</string>
-    <string name="unet_portraits_smaller">UNet Portrait 3x4 models</string>
+    <string name="unet_voc_human">U-Net VocHuman Trained</string>
+    <string name="unet_portraits">U-Net Augmented Portraits Trained</string>
+    <string name="unet_portraits_smaller">U-Net Augmented Portrait 3x4 Aspect Ratio</string>
 </resources>

@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     # Read .pb file
     #with tf.gfile.FastGFile("model/Test_22_Selfies_256_model/semanticsegmentation_frozen_person.pb", "rb") as f:
-    with tf.gfile.FastGFile("model/semanticsegmentation_frozen_person_32.pb", "rb") as f:
+    with tf.gfile.FastGFile("models/semanticsegmentation_frozen_person_32.pb", "rb") as f:
         graphdef = tf.GraphDef()
         graphdef.ParseFromString(f.read())
         _ = tf.import_graph_def(graphdef, name="")

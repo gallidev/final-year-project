@@ -4,7 +4,7 @@ import tensorflow as tf
 from PIL import Image
 
 
-def make_square(im, imageMode, init_size=(256,256), fill_color=(0, 0, 0, 0)):
+def make_square(im, imageMode, init_size=(128,128), fill_color=(0, 0, 0, 0)):
     x, y = im.size
     size = max(init_size[0], x, y)
     #check if the image is a png it won't accept the color black in 4 values
@@ -52,12 +52,12 @@ def get_only_human(img, mask, background):
 
 
 models = [
-        ["6_model", "/6_model_32e_96_128_aug_quantized.tflite", "", False],
-        ["5_model", "/5_model_32e_96_128_aug_quantized.tflite", "", False],
-        ["4_model", "/4_model_12e_96_128_aug_quantized.tflite", "", False],
-        ["premade", "/semanticsegmentation_frozen_person_quantized_08.tflite", "", True],
-        ["1_model", "/1_model_20e_128_aug_quantized.tflite", "aug_", True],
-        ["1_model", "/1_model_20e_128_quantized.tflite", "", True],
+        #["6_model", "/6_model_32e_96_128_aug_quantized.tflite", "", False],
+        #["5_model", "/5_model_32e_96_128_aug_quantized.tflite", "", False],
+        #["4_model", "/4_model_12e_96_128_aug_quantized.tflite", "", False],
+        ["premade", "/semanticsegmentation_frozen_person_quantized_32.tflite", "", True],
+        #["1_model", "/1_model_20e_128_aug_quantized.tflite", "aug_", True],
+        #["1_model", "/1_model_20e_128_quantized.tflite", "", True],
         ]
 
 if __name__ == '__main__':
@@ -73,16 +73,16 @@ if __name__ == '__main__':
     #save input images only human with ground truth
     for idx, inputImage in enumerate(images):
         maskRGB = imagesMasks[idx].convert("RGB")
-        maskRGB = maskRGB.resize((48, 64), Image.ANTIALIAS)
-        maskRGB = maskRGB.resize((600, 800), Image.ANTIALIAS)
-        maskRGB.show()
+        #maskRGB = maskRGB.resize((48, 64))
+        maskRGB = maskRGB.resize((600, 800))
+        #maskRGB.show()
         groundTruth = get_only_human(inputImage, maskRGB, backgroundImage)
         groundTruth.save("images/groundtruth" + str(idx+1) + ".png")
 
 
-    imageMask = Image.open("images/mask1.png")
+    imageMask = Image.open("1.jpg")
     imageMaskSquared = make_square(imageMask, imageMask.mode)
-    imageMaskSquared.save("MaskSquared1.jpg")
+    imageMaskSquared.save("Squared1.jpg")
 
 
     for model in models:
@@ -90,11 +90,11 @@ if __name__ == '__main__':
         model_folder = model[0]
 
         # model path
-        model_path = "model/" + model_folder + model[1]
+        model_path = "models/" + model_folder + model[1]
 
         square = model[3]
 
-        relativePathResults = "model/" + model_folder + "/results/" + model_folder + "_" + model[2]
+        relativePathResults = "models/" + model_folder + "/results/" + model_folder + "_" + model[2]
 
         index = 1
         for idx, inputImage in enumerate(images):

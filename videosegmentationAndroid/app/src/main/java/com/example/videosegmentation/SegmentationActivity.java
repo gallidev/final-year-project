@@ -71,6 +71,9 @@ public class SegmentationActivity extends AppCompatActivity implements ActivityC
         changeBackgroundButton = (ImageButton) findViewById(R.id.changeBackgroundButton);
         changeModelButton = (ImageButton) findViewById(R.id.changeModelButton);
         takePictureButton = (ImageButton) findViewById(R.id.takePictureButton);
+        //changeModelButton.setVisibility(View.INVISIBLE);
+        //changeBackgroundButton.setVisibility(View.INVISIBLE);
+        //takePictureButton.setVisibility(View.INVISIBLE);
         changeBackgroundButton.setOnClickListener(this);
         changeModelButton.setOnClickListener(this);
         takePictureButton.setOnClickListener(this);

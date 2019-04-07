@@ -7,13 +7,11 @@ import random
 import tensorflow as tf
 import sys
 
-from util import loader as ld
-from util import model_smaller_first as model
-from util import repoter as rp
+from model_classes import standardUnetSquared, aspectRatioVertical, standardUnetSquared
 
 
 # Create a model
-model_unet = model.UNet(l2_reg=0.0001).model
+model_unet = standardUnetSquared.UNet(l2_reg=0.0001).model
 
 correct_prediction = tf.equal(tf.argmax(model_unet.outputs, 3), tf.argmax(model_unet.teacher, 3))
 

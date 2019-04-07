@@ -9,6 +9,9 @@ import android.graphics.Bitmap
 import android.graphics.BlurMaskFilter.Blur
 import android.graphics.BlurMaskFilter
 import android.graphics.PorterDuff
+import android.R.attr.bitmap
+
+
 
 
 class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
@@ -47,11 +50,13 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     canvas.width,
                     canvas.height)
 
+            // crop the bitmap with new margins: bitmap, left, top, width, height
 
             var paint = Paint()
             paint.setAntiAlias(true)
             paint.setFilterBitmap(true)
             paint.setDither(true)
+
             //
 
             paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
@@ -59,12 +64,14 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             //canvas.drawBitmap(maskFixed, null, maskRect, Paint(Paint.FILTER_BITMAP_FLAG))
 
             if(indexImage == backgroundImages.size){
-                canvas.drawColor(Color.WHITE)
+                canvas.drawColor(Color.TRANSPARENT)
             }else{
+                //canvas.drawColor(Color.RED)
                 canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
             }
 
             canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
+            //canvas.drawBitmap(maskFixed, null, maskRect, paint)
             paint.setXfermode(null)
 
 
@@ -128,14 +135,15 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     canvas.height)
 
             var paint = Paint()
-            paint.setAntiAlias(true)
-            paint.setFilterBitmap(true)
-            paint.setDither(true)
+            //paint.setAntiAlias(true)
+            //paint.setFilterBitmap(true)
+            //paint.setDither(true)
 
             paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
 
             canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
-            canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
+            //canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
+            canvas.drawBitmap(maskFixed, null, maskRect, paint)
             paint.setXfermode(null)
 
             // at this point processedMask should be the size of the screen with the image as background

@@ -39,7 +39,7 @@ class ImageProcessor(
         cameraView.addFrameProcessor { frame ->
 
             if (frame.size != null ) {
-                //Log.d("Frame", "start processing frame")
+                Log.d("Frame", "start processing frame")
                 val startTime = SystemClock.uptimeMillis()
 
                 val rotatedYuv = rotateYUV420Degree270(frame.data, frame.size.width, frame.size.height)
@@ -64,7 +64,7 @@ class ImageProcessor(
                 setLastFrame(bitmap)
 
                 val endTime = SystemClock.uptimeMillis()
-                //Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
+                Log.d("TIME", "conversion from YUV bitmap: " + java.lang.Long.toString(endTime - startTime))
 
                 //Log.d("rotation in float", rotation.toFloat().toString());
                 val startTimeBitmap = SystemClock.uptimeMillis()

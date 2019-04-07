@@ -8,7 +8,7 @@ import tensorflow as tf
 import sys
 
 from util import loader as ld
-from util import model_smaller_first as model
+from model_classes import standardUnetSquared, aspectRatioVertical, halfConvVertical, biggerStridesVertical
 from util import repoter as rp
 
 
@@ -36,7 +36,12 @@ def load_dataset(train_rate, init_size, squared, test=False, augmentation=False)
 def train(parser):
 
     init_size = tuple(parser.init_size)
+    if parser.model_id is not 1:
+        init_size = [96, 128]
+        parser.squared = False
+
     print(init_size)
+    print("Model ID: " + str(parser.model_id))
     print("Squared: " + str(parser.squared))
     print("test: " + str(parser.test))
     train, test = load_dataset(train_rate=parser.trainrate, init_size=init_size,
@@ -53,8 +58,16 @@ def train(parser):
     # Whether or not using a GPU
     gpu = parser.gpu
 
+    model_unet = None
     # Create a model
-    model_unet = model.UNet(l2_reg=parser.l2reg).model
+    if parser.model_id is 1:
+        model_unet = standardUnetSquared.UNet(l2_reg=parser.l2reg).model
+    elif parser.model_id is 2:
+        model_unet = aspectRatioVertical.UNet(l2_reg=parser.l2reg).model
+    elif parser.model_id is 3:
+        model_unet = halfConvVertical.UNet(l2_reg=parser.l2reg).model
+    elif parser.model_id is 4:
+        model_unet = biggerStridesVertical.UNet(l2_reg=parser.l2reg).model
 
     # Set a loss function and an optimizer
     cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=model_unet.teacher,
@@ -117,7 +130,7 @@ def train(parser):
                 test_set = [test.images_original[idx_test], outputs_test[0], test.images_segmented[idx_test]]
                 reporter.save_image_from_ndarray(train_set, test_set, train.palette, epoch,
                                                  index_void=len(ld.DataSet.CATEGORY)-1)
-        saver.save(sess, './model/deploy.ckpt')
+        saver.save(sess, './models/deploy.ckpt')
         print("in=", model_unet.inputs.name)
         print("on=", model_unet.outputs.name)
 
@@ -137,6 +150,7 @@ def get_parser():
     )
 
     parser.add_argument('-g', '--gpu', action='store_true', help='Using GPUs')
+    parser.add_argument('-m', '--model_id', type=int, default=1, help='Model ID')
     parser.add_argument('-e', '--epoch', type=int, default=250, help='Number of epochs')
     parser.add_argument('-b', '--batchsize', type=int, default=32, help='Batch size')
     parser.add_argument('-t', '--trainrate', type=float, default=0.85, help='Training rate')
