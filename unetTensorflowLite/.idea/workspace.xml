@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_infer.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_infer.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="156" column="66" selection-start-line="156" selection-start-column="66" selection-end-line="156" selection-end-column="66" />
+            <state relative-caret-position="254">
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="19" />
               <folding>
                 <element signature="e#219#234#0" expanded="true" />
               </folding>
@@ -55,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main_infer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+            <state relative-caret-position="360">
+              <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -141,7 +139,6 @@
       <find>contrib</find>
       <find>batch</find>
       <find>rotate</find>
-      <find>augmentation</find>
       <find>augment</find>
       <find>is_augment</find>
       <find>crop</find>
@@ -155,6 +152,7 @@
       <find>resize</find>
       <find>make_square</find>
       <find>ld</find>
+      <find>augmentation</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -192,8 +190,8 @@
         <option value="$PROJECT_DIR$/model_classes_infer/biggerStridesVertical.py" />
         <option value="$PROJECT_DIR$/model_classes_infer/halfConvVertical_infer.py" />
         <option value="$PROJECT_DIR$/model_classes_infer/standarUnetSquared_infer.py" />
-        <option value="$PROJECT_DIR$/main_infer.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/main_infer.py" />
       </list>
     </option>
   </component>
@@ -406,12 +404,12 @@
       <workItem from="1554450962799" duration="475000" />
       <workItem from="1554568054213" duration="3393000" />
       <workItem from="1554624835286" duration="273000" />
-      <workItem from="1554658442281" duration="4191000" />
+      <workItem from="1554658442281" duration="4505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64621000" />
+    <option name="totallyTimeSpent" value="64935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
@@ -785,22 +783,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_infer.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+        <state relative-caret-position="254">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="19" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#219#234#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/main_infer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="156" column="66" selection-start-line="156" selection-start-column="66" selection-end-line="156" selection-end-column="66" />
+        <state relative-caret-position="360">
+          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
           <folding>
-            <element signature="e#219#234#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

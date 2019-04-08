@@ -16,13 +16,13 @@ def main(parser):
         model_unet = None
         # Create a model
         if parser.model_id is 1:
-            model_unet = standarUnetSquared_infer.UNet(l2_reg=parser.l2reg).model
+            model_unet = standarUnetSquared_infer.UNet(l2_reg=0.0001).model
         elif parser.model_id is 2:
-            model_unet = aspectRatioVertical_infer.UNet(l2_reg=parser.l2reg).model
+            model_unet = aspectRatioVertical_infer.UNet(l2_reg=0.0001).model
         elif parser.model_id is 3:
-            model_unet = halfConvVertical_infer.UNet(l2_reg=parser.l2reg).model
+            model_unet = halfConvVertical_infer.UNet(l2_reg=0.0001).model
         elif parser.model_id is 4:
-            model_unet = biggerStridesVertical_infer.UNet(l2_reg=parser.l2reg).model
+            model_unet = biggerStridesVertical_infer.UNet(l2_reg=0.0001).model
 
         saver = tf.train.Saver(tf.global_variables())
         sess  = tf.Session()
