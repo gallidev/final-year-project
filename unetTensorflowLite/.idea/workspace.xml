@@ -2,138 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/model_classes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes/aspectRatioVertical.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes/biggerStridesVertical.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes/halfConvVertical.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes/standardUnetSquared.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes_infer/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes_infer/aspectRatioVertical_infer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes_infer/biggerStridesVertical_infer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes_infer/halfConvVertical_infer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_classes_infer/standarUnetSquared_infer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calcMeanValue.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/groundtruth1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/groundtruth1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/groundtruth2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/groundtruth2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/groundtruth3.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/groundtruth3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/groundtruth4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/groundtruth4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/groundtruth5.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/groundtruth5.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_infer.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_infer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/1_model_20e_128.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/1_model_20e_128_aug.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/1_model_20e_128_aug_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/1_model_20e_128_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_aug_mask1_IoU_981.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_aug_mask2_IoU_977.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_aug_mask3_IoU_980.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_aug_mask4_IoU_984.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_aug_mask5_IoU_964.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask1_IoU_975.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask2_IoU_964.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask3_IoU_974.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask4_IoU_977.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/1_model_mask5_IoU_967.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/augmented/1_model_aug_mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/augmented/1_model_aug_mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/augmented/1_model_aug_mask3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/augmented/1_model_aug_mask4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/1_model/results/augmented/1_model_aug_mask5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/2_model/2_model_26e_128.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/2_model/2_model_26e_128_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/2_model/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/2_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/3_model/3_model_26e_128.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/3_model/3_model_26e_128_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/3_model/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/3_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/4_model_12e_96_128.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/4_model_12e_96_128_aug.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/4_model_12e_96_128_aug_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/4_model_12e_96_128_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/4_model_26e_96_128.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/4_model_26e_96_128_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask1_IoU_948.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask2_IoU_978.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask3_IoU_977.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask4_IoU_928.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/4_model/results/4_model_mask5_IoU_962.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/5_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/5_model_18e_96_128_aug.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/5_model_18e_96_128_aug_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/5_model_32e_96_128_aug.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/5_model_32e_96_128_aug_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask1_IoU_946.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask2_IoU_882.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask3_IoU_965.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask4_IoU_973.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/5_model/results/5_model_mask5_IoU_948.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/6_model_32e_96_128_aug.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/6_model_32e_96_128_aug_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask1_IoU_979.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask2_IoU_953.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask3_IoU_940.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask4_IoU_984.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/6_model/results/6_model_mask5_IoU_965.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/deeplab/deeplabv3_257_mv_gpu.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/experiment_model/experiment_model_26e_128.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/experiment_model/experiment_model_26e_128_quantized.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/experiment_model/model_smaller_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/experiment_model/model_smaller_infer_first.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_mask1_IoU_600.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_mask2_IoU_401.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_mask3_IoU_622.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_mask4_IoU_647.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_mask5_IoU_58.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_model_mask1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_model_mask2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_model_mask3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_model_mask4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/results/premade_model_mask5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/semanticsegmentation_frozen_person_08.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/semanticsegmentation_frozen_person_32.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/semanticsegmentation_frozen_person_non_quantized_08.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/semanticsegmentation_frozen_person_non_quantized_32.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/semanticsegmentation_frozen_person_quantized_08.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/premade/semanticsegmentation_frozen_person_quantized_32.tflite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/runEvaluation.command" beforeDir="false" afterPath="$PROJECT_DIR$/runEvaluation.command" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tf_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tf_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tflite_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tflite_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ImageProcessor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ImageProcessor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/OverlayView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/OverlayView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/SegmentationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/SegmentationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/res/layout/activity_segmentation_full.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/res/layout/activity_segmentation_full.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -167,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/model_classes/biggerStridesVertical.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -175,13 +46,30 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+            <state relative-caret-position="335">
+              <caret line="156" column="66" selection-start-line="156" selection-start-column="66" selection-end-line="156" selection-end-column="66" />
               <folding>
                 <element signature="e#219#234#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main_infer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model_classes_infer/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -196,7 +84,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_classes_infer/halfConvVertical_infer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
+            <state relative-caret-position="570">
               <caret line="39" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
@@ -205,7 +93,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_classes_infer/aspectRatioVertical_infer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1252" />
+            <state relative-caret-position="90">
+              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -223,20 +116,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-502">
               <caret line="42" column="74" selection-start-line="42" selection-start-column="74" selection-end-line="42" selection-end-column="74" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model_classes/aspectRatioVertical.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model_classes/standardUnetSquared.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -275,6 +154,7 @@
       <find>inputImage</find>
       <find>resize</find>
       <find>make_square</find>
+      <find>ld</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -301,7 +181,6 @@
         <option value="$PROJECT_DIR$/model/6_model/model_smaller_first.py" />
         <option value="$PROJECT_DIR$/util/loader.py" />
         <option value="$PROJECT_DIR$/model_test_accuracy.py" />
-        <option value="$PROJECT_DIR$/main_infer.py" />
         <option value="$PROJECT_DIR$/tf_test.py" />
         <option value="$PROJECT_DIR$/tflite_test.py" />
         <option value="$PROJECT_DIR$/runEvaluation.command" />
@@ -313,6 +192,7 @@
         <option value="$PROJECT_DIR$/model_classes_infer/biggerStridesVertical.py" />
         <option value="$PROJECT_DIR$/model_classes_infer/halfConvVertical_infer.py" />
         <option value="$PROJECT_DIR$/model_classes_infer/standarUnetSquared_infer.py" />
+        <option value="$PROJECT_DIR$/main_infer.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -338,17 +218,18 @@
             <path>
               <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
               <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
-              <item name="model_classes" type="462c0819:PsiDirectoryNode" />
+              <item name="data_set" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
+              <item name="data_set" type="462c0819:PsiDirectoryNode" />
+              <item name="portraits" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
               <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
               <item name="model_classes_infer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="unetTensorflowLite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="unetTensorflowLite" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -525,18 +406,18 @@
       <workItem from="1554450962799" duration="475000" />
       <workItem from="1554568054213" duration="3393000" />
       <workItem from="1554624835286" duration="273000" />
-      <workItem from="1554658442281" duration="3162000" />
+      <workItem from="1554658442281" duration="4191000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63592000" />
+    <option name="totallyTimeSpent" value="64621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.78125" visible="true" weight="0.13844515" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.78125" visible="true" weight="0.13844515" />
       <window_info id="Structure" order="1" sideWeight="0.21875" side_tool="true" visible="true" weight="0.13844515" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -550,7 +431,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32972136" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3374741" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3374741" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -789,16 +670,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_infer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tf_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -835,9 +706,6 @@
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_classes_infer/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/model_test_accuracy.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -879,7 +747,7 @@
     <entry file="file://$PROJECT_DIR$/model_classes/biggerStridesVertical.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
@@ -892,14 +760,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model_classes_infer/halfConvVertical_infer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
+        <state relative-caret-position="570">
           <caret line="39" selection-start-line="39" selection-end-line="39" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model_classes_infer/aspectRatioVertical_infer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1252" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model_classes_infer/standarUnetSquared_infer.py">
@@ -909,10 +772,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model_classes_infer/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_classes_infer/aspectRatioVertical_infer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_infer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="44" column="21" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+        <state relative-caret-position="335">
+          <caret line="156" column="66" selection-start-line="156" selection-start-column="66" selection-end-line="156" selection-end-column="66" />
           <folding>
             <element signature="e#219#234#0" expanded="true" />
           </folding>

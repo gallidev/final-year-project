@@ -154,7 +154,7 @@ def get_parser():
     parser.add_argument('-e', '--epoch', type=int, default=250, help='Number of epochs')
     parser.add_argument('-b', '--batchsize', type=int, default=32, help='Batch size')
     parser.add_argument('-t', '--trainrate', type=float, default=0.85, help='Training rate')
-    parser.add_argument('-a', '--augmentation', action='store_true', help='Number of epochs')
+    parser.add_argument('-a', '--augmentation', action='store_true', help='was augmentation used or not')
     parser.add_argument('-r', '--l2reg', type=float, default=0.0001, help='L2 regularization')
     parser.add_argument('-i', '--init_size', nargs='+', type=int,  default=[128, 128], help='Size of the model')
     parser.add_argument('-s', '--squared',  help='Square the input image', dest='squared', action='store_true')
