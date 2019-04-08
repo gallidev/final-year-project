@@ -1,5 +1,4 @@
 import tensorflow as tf
-from util import model_smaller_infer_first as model
 
 import argparse
 
