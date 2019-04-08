@@ -80,9 +80,9 @@ if __name__ == '__main__':
         groundTruth.save("images/groundtruth" + str(idx+1) + ".png")
 
 
-    imageMask = Image.open("1.jpg")
-    imageMaskSquared = make_square(imageMask, imageMask.mode)
-    imageMaskSquared.save("Squared1.jpg")
+    #imageMask = Image.open("1.jpg")
+    #imageMaskSquared = make_square(imageMask, imageMask.mode)
+    #imageMaskSquared.save("Squared1.jpg")
 
 
     for model in models:
@@ -155,9 +155,9 @@ if __name__ == '__main__':
 
             #crop to vertical
             if square:
-                mask = crop_center(mask, imageMask.width, imageMask.height)
-                maskRGB = crop_center(maskRGB, imageMask.width, imageMask.height)
-                inputImage = crop_center(inputImage, imageMask.width, imageMask.height)
+                mask = crop_center(mask, images[0].width,  images[0].height)
+                maskRGB = crop_center(maskRGB,  images[0].width,  images[0].height)
+                inputImage = crop_center(inputImage,  images[0].width,  images[0].height)
 
             IoU = calculate_accuracy(mask, imagesMasks[idx])
 
