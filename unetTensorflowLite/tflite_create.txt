@@ -1,9 +1,0 @@
-tflite_convert \
---output_file=semanticsegmentation_frozen_person_quantized_32.tflite \
---graph_def_file=semanticsegmentation_frozen_person_latest.pb \
---input_arrays=input \
---input_shapes=1,128,128,3 \
---inference_type=FLOAT \
---input_type=FLOAT \
---output_arrays=output/BiasAdd \
---post_training_quantize
