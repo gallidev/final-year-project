@@ -67,6 +67,7 @@ fastlane/readme.md
 
 # NTFS MAC issue
 *.DS_Store
+.DS_Store
 
 #Python compiled files
 *.pyc
