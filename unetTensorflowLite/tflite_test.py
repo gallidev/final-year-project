@@ -52,12 +52,12 @@ def get_only_human(img, mask, background):
 
 
 models = [
-        #["6_model", "/6_model_32e_96_128_aug_quantized.tflite", "", False],
-        #["5_model", "/5_model_32e_96_128_aug_quantized.tflite", "", False],
-        #["4_model", "/4_model_12e_96_128_aug_quantized.tflite", "", False],
+        ["6_model", "/6_model_32e_96_128_aug_quantized.tflite", "", False],
+        ["5_model", "/5_model_32e_96_128_aug_quantized.tflite", "", False],
+        ["4_model", "/4_model_12e_96_128_aug_quantized.tflite", "", False],
         ["premade", "/semanticsegmentation_frozen_person_quantized_32.tflite", "", True],
-        #["1_model", "/1_model_20e_128_aug_quantized.tflite", "aug_", True],
-        #["1_model", "/1_model_20e_128_quantized.tflite", "", True],
+        ["1_model", "/1_model_20e_128_aug_quantized.tflite", "aug_", True],
+        ["1_model", "/1_model_20e_128_quantized.tflite", "", True],
         ]
 
 if __name__ == '__main__':

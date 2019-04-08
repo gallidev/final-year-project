@@ -1,22 +1,12 @@
 package com.example.videosegmentation;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.text.TextUtils;
-import android.util.Log;
 
-import com.dailystudio.app.utils.ArrayUtils;
 import com.dailystudio.app.utils.BitmapUtils;
-import com.dailystudio.development.Logger;
 
 import org.tensorflow.lite.Interpreter;
-import org.tensorflow.lite.Tensor;
-import org.tensorflow.lite.experimental.GpuDelegate;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;

@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.BlurMaskFilter.Blur
 import android.graphics.BlurMaskFilter
 import android.graphics.PorterDuff
-import android.R.attr.bitmap
 
 
 

@@ -3,12 +3,10 @@ package com.example.videosegmentation;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.util.Log;
 
 import com.dailystudio.app.utils.BitmapUtils;
 
 import org.tensorflow.lite.Interpreter;
-import org.tensorflow.lite.experimental.GpuDelegate;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

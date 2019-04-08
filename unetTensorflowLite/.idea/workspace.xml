@@ -2,7 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd70c8ec-761f-4bd5-bc05-202efa78b422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main_infer.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_infer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobile_Real_time_Portrait_Segmentation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Mobile_Real_time_Portrait_Segmentation.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/1_model_mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/1_model_mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/1_model_mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/1_model_mask4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/1_model_mask5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/augmented/1_model_aug_mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/augmented/1_model_aug_mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/augmented/1_model_aug_mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/augmented/1_model_aug_mask4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/1_model/results/augmented/1_model_aug_mask5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/4_model/results/4_model_mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/4_model/results/4_model_mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/4_model/results/4_model_mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/4_model/results/4_model_mask4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/4_model/results/4_model_mask5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/5_model/results/5_model_mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/5_model/results/5_model_mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/5_model/results/5_model_mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/5_model/results/5_model_mask4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/5_model/results/5_model_mask5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/6_model/results/6_model_mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/6_model/results/6_model_mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/6_model/results/6_model_mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/6_model/results/6_model_mask4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/6_model/results/6_model_mask5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/premade/results/premade_model_mask1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/premade/results/premade_model_mask2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/premade/results/premade_model_mask3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/premade/results/premade_model_mask4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/premade/results/premade_model_mask5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tflite_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tflite_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/model_smaller_first.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/model_smaller_infer_first.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/Deeplab.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/Deeplab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ImageProcessor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ImageProcessor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/ModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/OverlayView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/OverlayView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/SegmentationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/SegmentationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/UnetPortraits.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/UnetPortraits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/UnetPortraitsSmaller.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/UnetPortraitsSmaller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/UnetVocHuman.java" beforeDir="false" afterPath="$PROJECT_DIR$/../videosegmentationAndroid/app/src/main/java/com/example/videosegmentation/UnetVocHuman.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +74,18 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tflite_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_classes/biggerStridesVertical.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -53,7 +107,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main_infer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
@@ -105,15 +159,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model_classes/halfConvVertical.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-502">
-              <caret line="42" column="74" selection-start-line="42" selection-start-column="74" selection-end-line="42" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -180,7 +225,6 @@
         <option value="$PROJECT_DIR$/util/loader.py" />
         <option value="$PROJECT_DIR$/model_test_accuracy.py" />
         <option value="$PROJECT_DIR$/tf_test.py" />
-        <option value="$PROJECT_DIR$/tflite_test.py" />
         <option value="$PROJECT_DIR$/runEvaluation.command" />
         <option value="$PROJECT_DIR$/model_classes/standardUnet.py" />
         <option value="$PROJECT_DIR$/model_classes/standardUnetSquared.py" />
@@ -192,6 +236,7 @@
         <option value="$PROJECT_DIR$/model_classes_infer/standarUnetSquared_infer.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/main_infer.py" />
+        <option value="$PROJECT_DIR$/tflite_test.py" />
       </list>
     </option>
   </component>
@@ -404,12 +449,12 @@
       <workItem from="1554450962799" duration="475000" />
       <workItem from="1554568054213" duration="3393000" />
       <workItem from="1554624835286" duration="273000" />
-      <workItem from="1554658442281" duration="4505000" />
+      <workItem from="1554658442281" duration="4671000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64935000" />
+    <option name="totallyTimeSpent" value="65101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1058" extended-state="6" />
@@ -678,16 +723,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tflite_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-143">
-          <caret line="96" column="37" selection-start-line="96" selection-start-column="37" selection-end-line="96" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/runEvaluation.command">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -799,6 +834,16 @@
           <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tflite_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="59" column="8" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>

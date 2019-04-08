@@ -3,7 +3,6 @@ package com.example.videosegmentation;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.util.Log;
 
 import com.dailystudio.app.utils.BitmapUtils;
 

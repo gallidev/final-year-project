@@ -1,7 +1,5 @@
 package com.example.videosegmentation;
 
-import android.util.Log;
-
 public class ModelManager {
 
     public static final String DEEPLAB = "deeplab";
