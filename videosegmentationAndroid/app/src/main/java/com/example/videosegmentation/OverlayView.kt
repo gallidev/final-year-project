@@ -134,15 +134,15 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
                     canvas.height)
 
             var paint = Paint()
-            //paint.setAntiAlias(true)
-            //paint.setFilterBitmap(true)
-            //paint.setDither(true)
+            paint.setAntiAlias(true)
+            paint.setFilterBitmap(true)
+            paint.setDither(true)
 
             paint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.DST_IN))
 
             canvas.drawBitmap(backgroundImages[indexImage], null, maskRect, null)
-            //canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
-            canvas.drawBitmap(maskFixed, null, maskRect, paint)
+            canvas.drawBitmap(maskWithBlur, null, maskRect, paint)
+            //canvas.drawBitmap(maskFixed, null, maskRect, paint)
             paint.setXfermode(null)
 
             // at this point processedMask should be the size of the screen with the image as background
