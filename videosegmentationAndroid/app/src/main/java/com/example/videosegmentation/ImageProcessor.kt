@@ -15,10 +15,6 @@ class ImageProcessor(
         private val activity: SegmentationActivity,
         private val contextApplication: Context) {
 
-    private val imageYUVsize = 2880000
-    private val frameWIDTH = 1200
-    private val frameHEIGHT = 1600
-
     private var lastFrame: Bitmap? = null
 
 
@@ -26,12 +22,6 @@ class ImageProcessor(
 
         val rs = RenderScript.create(contextApplication)
         val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
-
-        val yuvType = Type.Builder(rs, Element.U8(rs)).setX(imageYUVsize)
-        val input = Allocation.createTyped(rs, yuvType.create(), Allocation.USAGE_SCRIPT)
-
-        val rgbaType = Type.Builder(rs, Element.RGBA_8888(rs)).setX(frameWIDTH).setY(frameHEIGHT)
-        val out = Allocation.createTyped(rs, rgbaType.create(), Allocation.USAGE_SCRIPT)
 
 
         // Getting frames from camera view
@@ -46,18 +36,13 @@ class ImageProcessor(
                 val bitmap = Bitmap.createBitmap(frame.size.height, frame.size.width, Bitmap.Config.ARGB_8888)
 
 
-                input.copyFrom(rotatedYuv)
+                val bmData = renderScriptNV21ToRGBA888(rs,
+                        yuvToRgbIntrinsic,
+                        frame.size.height,
+                        frame.size.width,
+                        rotatedYuv)
 
-                yuvToRgbIntrinsic.setInput(input)
-                yuvToRgbIntrinsic.forEach(out)
-
-                //val bmData = renderScriptNV21ToRGBA888(rs,
-                //        contextApplication,
-                //        frame.size.height,
-                //        frame.size.width,
-                //        rotatedYuv)
-
-                out.copyTo(bitmap)
+                bmData.copyTo(bitmap)
                 //it is essential to destroy the allocation object to prevent memory leaks
 
                 setLastFrame(bitmap)
@@ -122,9 +107,9 @@ class ImageProcessor(
     }
 
     //Converts YUV image into RGB in ~10ms
-    private fun renderScriptNV21ToRGBA888(rs:RenderScript, context: Context, width: Int, height: Int, nv21: ByteArray): Allocation {
+    private fun renderScriptNV21ToRGBA888(rs:RenderScript, yuvToRgbIntrinsic: ScriptIntrinsicYuvToRGB,
+                                          width: Int, height: Int, nv21: ByteArray): Allocation {
         //val rs = RenderScript.create(context)
-        val yuvToRgbIntrinsic = ScriptIntrinsicYuvToRGB.create(rs, Element.U8_4(rs))
 
         val yuvType = Type.Builder(rs, Element.U8(rs)).setX(nv21.size)
         val input = Allocation.createTyped(rs, yuvType.create(), Allocation.USAGE_SCRIPT)
