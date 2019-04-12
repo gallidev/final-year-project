@@ -95,7 +95,11 @@ class ImageProcessor(
                             rw, rh)
 
                     overlayViewMask.mask = mask
-                    overlayViewMask.invalidate()
+                    //overlayViewMask.invalidate()
+                    // needs to be run on uiThread to invalidate the View
+                    activity.runOnUiThread {
+                        overlayViewMask.invalidate()
+                    }
 
                     //Log.d("Mask", "sent Mask")
                     activity.showPerformance(ModelManager.getModelName(), java.lang.Long.toString(endTime - startTime),
